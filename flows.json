@@ -1,1 +1,64 @@
-[]
+[
+    {
+        "id": "af55b5cc3918c576",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7cb33314543eaf40",
+        "type": "mongodb",
+        "hostname": "localhost",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": 27017,
+        "db": "SCADABK",
+        "name": ""
+    },
+    {
+        "id": "d814aac5f5321fda",
+        "type": "mongodb out",
+        "z": "af55b5cc3918c576",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "RECORDSREMOTE",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 730,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "476be16f4812260a",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "d814aac5f5321fda"
+            ]
+        ]
+    }
+]
