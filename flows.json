@@ -2,7 +2,7 @@
     {
         "id": "af55b5cc3918c576",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "CUARTOS DE CURADO",
         "disabled": false,
         "info": "",
         "env": []
@@ -18,22 +18,221 @@
         "name": ""
     },
     {
-        "id": "d814aac5f5321fda",
-        "type": "mongodb out",
-        "z": "af55b5cc3918c576",
-        "mongodb": "7cb33314543eaf40",
-        "name": "",
-        "collection": "RECORDSREMOTE",
-        "payonly": false,
-        "upsert": false,
-        "multi": false,
-        "operation": "store",
-        "x": 730,
-        "y": 280,
-        "wires": []
+        "id": "7ff3f390b5ac3457",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#ffff00",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#ffff00",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#ffff00",
+                    "value": "#ffff00",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#ffff00",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#000000",
+                    "edited": true
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#535353",
+                    "edited": true
+                },
+                "group-textColor": {
+                    "value": "#ffff4d",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffff00",
+                    "edited": true
+                },
+                "group-backgroundColor": {
+                    "value": "#535353",
+                    "edited": true
+                },
+                "widget-textColor": {
+                    "value": "#ffffff",
+                    "edited": true
+                },
+                "widget-backgroundColor": {
+                    "value": "#ffff00",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#535353",
+                    "edited": true
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "BLOCKES KALEB DASHBOARD",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "true",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
     },
     {
-        "id": "476be16f4812260a",
+        "id": "a0c95dd8e51cf480",
+        "type": "ui_tab",
+        "name": "CUARTOS DE CURADO",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ed0373e091790dfe",
+        "type": "ui_group",
+        "name": "ULTIMOS 7 DIAS",
+        "tab": "a0c95dd8e51cf480",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "83d4f76e7763510b",
+        "type": "ui_tab",
+        "name": "BATCH",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "5d8f2ca7b07ffedc",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "83d4f76e7763510b",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "80fbb335a0356fa2",
+        "type": "ui_group",
+        "name": "TEMPERATURA ACTUAL",
+        "tab": "a0c95dd8e51cf480",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a04abab75fcf5d79",
+        "type": "ui_group",
+        "name": "MATEMATICA",
+        "tab": "a0c95dd8e51cf480",
+        "order": 4,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "44437dd9de5bdac9",
+        "type": "ui_group",
+        "name": "HUMEDAD ACTUAL",
+        "tab": "a0c95dd8e51cf480",
+        "order": 3,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "67e1536d3e6062f5",
+        "type": "ui_chart",
+        "z": "af55b5cc3918c576",
+        "name": "CHART CC1",
+        "group": "ed0373e091790dfe",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "label": "CUARTO DE CURADO 1",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0931d2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f355b78ebd00c4c",
         "type": "inject",
         "z": "af55b5cc3918c576",
         "name": "",
@@ -50,15 +249,2349 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 360,
-        "y": 300,
+        "topic": "b",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 230,
+        "y": 40,
         "wires": [
             [
-                "d814aac5f5321fda"
+                "67e1536d3e6062f5"
             ]
         ]
+    },
+    {
+        "id": "f7d16b7c7395a7c3",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "a",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 90,
+        "y": 40,
+        "wires": [
+            [
+                "67e1536d3e6062f5"
+            ]
+        ]
+    },
+    {
+        "id": "20c4318199ac9f0c",
+        "type": "ui_button",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "group": "5d8f2ca7b07ffedc",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": " #FF5733 ",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "22d39f36d9fccf0c",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 670,
+        "y": 40,
+        "wires": [
+            [
+                "52e6794adba2af36"
+            ]
+        ]
+    },
+    {
+        "id": "3c650977137fc0e2",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 40,
+        "wires": [
+            [
+                "52e6794adba2af36"
+            ]
+        ]
+    },
+    {
+        "id": "52e6794adba2af36",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE TCC1",
+        "group": "80fbb335a0356fa2",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 1",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "df54237099e96301",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 670,
+        "y": 440,
+        "wires": [
+            [
+                "08f740d3597d6bf8"
+            ]
+        ]
+    },
+    {
+        "id": "cef76bc32a35fc57",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 440,
+        "wires": [
+            [
+                "08f740d3597d6bf8"
+            ]
+        ]
+    },
+    {
+        "id": "08f740d3597d6bf8",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE HCC1",
+        "group": "44437dd9de5bdac9",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 1",
+        "label": "%HUMEDAD RELATIVA",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffffff",
+            "#3399ff",
+            "#0080ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "b8e6cf2c94ccb0c7",
+        "type": "ui_chart",
+        "z": "af55b5cc3918c576",
+        "name": "CHART CC2",
+        "group": "ed0373e091790dfe",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "label": "CUARTO DE CURADO 2",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0931d2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ba00af579a1fe17d",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "b",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 230,
+        "y": 80,
+        "wires": [
+            [
+                "b8e6cf2c94ccb0c7"
+            ]
+        ]
+    },
+    {
+        "id": "7b8299b1c8945d47",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "a",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 90,
+        "y": 80,
+        "wires": [
+            [
+                "b8e6cf2c94ccb0c7"
+            ]
+        ]
+    },
+    {
+        "id": "48440dae79dfa755",
+        "type": "ui_chart",
+        "z": "af55b5cc3918c576",
+        "name": "CHART CC3",
+        "group": "ed0373e091790dfe",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "label": "CUARTO DE CURADO 3",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0931d2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b3caa9e2df3a6cf9",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "b",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 230,
+        "y": 120,
+        "wires": [
+            [
+                "48440dae79dfa755"
+            ]
+        ]
+    },
+    {
+        "id": "d4b286359a03e6fc",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "a",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 90,
+        "y": 120,
+        "wires": [
+            [
+                "48440dae79dfa755"
+            ]
+        ]
+    },
+    {
+        "id": "d45b5c44a056cb1e",
+        "type": "ui_chart",
+        "z": "af55b5cc3918c576",
+        "name": "CHART CC4",
+        "group": "ed0373e091790dfe",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "label": "CUARTO DE CURADO 4",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0931d2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c4531b2504d991ab",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "b",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "d45b5c44a056cb1e"
+            ]
+        ]
+    },
+    {
+        "id": "e851f6ebb02f2777",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "a",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 90,
+        "y": 160,
+        "wires": [
+            [
+                "d45b5c44a056cb1e"
+            ]
+        ]
+    },
+    {
+        "id": "abdac559913cd62f",
+        "type": "ui_chart",
+        "z": "af55b5cc3918c576",
+        "name": "CHART CC5",
+        "group": "ed0373e091790dfe",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "label": "CUARTO DE CURADO 5",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0931d2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "05b76929f10415a7",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "b",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 230,
+        "y": 200,
+        "wires": [
+            [
+                "abdac559913cd62f"
+            ]
+        ]
+    },
+    {
+        "id": "05dbf577da3b927f",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "a",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 90,
+        "y": 200,
+        "wires": [
+            [
+                "abdac559913cd62f"
+            ]
+        ]
+    },
+    {
+        "id": "91da576da0b214ce",
+        "type": "ui_chart",
+        "z": "af55b5cc3918c576",
+        "name": "CHART CC6",
+        "group": "ed0373e091790dfe",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "label": "CUARTO DE CURADO 6",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0931d2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc33bb1489c78847",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "b",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "91da576da0b214ce"
+            ]
+        ]
+    },
+    {
+        "id": "75ce198609c71fda",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "a",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 90,
+        "y": 240,
+        "wires": [
+            [
+                "91da576da0b214ce"
+            ]
+        ]
+    },
+    {
+        "id": "0e86bf7faca1fed0",
+        "type": "ui_chart",
+        "z": "af55b5cc3918c576",
+        "name": "CHART CC7",
+        "group": "ed0373e091790dfe",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "label": "CUARTO DE CURADO 7",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0931d2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1d1156cd04f0f121",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "b",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 230,
+        "y": 280,
+        "wires": [
+            [
+                "0e86bf7faca1fed0"
+            ]
+        ]
+    },
+    {
+        "id": "a6017ee6cef8d763",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "a",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 90,
+        "y": 280,
+        "wires": [
+            [
+                "0e86bf7faca1fed0"
+            ]
+        ]
+    },
+    {
+        "id": "c2afd3778401fb4b",
+        "type": "ui_chart",
+        "z": "af55b5cc3918c576",
+        "name": "CHART CC8",
+        "group": "ed0373e091790dfe",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "label": "CUARTO DE CURADO 8",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0931d2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8c61af9e59ab29f9",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "b",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "c2afd3778401fb4b"
+            ]
+        ]
+    },
+    {
+        "id": "2c293f0dc7bd4849",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "a",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 90,
+        "y": 320,
+        "wires": [
+            [
+                "c2afd3778401fb4b"
+            ]
+        ]
+    },
+    {
+        "id": "d65bb28104f77248",
+        "type": "ui_chart",
+        "z": "af55b5cc3918c576",
+        "name": "CHART AMB",
+        "group": "ed0373e091790dfe",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "label": "AMBIENTE",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0931d2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "570f6c31485a3757",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "b",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 230,
+        "y": 360,
+        "wires": [
+            [
+                "d65bb28104f77248"
+            ]
+        ]
+    },
+    {
+        "id": "c67eba88ea83cf62",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "a",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 90,
+        "y": 360,
+        "wires": [
+            [
+                "d65bb28104f77248"
+            ]
+        ]
+    },
+    {
+        "id": "0e4e9d8298c253e7",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 670,
+        "y": 80,
+        "wires": [
+            [
+                "6c587a3e541f20e3"
+            ]
+        ]
+    },
+    {
+        "id": "0042081fcfe5fa6f",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 80,
+        "wires": [
+            [
+                "6c587a3e541f20e3"
+            ]
+        ]
+    },
+    {
+        "id": "6c587a3e541f20e3",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE TCC2",
+        "group": "80fbb335a0356fa2",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 2",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "ee0f13f2e1c999b2",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 670,
+        "y": 120,
+        "wires": [
+            [
+                "94fb9fcc785dd0a6"
+            ]
+        ]
+    },
+    {
+        "id": "50dbae3e3686d09f",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "94fb9fcc785dd0a6"
+            ]
+        ]
+    },
+    {
+        "id": "94fb9fcc785dd0a6",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE TCC3",
+        "group": "80fbb335a0356fa2",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 3",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "3b705c9554152952",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 670,
+        "y": 160,
+        "wires": [
+            [
+                "dff6087c0ac0092f"
+            ]
+        ]
+    },
+    {
+        "id": "ad26b9f1c6b5b09d",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 160,
+        "wires": [
+            [
+                "dff6087c0ac0092f"
+            ]
+        ]
+    },
+    {
+        "id": "dff6087c0ac0092f",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE TCC4",
+        "group": "80fbb335a0356fa2",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 4",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "38d2653533c1f53d",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 670,
+        "y": 200,
+        "wires": [
+            [
+                "2e86f15d2c40c545"
+            ]
+        ]
+    },
+    {
+        "id": "dc3c29254daeee77",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 200,
+        "wires": [
+            [
+                "2e86f15d2c40c545"
+            ]
+        ]
+    },
+    {
+        "id": "2e86f15d2c40c545",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE TCC5",
+        "group": "80fbb335a0356fa2",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 5",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "84d4150819f23d1d",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "9359d9238a74e33c"
+            ]
+        ]
+    },
+    {
+        "id": "387f7ca4033b0438",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 240,
+        "wires": [
+            [
+                "9359d9238a74e33c"
+            ]
+        ]
+    },
+    {
+        "id": "9359d9238a74e33c",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE TCC6",
+        "group": "80fbb335a0356fa2",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 6",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "3475f7aca37d9473",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 670,
+        "y": 280,
+        "wires": [
+            [
+                "f2e64bea38c00d5c"
+            ]
+        ]
+    },
+    {
+        "id": "01d0214b3f9f0a45",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 280,
+        "wires": [
+            [
+                "f2e64bea38c00d5c"
+            ]
+        ]
+    },
+    {
+        "id": "f2e64bea38c00d5c",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE TCC7",
+        "group": "80fbb335a0356fa2",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 7",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "142172c365bc2305",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 670,
+        "y": 320,
+        "wires": [
+            [
+                "5c2dfdffacb1da4c"
+            ]
+        ]
+    },
+    {
+        "id": "d6e40e4ba3037526",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 320,
+        "wires": [
+            [
+                "5c2dfdffacb1da4c"
+            ]
+        ]
+    },
+    {
+        "id": "5c2dfdffacb1da4c",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE TCC8",
+        "group": "80fbb335a0356fa2",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 8",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7b0cad7a39f26ba2",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 670,
+        "y": 360,
+        "wires": [
+            [
+                "eef75d6ca1f89bf2"
+            ]
+        ]
+    },
+    {
+        "id": "62210548a5502382",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 360,
+        "wires": [
+            [
+                "eef75d6ca1f89bf2"
+            ]
+        ]
+    },
+    {
+        "id": "eef75d6ca1f89bf2",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE AMB",
+        "group": "80fbb335a0356fa2",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "AMBIENTE",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d14768f70c6e5889",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 670,
+        "y": 480,
+        "wires": [
+            [
+                "be9926666468b4f7"
+            ]
+        ]
+    },
+    {
+        "id": "59224cd05ebf547d",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 480,
+        "wires": [
+            [
+                "be9926666468b4f7"
+            ]
+        ]
+    },
+    {
+        "id": "be9926666468b4f7",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE HCC2",
+        "group": "44437dd9de5bdac9",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 2",
+        "label": "%HUMEDAD RELATIVA",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffffff",
+            "#3399ff",
+            "#0080ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "81f8efe05f759312",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 670,
+        "y": 520,
+        "wires": [
+            [
+                "0d680bc2d18793cc"
+            ]
+        ]
+    },
+    {
+        "id": "606c0fddf2879779",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 520,
+        "wires": [
+            [
+                "0d680bc2d18793cc"
+            ]
+        ]
+    },
+    {
+        "id": "0d680bc2d18793cc",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE HCC3",
+        "group": "44437dd9de5bdac9",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 3",
+        "label": "%HUMEDAD RELATIVA",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffffff",
+            "#3399ff",
+            "#0080ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "76993734e76746e4",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 670,
+        "y": 560,
+        "wires": [
+            [
+                "4d410acfa1b0b4c3"
+            ]
+        ]
+    },
+    {
+        "id": "7eda5f0d1fb9da08",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 560,
+        "wires": [
+            [
+                "4d410acfa1b0b4c3"
+            ]
+        ]
+    },
+    {
+        "id": "4d410acfa1b0b4c3",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE HCC4",
+        "group": "44437dd9de5bdac9",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 4",
+        "label": "%HUMEDAD RELATIVA",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffffff",
+            "#3399ff",
+            "#0080ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "77a6b57d7467341c",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 670,
+        "y": 600,
+        "wires": [
+            [
+                "94be360df47e7a12"
+            ]
+        ]
+    },
+    {
+        "id": "5caef5e054954e5f",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 600,
+        "wires": [
+            [
+                "94be360df47e7a12"
+            ]
+        ]
+    },
+    {
+        "id": "94be360df47e7a12",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE HCC5",
+        "group": "44437dd9de5bdac9",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 5",
+        "label": "%HUMEDAD RELATIVA",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffffff",
+            "#3399ff",
+            "#0080ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "b1223e28706bac5b",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 670,
+        "y": 640,
+        "wires": [
+            [
+                "c5e23e7430e6925a"
+            ]
+        ]
+    },
+    {
+        "id": "59b259671933c6f0",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 640,
+        "wires": [
+            [
+                "c5e23e7430e6925a"
+            ]
+        ]
+    },
+    {
+        "id": "c5e23e7430e6925a",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE HCC6",
+        "group": "44437dd9de5bdac9",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 6",
+        "label": "%HUMEDAD RELATIVA",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffffff",
+            "#3399ff",
+            "#0080ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "9a6ce26795001e79",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 670,
+        "y": 680,
+        "wires": [
+            [
+                "053ba041c48fc6d4"
+            ]
+        ]
+    },
+    {
+        "id": "8bbd7142521081b2",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 680,
+        "wires": [
+            [
+                "053ba041c48fc6d4"
+            ]
+        ]
+    },
+    {
+        "id": "053ba041c48fc6d4",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE HCC7",
+        "group": "44437dd9de5bdac9",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 7",
+        "label": "%HUMEDAD RELATIVA",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffffff",
+            "#3399ff",
+            "#0080ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "482bef4dd90ff39b",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 670,
+        "y": 720,
+        "wires": [
+            [
+                "194ad2199f8b9c88"
+            ]
+        ]
+    },
+    {
+        "id": "b0ec141a372358f0",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 720,
+        "wires": [
+            [
+                "194ad2199f8b9c88"
+            ]
+        ]
+    },
+    {
+        "id": "194ad2199f8b9c88",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE HCC8",
+        "group": "44437dd9de5bdac9",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "CUARTO DE CURADO 8",
+        "label": "%HUMEDAD RELATIVA",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffffff",
+            "#3399ff",
+            "#0080ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "ebcf2430941a9553",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 670,
+        "y": 760,
+        "wires": [
+            [
+                "4daeaa36a9f0e834"
+            ]
+        ]
+    },
+    {
+        "id": "70fb047fa885b0c5",
+        "type": "inject",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 530,
+        "y": 760,
+        "wires": [
+            [
+                "4daeaa36a9f0e834"
+            ]
+        ]
+    },
+    {
+        "id": "4daeaa36a9f0e834",
+        "type": "ui_gauge",
+        "z": "af55b5cc3918c576",
+        "name": "GAUGE AMB",
+        "group": "44437dd9de5bdac9",
+        "order": 0,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "AMBIENTE",
+        "label": "%HUMEDAD RELATIVA",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffffff",
+            "#3399ff",
+            "#0080ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "86ec357259c04182",
+        "type": "ui_date_picker",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "label": "INICIO",
+        "group": "a04abab75fcf5d79",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 130,
+        "y": 680,
+        "wires": [
+            [
+                "cead6b972d0e0ee9"
+            ]
+        ]
+    },
+    {
+        "id": "b4e043ae608a9460",
+        "type": "ui_date_picker",
+        "z": "af55b5cc3918c576",
+        "name": "",
+        "label": "FINAL",
+        "group": "a04abab75fcf5d79",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 130,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cead6b972d0e0ee9",
+        "type": "debug",
+        "z": "af55b5cc3918c576",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 680,
+        "wires": []
     }
 ]
