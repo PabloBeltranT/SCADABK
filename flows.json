@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "22276406018f011e",
+        "type": "tab",
+        "label": "DASH MEZCLAS",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "7cb33314543eaf40",
         "type": "mongodb",
         "hostname": "localhost",
@@ -186,6 +194,36 @@
         "width": "8",
         "collapse": false,
         "className": ""
+    },
+    {
+        "id": "82b43b09543b25b1",
+        "type": "modbus-client",
+        "name": "",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.100.125",
+        "tcpPort": 502,
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": 9600,
+        "serialDatabits": 8,
+        "serialStopbits": 1,
+        "serialParity": "none",
+        "serialConnectionDelay": 100,
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 500,
+        "parallelUnitIdsAllowed": true,
+        "showErrors": false,
+        "showWarnings": true,
+        "showLogs": true
     },
     {
         "id": "67e1536d3e6062f5",
@@ -2593,5 +2631,100 @@
         "x": 320,
         "y": 680,
         "wires": []
+    },
+    {
+        "id": "ad48bd1968af7bc1",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e0121bd078de9301",
+        "type": "inject",
+        "z": "22276406018f011e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "bdaa38e25ff547d7"
+            ]
+        ]
+    },
+    {
+        "id": "f581f4ce754f0aa2",
+        "type": "inject",
+        "z": "22276406018f011e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "bdaa38e25ff547d7"
+            ]
+        ]
+    },
+    {
+        "id": "bdaa38e25ff547d7",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "function 1",
+        "func": "if (msg.payload == true && global.get('estado_anterior') == false){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA LISTA');\n    msg.payload = global.get('estado_mezcla');\n\n    // HACER REGISTRO DE BATCH EN BASE DE DATOS\n    \n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n};\n\nif (msg.payload == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set('estado_anterior',false);\nglobal.set('estado_mezcla','');",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 180,
+        "wires": [
+            [
+                "ad48bd1968af7bc1"
+            ]
+        ]
     }
 ]
