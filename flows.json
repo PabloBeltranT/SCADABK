@@ -22,7 +22,7 @@
         "topology": "direct",
         "connectOptions": "",
         "port": 27017,
-        "db": "SCADABK",
+        "db": "SCADABK_DB",
         "name": ""
     },
     {
@@ -2633,40 +2633,182 @@
         "wires": []
     },
     {
-        "id": "ad48bd1968af7bc1",
-        "type": "debug",
-        "z": "22276406018f011e",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 180,
-        "wires": []
-    },
-    {
         "id": "bdaa38e25ff547d7",
         "type": "function",
         "z": "22276406018f011e",
         "name": "BATCH RISING EDGE ",
-        "func": "if (msg.payload == true && global.get('estado_anterior') == false){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA LISTA');\n    msg.payload = global.get('estado_mezcla');\n\n    // HACER REGISTRO DE BATCH EN BASE DE DATOS\n    \n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n};\n\nif (msg.payload == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\nreturn msg;",
+        "func": "if (msg.payload == true && global.get('estado_anterior') == false){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA LISTA');\n    msg.payload = global.get('estado_mezcla');\n\n    // HACER REGISTRO DE BATCH EN BASE DE DATOS\n    msg.payload = 'SAVE_DATA';\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n};\n\nif (msg.payload == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set('estado_anterior',false);\nglobal.set('estado_mezcla','');",
         "finalize": "",
         "libs": [],
-        "x": 480,
-        "y": 180,
+        "x": 400,
+        "y": 100,
         "wires": [
             [
-                "ad48bd1968af7bc1"
+                "ca1a43564b71cdc6"
             ]
+        ]
+    },
+    {
+        "id": "6c9ac916a80acf0d",
+        "type": "comment",
+        "z": "22276406018f011e",
+        "name": "CONEXION A BASE DE DATOS",
+        "info": "mongodb://localhost:27017",
+        "x": 150,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "aa7d9353403a11f3",
+        "type": "mongodb out",
+        "z": "22276406018f011e",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "BATCH",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 1320,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "840a393033c6de16",
+        "type": "inject",
+        "z": "22276406018f011e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 140,
+        "wires": [
+            [
+                "bdaa38e25ff547d7"
+            ]
+        ]
+    },
+    {
+        "id": "ca1a43564b71cdc6",
+        "type": "switch",
+        "z": "22276406018f011e",
+        "name": "IF RISING EDGE",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "SAVE_DATA",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 100,
+        "wires": [
+            [
+                "064516d6095c958d"
+            ]
+        ]
+    },
+    {
+        "id": "688dca7626b35320",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "SAVE DATA",
+        "func": "msg.payload = {\n    \"PULSOS_MATERIAL_1\":'',\n    \"PULSOS_MATERIAL_2\": '',\n    \"PULSOS_MATERIAL_3\": '',\n    \"PULSOS_AGUA\": '',\n    \"KG_CEMENTO\": '',\n    \"PULSOS_ADITIVO\": '',\n    \"FECHA\":'',\n    \"HORA\":''\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 100,
+        "wires": [
+            [
+                "aa7d9353403a11f3"
+            ]
+        ]
+    },
+    {
+        "id": "064516d6095c958d",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "d": true,
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "0",
+        "quantity": "160",
+        "server": "82b43b09543b25b1",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 860,
+        "y": 100,
+        "wires": [
+            [
+                "688dca7626b35320"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "531c1e23bad59fd9",
+        "type": "modbus-read",
+        "z": "22276406018f011e",
+        "d": true,
+        "name": "READ MIX READY",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "65",
+        "quantity": "1",
+        "rate": "250",
+        "rateUnit": "ms",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "82b43b09543b25b1",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "bdaa38e25ff547d7"
+            ],
+            []
         ]
     }
 ]
