@@ -129,7 +129,7 @@
         "type": "ui_tab",
         "name": "CUARTOS DE CURADO",
         "icon": "dashboard",
-        "order": 1,
+        "order": 2,
         "disabled": false,
         "hidden": false
     },
@@ -149,18 +149,20 @@
         "type": "ui_tab",
         "name": "BATCH",
         "icon": "dashboard",
-        "order": 2,
+        "order": 1,
         "disabled": false,
         "hidden": false
     },
     {
         "id": "5d8f2ca7b07ffedc",
         "type": "ui_group",
-        "name": "Group 1",
+        "name": "REGISTRO DE BATIDAS",
         "tab": "83d4f76e7763510b",
         "order": 1,
         "disp": true,
-        "width": 6
+        "width": "30",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "80fbb335a0356fa2",
@@ -196,7 +198,7 @@
         "className": ""
     },
     {
-        "id": "82b43b09543b25b1",
+        "id": "79820e68718191b3",
         "type": "modbus-client",
         "name": "",
         "clienttype": "tcp",
@@ -219,7 +221,7 @@
         "commandDelay": 1,
         "clientTimeout": 1000,
         "reconnectOnTimeout": true,
-        "reconnectTimeout": 500,
+        "reconnectTimeout": 2000,
         "parallelUnitIdsAllowed": true,
         "showErrors": false,
         "showWarnings": true,
@@ -325,32 +327,6 @@
             [
                 "67e1536d3e6062f5"
             ]
-        ]
-    },
-    {
-        "id": "20c4318199ac9f0c",
-        "type": "ui_button",
-        "z": "af55b5cc3918c576",
-        "name": "",
-        "group": "5d8f2ca7b07ffedc",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "button",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": " #FF5733 ",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 110,
-        "y": 500,
-        "wires": [
-            []
         ]
     },
     {
@@ -2637,18 +2613,19 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "BATCH RISING EDGE ",
-        "func": "if (msg.payload == true && global.get('estado_anterior') == false){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA LISTA');\n    msg.payload = global.get('estado_mezcla');\n\n    // HACER REGISTRO DE BATCH EN BASE DE DATOS\n    msg.payload = 'SAVE_DATA';\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n};\n\nif (msg.payload == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\nreturn msg;",
+        "func": "var mix_ready = msg.payload[65];\n\nif (mix_ready == true && global.get('estado_anterior') == false){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA LISTA');\n    msg.payload = global.get('estado_mezcla');\n\n    // HACER REGISTRO DE BATCH EN BASE DE DATOS\n    msg.payload = 'SAVE_DATA';\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n};\n\nif (mix_ready == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (mix_ready == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (mix_ready == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set('estado_anterior',false);\nglobal.set('estado_mezcla','');",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n// VARIABLE PARA CONTROLAR LATCH DE BATIDA LISTA\nglobal.set('estado_anterior',false);\nglobal.set('estado_mezcla','');\n\n// VARIABLES GLOBALES\nglobal.set(\"PULSOS_T_1\", \"\");\nglobal.set(\"PULSOS_T_2\", \"\");\nglobal.set(\"PULSOS_T_3\", \"\");\nglobal.set(\"PULSOS AGUA\", \"\");\nglobal.set(\"KG_CEMENTO\", \"\");\nglobal.set(\"HUMEDAD_SET\", \"\");\nglobal.set(\"PREMOJADO_\", \"\");\nglobal.set(\"SPRAY_\", \"\");\nglobal.set(\"T_MEZCLADO_HUMED\", \"\");\nglobal.set(\"CICLO_CONT_(S)\", \"\");\nglobal.set(\"BARRIDO_BANDAS\", \"\");\nglobal.set(\"T_MEZCLADO_SECO\", \"\");\nglobal.set(\"APERTURA_MIX\", \"\");\nglobal.set(\"T_PRENDIDO\", \"\");\nglobal.set(\"T_APAGADO\", \"\");\nglobal.set(\"DOSIFICADOR_\", \"\");",
         "finalize": "",
         "libs": [],
-        "x": 400,
+        "x": 360,
         "y": 100,
         "wires": [
             [
-                "ca1a43564b71cdc6"
+                "ca1a43564b71cdc6",
+                "b502d54f27e09e3e"
             ]
         ]
     },
@@ -2656,9 +2633,9 @@
         "id": "6c9ac916a80acf0d",
         "type": "comment",
         "z": "22276406018f011e",
-        "name": "CONEXION A BASE DE DATOS",
+        "name": "CREATE REGISTER ON MONGO DB",
         "info": "mongodb://localhost:27017",
-        "x": 150,
+        "x": 170,
         "y": 40,
         "wires": []
     },
@@ -2673,7 +2650,7 @@
         "upsert": false,
         "multi": false,
         "operation": "store",
-        "x": 1320,
+        "x": 1220,
         "y": 100,
         "wires": []
     },
@@ -2692,10 +2669,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
+        "payload": "[true]",
+        "payloadType": "jsonata",
         "x": 90,
-        "y": 140,
+        "y": 160,
         "wires": [
             [
                 "bdaa38e25ff547d7"
@@ -2719,11 +2696,12 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 630,
+        "x": 590,
         "y": 100,
         "wires": [
             [
-                "064516d6095c958d"
+                "17cad2975cd106c5",
+                "c603bee0a27b2c55"
             ]
         ]
     },
@@ -2732,18 +2710,19 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "SAVE DATA",
-        "func": "msg.payload = {\n    \"PULSOS_MATERIAL_1\":'',\n    \"PULSOS_MATERIAL_2\": '',\n    \"PULSOS_MATERIAL_3\": '',\n    \"PULSOS_AGUA\": '',\n    \"KG_CEMENTO\": '',\n    \"PULSOS_ADITIVO\": '',\n    \"FECHA\":'',\n    \"HORA\":''\n}\nreturn msg;",
+        "func": "msg.payload = {\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS T 1\" :        global.get('PUSOS_T_1'),\n    \"PULSOS T 2\" :        global.get('PUSOS_T_2'),\n    \"PULSOS T 3\" :        global.get('PUSOS_T_3'),\n    \"PULSOS AGUA\" :       global.get('PULSOS_AGUA'),\n    \"KG CEMENTO\" :        global.get('KG_CEMENTO'),\n    \"HUMEDAD SET\" :       global.get('HUMEDAD_SET'),\n    /*\"PREMOJADO\" :         global.get('PREMOJADO_'),\n    \"SPRAY\" :             global.get('SPRAY_'),\n    \"T MEZCLADO HUMEDO\" : global.get('T_MEZCLADO_HUMEDO'),\n    \"CICLO CONT (S)\" :    global.get('CICLO_CONT_(S)'),\n    \"BARRIDO BANDAS\" :    global.get('BARRIDO_BANDAS'),\n    \"T MEZCLADO SECO\" :   global.get('T_MEZCLADO_SECO'),\n    \"APERTURA MIX\" :      global.get('APERTURA_MIX'),\n    \"T PRENDIDO\" :        global.get('T_PRENDIDO'),\n    \"T APAGADO\" :         global.get('T_APAGADO'),\n    \"DOSIFICADOR\" :       global.get('DOSIFICADOR_')  */ \n}\nreturn msg.payload;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1050,
+        "x": 970,
         "y": 100,
         "wires": [
             [
-                "aa7d9353403a11f3"
+                "aa7d9353403a11f3",
+                "b3640d8ac8f05c82"
             ]
         ]
     },
@@ -2760,8 +2739,8 @@
         "unitid": "1",
         "dataType": "HoldingRegister",
         "adr": "0",
-        "quantity": "160",
-        "server": "82b43b09543b25b1",
+        "quantity": "120",
+        "server": "79820e68718191b3",
         "useIOFile": false,
         "ioFile": "",
         "useIOForPayload": false,
@@ -2769,12 +2748,10 @@
         "keepMsgProperties": false,
         "delayOnStart": false,
         "startDelayTime": "",
-        "x": 860,
-        "y": 100,
+        "x": 940,
+        "y": 160,
         "wires": [
-            [
-                "688dca7626b35320"
-            ],
+            [],
             []
         ]
     },
@@ -2791,13 +2768,13 @@
         "showWarnings": true,
         "unitid": "",
         "dataType": "Coil",
-        "adr": "65",
-        "quantity": "1",
+        "adr": "0",
+        "quantity": "120",
         "rate": "250",
         "rateUnit": "ms",
         "delayOnStart": false,
         "startDelayTime": "",
-        "server": "82b43b09543b25b1",
+        "server": "79820e68718191b3",
         "useIOFile": false,
         "ioFile": "",
         "useIOForPayload": false,
@@ -2808,6 +2785,290 @@
             [
                 "bdaa38e25ff547d7"
             ],
+            []
+        ]
+    },
+    {
+        "id": "b502d54f27e09e3e",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 560,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "17cad2975cd106c5",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 780,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "c603bee0a27b2c55",
+        "type": "simpletime",
+        "z": "22276406018f011e",
+        "name": "",
+        "mydate": true,
+        "myymd": true,
+        "myyear": false,
+        "mymonth": true,
+        "mymonthn": false,
+        "mymonthf": false,
+        "mydom": false,
+        "mydoy": false,
+        "myday": false,
+        "mydayf": false,
+        "myhourpm": false,
+        "myhour": false,
+        "mytime": false,
+        "mytimes": true,
+        "myminute": false,
+        "myminutes": false,
+        "mysecond": false,
+        "mymillis": false,
+        "myepoch": false,
+        "myrawdate": true,
+        "mypm": true,
+        "x": 790,
+        "y": 100,
+        "wires": [
+            [
+                "688dca7626b35320"
+            ]
+        ]
+    },
+    {
+        "id": "4193f39ffa0c7b7a",
+        "type": "comment",
+        "z": "22276406018f011e",
+        "name": "READ DATA FROM MONGO DB",
+        "info": "",
+        "x": 150,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "94d95df82443374e",
+        "type": "comment",
+        "z": "22276406018f011e",
+        "name": "CONEXION TO MONGO DB",
+        "info": "mongodb://localhost:27017",
+        "x": 480,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d94ff4b89a042eba",
+        "type": "mongodb in",
+        "z": "22276406018f011e",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "BATCH",
+        "operation": "find",
+        "x": 700,
+        "y": 360,
+        "wires": [
+            [
+                "eaa7a3414ba00ca0",
+                "2726e1981063031c"
+            ]
+        ]
+    },
+    {
+        "id": "cf7e02f56396c447",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "function 1",
+        "func": "msg.payload = {\"FECHA\":msg.myymd}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 360,
+        "wires": [
+            [
+                "d94ff4b89a042eba"
+            ]
+        ]
+    },
+    {
+        "id": "f74cb41079d34a5a",
+        "type": "simpletime",
+        "z": "22276406018f011e",
+        "name": "",
+        "mydate": false,
+        "myymd": true,
+        "myyear": false,
+        "mymonth": false,
+        "mymonthn": false,
+        "mymonthf": false,
+        "mydom": false,
+        "mydoy": false,
+        "myday": false,
+        "mydayf": false,
+        "myhourpm": false,
+        "myhour": false,
+        "mytime": false,
+        "mytimes": true,
+        "myminute": false,
+        "myminutes": false,
+        "mysecond": false,
+        "mymillis": false,
+        "myepoch": false,
+        "myrawdate": false,
+        "mypm": false,
+        "x": 290,
+        "y": 360,
+        "wires": [
+            [
+                "cf7e02f56396c447"
+            ]
+        ]
+    },
+    {
+        "id": "2726e1981063031c",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "DEBUG GET BATCH REGISTER",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "eaa7a3414ba00ca0",
+        "type": "ui_table",
+        "z": "22276406018f011e",
+        "group": "5d8f2ca7b07ffedc",
+        "name": "",
+        "order": 2,
+        "width": "30",
+        "height": "60",
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 930,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "905ff978c07f63bf",
+        "type": "ui_button",
+        "z": "22276406018f011e",
+        "name": "",
+        "group": "5d8f2ca7b07ffedc",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "ACTUALIZAR",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "#FF8000",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 100,
+        "y": 360,
+        "wires": [
+            [
+                "f74cb41079d34a5a"
+            ]
+        ]
+    },
+    {
+        "id": "b3640d8ac8f05c82",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "7f4584de25aeca78",
+        "type": "inject",
+        "z": "22276406018f011e",
+        "name": "RESET ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 200,
+        "wires": [
+            [
+                "7ea41f4c4ea1c06e"
+            ]
+        ]
+    },
+    {
+        "id": "7ea41f4c4ea1c06e",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "function 2",
+        "func": "global.set('estado_anterior',false);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 200,
+        "wires": [
             []
         ]
     }
