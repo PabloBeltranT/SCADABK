@@ -2612,12 +2612,12 @@
         "id": "bdaa38e25ff547d7",
         "type": "function",
         "z": "22276406018f011e",
-        "name": "BATCH RISING EDGE ",
-        "func": "var mix_ready = msg.payload[65];\n\nif (mix_ready == true && global.get('estado_anterior') == false){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA LISTA');\n    msg.payload = global.get('estado_mezcla');\n\n    // HACER REGISTRO DE BATCH EN BASE DE DATOS\n    msg.payload = 'SAVE_DATA';\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n};\n\nif (mix_ready == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (mix_ready == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (mix_ready == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\nreturn msg;",
+        "name": "LISTA RISING EDGE ",
+        "func": "\n\nif (msg.payload[65] == true && global.get('estado_anterior') == false){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA_LISTA');\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n    \n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload[65] == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload[65] == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload[65] == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\n\n//msg.payload = msg.payload[0];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n// VARIABLE PARA CONTROLAR LATCH DE BATIDA LISTA\nglobal.set('estado_anterior',false);\nglobal.set('estado_mezcla','');\n\n// VARIABLES GLOBALES\nglobal.set(\"PULSOS_T_1\", \"\");\nglobal.set(\"PULSOS_T_2\", \"\");\nglobal.set(\"PULSOS_T_3\", \"\");\nglobal.set(\"PULSOS AGUA\", \"\");\nglobal.set(\"KG_CEMENTO\", \"\");\nglobal.set(\"HUMEDAD_SET\", \"\");\nglobal.set(\"PREMOJADO_\", \"\");\nglobal.set(\"SPRAY_\", \"\");\nglobal.set(\"T_MEZCLADO_HUMED\", \"\");\nglobal.set(\"CICLO_CONT_(S)\", \"\");\nglobal.set(\"BARRIDO_BANDAS\", \"\");\nglobal.set(\"T_MEZCLADO_SECO\", \"\");\nglobal.set(\"APERTURA_MIX\", \"\");\nglobal.set(\"T_PRENDIDO\", \"\");\nglobal.set(\"T_APAGADO\", \"\");\nglobal.set(\"DOSIFICADOR_\", \"\");",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n// VARIABLE PARA CONTROLAR LATCH DE BATIDA LISTA\nglobal.set('estado_anterior',false);\nglobal.set('estado_mezcla','');\n\n// VARIABLES GLOBALES\nglobal.set(\"PULSOS_T_1\", \"\");\nglobal.set(\"PULSOS_T_2\", \"\");\nglobal.set(\"PULSOS_T_3\", \"\");\nglobal.set(\"PULSOS_AGUA\", \"\");\nglobal.set(\"KG_CEMENTO\", \"\");\nglobal.set(\"HUMEDAD_SET\", \"\");\nglobal.set(\"PREMOJADO_\", \"\");\nglobal.set(\"SPRAY_\", \"\");\nglobal.set(\"T_MEZCLADO_HUMED\", \"\");\nglobal.set(\"CICLO_CONT_(S)\", \"\");\nglobal.set(\"BARRIDO_BANDAS\", \"\");\nglobal.set(\"T_MEZCLADO_SECO\", \"\");\nglobal.set(\"APERTURA_MIX\", \"\");\nglobal.set(\"T_PRENDIDO\", \"\");\nglobal.set(\"T_APAGADO\", \"\");\nglobal.set(\"DOSIFICADOR_\", \"\");",
         "finalize": "",
         "libs": [],
         "x": 360,
@@ -2650,34 +2650,9 @@
         "upsert": false,
         "multi": false,
         "operation": "store",
-        "x": 1220,
+        "x": 1260,
         "y": 100,
         "wires": []
-    },
-    {
-        "id": "840a393033c6de16",
-        "type": "inject",
-        "z": "22276406018f011e",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "[true]",
-        "payloadType": "jsonata",
-        "x": 90,
-        "y": 160,
-        "wires": [
-            [
-                "bdaa38e25ff547d7"
-            ]
-        ]
     },
     {
         "id": "ca1a43564b71cdc6",
@@ -2689,14 +2664,14 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "SAVE_DATA",
+                "v": "MEZCLA_LISTA",
                 "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 590,
+        "x": 630,
         "y": 100,
         "wires": [
             [
@@ -2710,14 +2685,14 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "SAVE DATA",
-        "func": "msg.payload = {\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS T 1\" :        global.get('PUSOS_T_1'),\n    \"PULSOS T 2\" :        global.get('PUSOS_T_2'),\n    \"PULSOS T 3\" :        global.get('PUSOS_T_3'),\n    \"PULSOS AGUA\" :       global.get('PULSOS_AGUA'),\n    \"KG CEMENTO\" :        global.get('KG_CEMENTO'),\n    \"HUMEDAD SET\" :       global.get('HUMEDAD_SET'),\n    /*\"PREMOJADO\" :         global.get('PREMOJADO_'),\n    \"SPRAY\" :             global.get('SPRAY_'),\n    \"T MEZCLADO HUMEDO\" : global.get('T_MEZCLADO_HUMEDO'),\n    \"CICLO CONT (S)\" :    global.get('CICLO_CONT_(S)'),\n    \"BARRIDO BANDAS\" :    global.get('BARRIDO_BANDAS'),\n    \"T MEZCLADO SECO\" :   global.get('T_MEZCLADO_SECO'),\n    \"APERTURA MIX\" :      global.get('APERTURA_MIX'),\n    \"T PRENDIDO\" :        global.get('T_PRENDIDO'),\n    \"T APAGADO\" :         global.get('T_APAGADO'),\n    \"DOSIFICADOR\" :       global.get('DOSIFICADOR_')  */ \n}\nreturn msg.payload;",
+        "func": "msg.payload = {\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS T 1\" :        global.get('PULSOS_T_1'),\n    \"PULSOS T 2\" :        global.get('PULSOS_T_2'),\n    \"PULSOS T 3\" :        global.get('PULSOS_T_3'),\n    \"KG CEMENTO\" :        global.get('KG_CEMENTO'),\n    \"HUMEDAD SET\" :       global.get('HUMEDAD_SET'),\n    //\"PREMOJADO\" :         global.get('PREMOJADO_'),\n    //\"SPRAY\" :             global.get('SPRAY_'),\n    //\"T MEZCLADO HUMEDO\" : global.get('T_MEZCLADO_HUMEDO'),\n    //\"CICLO CONT (S)\" :    global.get('CICLO_CONT_(S)'),\n    //\"BARRIDO BANDAS\" :    global.get('BARRIDO_BANDAS'),\n    //\"T MEZCLADO SECO\" :   global.get('T_MEZCLADO_SECO'),\n    //\"APERTURA MIX\" :      global.get('APERTURA_MIX'),\n    //\"T PRENDIDO\" :        global.get('T_PRENDIDO'),\n    //\"T APAGADO\" :         global.get('T_APAGADO'),\n    //\"DOSIFICADOR\" :       global.get('DOSIFICADOR_'),\n    //\"PULSOS AGUA\" :       global.get('PULSOS_AGUA'),\n}\nreturn msg.payload;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 970,
+        "x": 1010,
         "y": 100,
         "wires": [
             [
@@ -2727,39 +2702,9 @@
         ]
     },
     {
-        "id": "064516d6095c958d",
-        "type": "modbus-getter",
-        "z": "22276406018f011e",
-        "d": true,
-        "name": "",
-        "showStatusActivities": false,
-        "showErrors": false,
-        "showWarnings": true,
-        "logIOActivities": false,
-        "unitid": "1",
-        "dataType": "HoldingRegister",
-        "adr": "0",
-        "quantity": "120",
-        "server": "79820e68718191b3",
-        "useIOFile": false,
-        "ioFile": "",
-        "useIOForPayload": false,
-        "emptyMsgOnFail": false,
-        "keepMsgProperties": false,
-        "delayOnStart": false,
-        "startDelayTime": "",
-        "x": 940,
-        "y": 160,
-        "wires": [
-            [],
-            []
-        ]
-    },
-    {
         "id": "531c1e23bad59fd9",
         "type": "modbus-read",
         "z": "22276406018f011e",
-        "d": true,
         "name": "READ MIX READY",
         "topic": "",
         "showStatusActivities": false,
@@ -2770,8 +2715,8 @@
         "dataType": "Coil",
         "adr": "0",
         "quantity": "120",
-        "rate": "250",
-        "rateUnit": "ms",
+        "rate": "1",
+        "rateUnit": "s",
         "delayOnStart": false,
         "startDelayTime": "",
         "server": "79820e68718191b3",
@@ -2783,7 +2728,12 @@
         "y": 100,
         "wires": [
             [
-                "bdaa38e25ff547d7"
+                "bdaa38e25ff547d7",
+                "8c3f8d1f768c58b9",
+                "c77b4f8c41b98381",
+                "ce3cb0e5509eea8c",
+                "59de0f64419a0eb7",
+                "0f9beafa2cf2edb2"
             ],
             []
         ]
@@ -2793,16 +2743,16 @@
         "type": "debug",
         "z": "22276406018f011e",
         "name": "debug 2",
-        "active": true,
-        "tosidebar": false,
+        "active": false,
+        "tosidebar": true,
         "console": false,
         "tostatus": true,
         "complete": "payload",
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 560,
-        "y": 160,
+        "x": 600,
+        "y": 140,
         "wires": []
     },
     {
@@ -2810,16 +2760,16 @@
         "type": "debug",
         "z": "22276406018f011e",
         "name": "debug 3",
-        "active": true,
-        "tosidebar": false,
+        "active": false,
+        "tosidebar": true,
         "console": false,
         "tostatus": true,
         "complete": "payload",
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 780,
-        "y": 160,
+        "x": 820,
+        "y": 140,
         "wires": []
     },
     {
@@ -2848,7 +2798,7 @@
         "myepoch": false,
         "myrawdate": true,
         "mypm": true,
-        "x": 790,
+        "x": 830,
         "y": 100,
         "wires": [
             [
@@ -2862,8 +2812,8 @@
         "z": "22276406018f011e",
         "name": "READ DATA FROM MONGO DB",
         "info": "",
-        "x": 150,
-        "y": 300,
+        "x": 230,
+        "y": 1300,
         "wires": []
     },
     {
@@ -2884,8 +2834,8 @@
         "name": "",
         "collection": "BATCH",
         "operation": "find",
-        "x": 700,
-        "y": 360,
+        "x": 780,
+        "y": 1360,
         "wires": [
             [
                 "eaa7a3414ba00ca0",
@@ -2905,8 +2855,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 360,
+        "x": 540,
+        "y": 1360,
         "wires": [
             [
                 "d94ff4b89a042eba"
@@ -2939,8 +2889,8 @@
         "myepoch": false,
         "myrawdate": false,
         "mypm": false,
-        "x": 290,
-        "y": 360,
+        "x": 370,
+        "y": 1360,
         "wires": [
             [
                 "cf7e02f56396c447"
@@ -2960,8 +2910,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1020,
-        "y": 420,
+        "x": 1100,
+        "y": 1420,
         "wires": []
     },
     {
@@ -2976,8 +2926,8 @@
         "columns": [],
         "outputs": 0,
         "cts": false,
-        "x": 930,
-        "y": 360,
+        "x": 1010,
+        "y": 1360,
         "wires": []
     },
     {
@@ -3000,8 +2950,8 @@
         "payloadType": "bool",
         "topic": "topic",
         "topicType": "msg",
-        "x": 100,
-        "y": 360,
+        "x": 180,
+        "y": 1360,
         "wires": [
             [
                 "f74cb41079d34a5a"
@@ -3021,7 +2971,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1140,
+        "x": 1200,
         "y": 160,
         "wires": []
     },
@@ -3046,8 +2996,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 90,
-        "y": 200,
+        "x": 170,
+        "y": 1220,
         "wires": [
             [
                 "7ea41f4c4ea1c06e"
@@ -3066,10 +3016,610 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
-        "y": 200,
+        "x": 360,
+        "y": 1220,
         "wires": [
+            [
+                "470a786b5b8b7b4a"
+            ]
+        ]
+    },
+    {
+        "id": "470a786b5b8b7b4a",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "f98a281c9e9fd427",
+        "type": "inject",
+        "z": "22276406018f011e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\t   \"asd\":'afljd'\t}",
+        "payloadType": "jsonata",
+        "x": 1030,
+        "y": 60,
+        "wires": [
+            [
+                "aa7d9353403a11f3"
+            ]
+        ]
+    },
+    {
+        "id": "8c3f8d1f768c58b9",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "MATERIA_1_OK RISING EDGE ",
+        "func": "\n\nif (msg.payload[32] == true && global.get('ESTADO_ANTERIOR_MAT_1') == false){\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('ESTADO_ANTERIOR_MAT_1', true);\n    // SETEAMOS ESTADO ACTUAL DE MATERIAL 1\n    global.set('ESTADO_ACTUAL_MAT_1', 'MAT_1_OK');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_1');\n    \n};\n\n\nif (msg.payload[32] == true && global.get('ESTADO_ANTERIOR_MAT_1') == true) {\n\n    // MATERIAL 1 SIGUE LISTO (INDICAR EN DASH)\n    global.set('ESTADO_ACTUAL_MAT_1', 'ESPERANDO RESET DE CICLO');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_1');\n\n};\n\n\nif (msg.payload[32] == false && global.get('ESTADO_ANTERIOR_MAT_1') == true) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_MAT_1', 'CICLO REINICIADO');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_MAT_1', false);\n    // RETORNO DE ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_1');\n\n}\n\n\nif (msg.payload[32] == false && global.get('ESTADO_ANTERIOR_MAT_1') == false) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_MAT_1', 'PREPARANDO MEZCLA');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_MAT_1', false);\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_1');\n\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n// VARIABLE PARA CONTROLAR FLANCO ASCENDENTE DE MATERIAL 1\nglobal.set('ESTADO_ANTERIOR_MAT_1',false);\nglobal.set('ESTADO_ACTUAL_MAT_1', false);\n",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 440,
+        "wires": [
+            [
+                "3b8cfc2d5d4d64af"
+            ]
+        ]
+    },
+    {
+        "id": "c77b4f8c41b98381",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "MATERIA_2_OK RISING EDGE ",
+        "func": "\n\nif (msg.payload[33] == true && global.get('ESTADO_ANTERIOR_MAT_2') == false){\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('ESTADO_ANTERIOR_MAT_2', true);\n    // SETEAMOS ESTADO ACTUAL DE MATERIAL 1\n    global.set('ESTADO_ACTUAL_MAT_2', 'MAT_2_OK');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_2');\n    \n};\n\n\nif (msg.payload[33] == true && global.get('ESTADO_ANTERIOR_MAT_2') == true) {\n\n    // MATERIAL 1 SIGUE LISTO (INDICAR EN DASH)\n    global.set('ESTADO_ACTUAL_MAT_2', 'ESPERANDO RESET DE CICLO');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_2');\n\n};\n\n\nif (msg.payload[33] == false && global.get('ESTADO_ANTERIOR_MAT_2') == true) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_MAT_2', 'CICLO REINICIADO');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_MAT_2', false);\n    // RETORNO DE ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_2');\n\n}\n\n\nif (msg.payload[33] == false && global.get('ESTADO_ANTERIOR_MAT_2') == false) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_MAT_2', 'PREPARANDO MEZCLA');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_MAT_2', false);\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_2');\n\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n// VARIABLE PARA CONTROLAR FLANCO ASCENDENTE DE MATERIAL 1\nglobal.set('ESTADO_ANTERIOR_MAT_2',false);\nglobal.set('ESTADO_ACTUAL_MAT_2', false);\n",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 480,
+        "wires": [
+            [
+                "3b8cfc2d5d4d64af"
+            ]
+        ]
+    },
+    {
+        "id": "ce3cb0e5509eea8c",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "MATERIA_3_OK RISING EDGE ",
+        "func": "\n\nif (msg.payload[34] == true && global.get('ESTADO_ANTERIOR_MAT_3') == false){\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('ESTADO_ANTERIOR_MAT_3', true);\n    // SETEAMOS ESTADO ACTUAL DE MATERIAL 1\n    global.set('ESTADO_ACTUAL_MAT_3', 'MAT_3_OK');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_3');\n    \n};\n\n\nif (msg.payload[34] == true && global.get('ESTADO_ANTERIOR_MAT_3') == true) {\n\n    // MATERIAL 1 SIGUE LISTO (INDICAR EN DASH)\n    global.set('ESTADO_ACTUAL_MAT_3', 'ESPERANDO RESET DE CICLO');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_3');\n\n};\n\n\nif (msg.payload[34] == false && global.get('ESTADO_ANTERIOR_MAT_3') == true) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_MAT_3', 'CICLO REINICIADO');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_MAT_3', false);\n    // RETORNO DE ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_3');\n\n}\n\n\nif (msg.payload[34] == false && global.get('ESTADO_ANTERIOR_MAT_3') == false) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_MAT_3', 'PREPARANDO MEZCLA');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_MAT_3', false);\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_MAT_3');\n\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n// VARIABLE PARA CONTROLAR FLANCO ASCENDENTE DE MATERIAL 1\nglobal.set('ESTADO_ANTERIOR_MAT_3',false);\nglobal.set('ESTADO_ACTUAL_MAT_3', false);\n",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 520,
+        "wires": [
+            [
+                "3b8cfc2d5d4d64af"
+            ]
+        ]
+    },
+    {
+        "id": "3b8cfc2d5d4d64af",
+        "type": "switch",
+        "z": "22276406018f011e",
+        "name": "IF RISING EDGE",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "MAT_1_OK",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "MAT_2_OK",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "MAT_3_OK",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "22c7570b7e9a394e"
+            ],
+            [
+                "5e84cd8e44114f10"
+            ],
+            [
+                "5111c067c55e04b1"
+            ]
+        ]
+    },
+    {
+        "id": "22c7570b7e9a394e",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ PULSES M1_REQ",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "5",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 890,
+        "y": 420,
+        "wires": [
+            [
+                "b6d7eb6b2a2263fc"
+            ],
             []
         ]
+    },
+    {
+        "id": "5e84cd8e44114f10",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ PULSES M2_REQ",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "9",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 890,
+        "y": 480,
+        "wires": [
+            [
+                "48d7f850de5a9432"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "5111c067c55e04b1",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ PULSES M3_REQ",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "12",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 890,
+        "y": 540,
+        "wires": [
+            [
+                "c38099268d595334"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b6d7eb6b2a2263fc",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PULSOS_T_1",
+        "func": "global.set('PULSOS_T_1', msg.payload[0]);\nmsg.payload = global.get('PULSOS_T_1');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 440,
+        "wires": [
+            [
+                "725cf028b90a928f"
+            ]
+        ]
+    },
+    {
+        "id": "48d7f850de5a9432",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PULSOS_T_1",
+        "func": "global.set('PULSOS_T_2', msg.payload[0]);\nmsg.payload = global.get('PULSOS_T_2');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 480,
+        "wires": [
+            [
+                "725cf028b90a928f"
+            ]
+        ]
+    },
+    {
+        "id": "c38099268d595334",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PULSOS_T_1",
+        "func": "global.set('PULSOS_T_3', msg.payload[0]);\nmsg.payload = global.get('PULSOS_T_3');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 520,
+        "wires": [
+            [
+                "725cf028b90a928f"
+            ]
+        ]
+    },
+    {
+        "id": "725cf028b90a928f",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "59de0f64419a0eb7",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "CEMENTO_OK RISING EDGE",
+        "func": "\n\nif (msg.payload[113] == true && global.get('ESTADO_ANTERIOR_CEMENTO_OK') == false){\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('ESTADO_ANTERIOR_CEMENTO_OK', true);\n    // SETEAMOS ESTADO ACTUAL DE MATERIAL 1\n    global.set('ESTADO_ACTUAL_CEMENTO_OK', 'KG_CEMENTO_OK');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_CEMENTO_OK');\n    \n};\n\n\nif (msg.payload[113] == true && global.get('ESTADO_ANTERIOR_CEMENTO_OK') == true) {\n\n    // MATERIAL 1 SIGUE LISTO (INDICAR EN DASH)\n    global.set('ESTADO_ACTUAL_CEMENTO_OK', 'ESPERANDO RESET DE CICLO');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_CEMENTO_OK');\n\n};\n\n\nif (msg.payload[113] == false && global.get('ESTADO_ANTERIOR_CEMENTO_OK') == true) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_CEMENTO_OK', 'CICLO REINICIADO');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_CEMENTO_OK', false);\n    // RETORNO DE ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_CEMENTO_OK');\n\n}\n\n\nif (msg.payload[113] == false && global.get('ESTADO_ANTERIOR_CEMENTO_OK') == false) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_CEMENTO_OK', 'PREPARANDO MEZCLA');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_CEMENTO_OK', false);\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_CEMENTO_OK');\n\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n\n// VARIABLE PARA CONTROLAR FLANCO ASCENDENTE DE MATERIAL 1\nglobal.set('ESTADO_ANTERIOR_CEMENTO_OK', false);\nglobal.set('ESTADO_ACTUAL_KG_CEMENTO_OK', false);",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 620,
+        "wires": [
+            [
+                "faced13cc2d385fd"
+            ]
+        ]
+    },
+    {
+        "id": "faced13cc2d385fd",
+        "type": "switch",
+        "z": "22276406018f011e",
+        "name": "IF RISING EDGE",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "KG_CEMENTO_OK",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 620,
+        "wires": [
+            [
+                "3d628f17b42a42db"
+            ]
+        ]
+    },
+    {
+        "id": "3d628f17b42a42db",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ KG_REQUERIDO",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "34",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 890,
+        "y": 620,
+        "wires": [
+            [
+                "fe88c00a8c089454"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fe88c00a8c089454",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE KG_CEMENTO",
+        "func": "global.set('KG_CEMENTO', msg.payload[0]);\nmsg.payload = global.get('KG_CEMENTO');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 620,
+        "wires": [
+            [
+                "2cbcf34d83c48dea"
+            ]
+        ]
+    },
+    {
+        "id": "2cbcf34d83c48dea",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "0f9beafa2cf2edb2",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "SPRAY_2 RISING EDGE",
+        "func": "\n\nif (msg.payload[62] == true && global.get('ESTADO_ANTERIOR_HUMEDAD_SET') == false){\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('ESTADO_ANTERIOR_HUMEDAD_SET', true);\n    // SETEAMOS ESTADO ACTUAL DE MATERIAL 1\n    global.set('ESTADO_ACTUAL_HUMEDAD_SET', 'HUMEDAD_SET_OK');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_HUMEDAD_SET');\n    \n};\n\n\nif (msg.payload[62] == true && global.get('ESTADO_ANTERIOR_HUMEDAD_SET') == true) {\n\n    // MATERIAL 1 SIGUE LISTO (INDICAR EN DASH)\n    global.set('ESTADO_ACTUAL_HUMEDAD_SET', 'ESPERANDO RESET DE CICLO');\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_HUMEDAD_SET');\n\n};\n\n\nif (msg.payload[62] == false && global.get('ESTADO_ANTERIOR_HUMEDAD_SET') == true) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_HUMEDAD_SET', 'CICLO REINICIADO');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_HUMEDAD_SET', false);\n    // RETORNO DE ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_HUMEDAD_SET');\n\n}\n\n\nif (msg.payload[62] == false && global.get('ESTADO_ANTERIOR_HUMEDAD_SET') == false) {\n\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('ESTADO_ACTUAL_HUMEDAD_SET', 'PREPARANDO MEZCLA');\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('ESTADO_ANTERIOR_HUMEDAD_SET', false);\n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('ESTADO_ACTUAL_HUMEDAD_SET');\n\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n\n// VARIABLE PARA CONTROLAR FLANCO ASCENDENTE DE MATERIAL 1\nglobal.set('ESTADO_ANTERIOR_HUMEDAD_SET', false);\nglobal.set('ESTADO_ACTUAL_HUMEDAD_SET', false);",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 700,
+        "wires": [
+            [
+                "a54b3680a6203109"
+            ]
+        ]
+    },
+    {
+        "id": "a54b3680a6203109",
+        "type": "switch",
+        "z": "22276406018f011e",
+        "name": "IF RISING EDGE",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "HUMEDAD_SET_OK",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 610,
+        "y": 700,
+        "wires": [
+            [
+                "bb6fbac51fce765a",
+                "8d4ab3b334532495"
+            ]
+        ]
+    },
+    {
+        "id": "bb6fbac51fce765a",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ HUMEDAD_REQUERIDA",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "41",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 880,
+        "y": 700,
+        "wires": [
+            [
+                "9d3e3da72d962033"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "9d3e3da72d962033",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE HUMEDAD_SET",
+        "func": "global.set('HUMEDAD_SET', msg.payload[0]);\nmsg.payload = global.get('HUMEDAD_SET');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1180,
+        "y": 700,
+        "wires": [
+            [
+                "a1697f25a45e8759"
+            ]
+        ]
+    },
+    {
+        "id": "a1697f25a45e8759",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1400,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "8d4ab3b334532495",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ PULSOS_CUENTA_LITROS",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "41",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 880,
+        "y": 760,
+        "wires": [
+            [
+                "2e0690d4f4e3440b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2e0690d4f4e3440b",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PULSOS_AGUA",
+        "func": "global.set('PULSOS_AGUA', msg.payload[0]);\nmsg.payload = global.get('PULSOS_AGUA');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1180,
+        "y": 760,
+        "wires": [
+            [
+                "7aa6c1374775c630"
+            ]
+        ]
+    },
+    {
+        "id": "7aa6c1374775c630",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1400,
+        "y": 760,
+        "wires": []
     }
 ]
