@@ -147,7 +147,7 @@
     {
         "id": "83d4f76e7763510b",
         "type": "ui_tab",
-        "name": "BATCH",
+        "name": "BATIDAS",
         "icon": "dashboard",
         "order": 1,
         "disabled": false,
@@ -2685,10 +2685,10 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "SAVE DATA",
-        "func": "msg.payload = {\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS T 1\" :        global.get('PULSOS_T_1'),\n    \"PULSOS T 2\" :        global.get('PULSOS_T_2'),\n    \"PULSOS T 3\" :        global.get('PULSOS_T_3'),\n    \"KG CEMENTO\" :        global.get('KG_CEMENTO'),\n    \"HUMEDAD SET\" :       global.get('HUMEDAD_SET'),\n    //\"PREMOJADO\" :         global.get('PREMOJADO_'),\n    //\"SPRAY\" :             global.get('SPRAY_'),\n    //\"T MEZCLADO HUMEDO\" : global.get('T_MEZCLADO_HUMEDO'),\n    //\"CICLO CONT (S)\" :    global.get('CICLO_CONT_(S)'),\n    //\"BARRIDO BANDAS\" :    global.get('BARRIDO_BANDAS'),\n    //\"T MEZCLADO SECO\" :   global.get('T_MEZCLADO_SECO'),\n    //\"APERTURA MIX\" :      global.get('APERTURA_MIX'),\n    //\"T PRENDIDO\" :        global.get('T_PRENDIDO'),\n    //\"T APAGADO\" :         global.get('T_APAGADO'),\n    //\"DOSIFICADOR\" :       global.get('DOSIFICADOR_'),\n    //\"PULSOS AGUA\" :       global.get('PULSOS_AGUA'),\n}\nreturn msg.payload;\n",
+        "func": "msg.payload = {\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS T 1\" :        global.get('PULSOS_T_1'),\n    \"PULSOS T 2\" :        global.get('PULSOS_T_2'),\n    \"PULSOS T 3\" :        global.get('PULSOS_T_3'),\n    \"KG CEMENTO\" :        global.get('KG_CEMENTO'),\n    \"HUMEDAD SET\" :       global.get('HUMEDAD_SET'),\n    \"PREMOJADO\" :         global.get('PREMOJADO_'),\n    \"SPRAY\" :             global.get('SPRAY_'),\n    //\"T MEZCLADO HUMEDO\" : global.get('T_MEZCLADO_HUMEDO'),\n    \"CICLO CONT (S)\" :    global.get('CICLO_CONT_(S)'),\n    \"BARRIDO BANDAS\" :    global.get('BARRIDO_BANDAS'),\n    \"T MEZCLADO SECO\" :   global.get('T_MEZCLADO_SECO'),\n    \"APERTURA MIX\" :      global.get('APERTURA_MIX'),\n    \"T PRENDIDO\" :        global.get('T_PRENDIDO'),\n    \"T APAGADO\" :         global.get('T_APAGADO'),\n    \"DOSIFICADOR\" :       global.get('DOSIFICADOR_'),\n    \"PULSOS AGUA\" :       global.get('PULSOS_AGUA'),\n}\n//return msg.payload;\n\n\n{\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS MATERIAL 1\" : global.get(\"PULSOS_T_1\"),\n    \"PULSOS MATERIAL 2\" : global.get(\"PULSOS_T_2\"),\n    \"PULSOS MATERIAL 3\" : global.get(\"PULSOS_T_3\"),\n    \"\" : global.get(\"PULSOS_AGUA\"),\n    \"\" : global.get(\"KG_CEMENTO\"),\n    \"\" : global.get(\"HUMEDAD_SET\"),\n    \"\" : global.get(\"PREMOJADO_\",),\n    \"\" : global.get(\"SPRAY_\"),\n    \"\" : global.get(\"T_MEZCLADO_HUMED\"),\n    \"\" : global.get(\"CICLO_CONT_(S)\"),\n    \"\" : global.get(\"BARRIDO_BANDAS\"),\n    \"\" : global.get(\"T_MEZCLADO_SECO\"),\n    \"\" : global.get(\"APERTURA_MIX\"),\n    \"\" : global.get(\"T_PRENDIDO\"),\n    \"\" : global.get(\"T_APAGADO\"),\n    \"\" : global.get(\"DOSIFICADOR_\")\n}",
         "outputs": 1,
         "timeout": 0,
-        "noerr": 0,
+        "noerr": 18,
         "initialize": "",
         "finalize": "",
         "libs": [],
@@ -2802,7 +2802,19 @@
         "y": 100,
         "wires": [
             [
-                "688dca7626b35320"
+                "688dca7626b35320",
+                "21250f5164896984",
+                "2d18c40da1c5ff87",
+                "76db15ee1c03069c",
+                "fb5fbf845e49c90e",
+                "d7a1202ab6cb1485",
+                "c993683e6561bbe2",
+                "2b76fbe4c48b2fa0",
+                "b59da9647974e393",
+                "e653e1f9e4baa961",
+                "5d6bc0aa3af46843",
+                "179b8c1dfd7df6a4",
+                "951a86009b647d87"
             ]
         ]
     },
@@ -2813,7 +2825,7 @@
         "name": "READ DATA FROM MONGO DB",
         "info": "",
         "x": 230,
-        "y": 1300,
+        "y": 1460,
         "wires": []
     },
     {
@@ -2835,7 +2847,7 @@
         "collection": "BATCH",
         "operation": "find",
         "x": 780,
-        "y": 1360,
+        "y": 1520,
         "wires": [
             [
                 "eaa7a3414ba00ca0",
@@ -2856,7 +2868,7 @@
         "finalize": "",
         "libs": [],
         "x": 540,
-        "y": 1360,
+        "y": 1520,
         "wires": [
             [
                 "d94ff4b89a042eba"
@@ -2890,7 +2902,7 @@
         "myrawdate": false,
         "mypm": false,
         "x": 370,
-        "y": 1360,
+        "y": 1520,
         "wires": [
             [
                 "cf7e02f56396c447"
@@ -2911,7 +2923,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1100,
-        "y": 1420,
+        "y": 1580,
         "wires": []
     },
     {
@@ -2927,7 +2939,7 @@
         "outputs": 0,
         "cts": false,
         "x": 1010,
-        "y": 1360,
+        "y": 1520,
         "wires": []
     },
     {
@@ -2951,7 +2963,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 180,
-        "y": 1360,
+        "y": 1520,
         "wires": [
             [
                 "f74cb41079d34a5a"
@@ -2997,7 +3009,7 @@
         "payload": "true",
         "payloadType": "bool",
         "x": 170,
-        "y": 1220,
+        "y": 1380,
         "wires": [
             [
                 "7ea41f4c4ea1c06e"
@@ -3017,7 +3029,7 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 1220,
+        "y": 1380,
         "wires": [
             [
                 "470a786b5b8b7b4a"
@@ -3038,7 +3050,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 1220,
+        "y": 1380,
         "wires": []
     },
     {
@@ -3079,7 +3091,7 @@
         "finalize": "",
         "libs": [],
         "x": 390,
-        "y": 440,
+        "y": 1060,
         "wires": [
             [
                 "3b8cfc2d5d4d64af"
@@ -3099,7 +3111,7 @@
         "finalize": "",
         "libs": [],
         "x": 390,
-        "y": 480,
+        "y": 1100,
         "wires": [
             [
                 "3b8cfc2d5d4d64af"
@@ -3119,7 +3131,7 @@
         "finalize": "",
         "libs": [],
         "x": 390,
-        "y": 520,
+        "y": 1140,
         "wires": [
             [
                 "3b8cfc2d5d4d64af"
@@ -3154,7 +3166,7 @@
         "repair": false,
         "outputs": 3,
         "x": 650,
-        "y": 480,
+        "y": 1100,
         "wires": [
             [
                 "22c7570b7e9a394e"
@@ -3189,7 +3201,7 @@
         "delayOnStart": false,
         "startDelayTime": "",
         "x": 890,
-        "y": 420,
+        "y": 1040,
         "wires": [
             [
                 "b6d7eb6b2a2263fc"
@@ -3219,7 +3231,7 @@
         "delayOnStart": false,
         "startDelayTime": "",
         "x": 890,
-        "y": 480,
+        "y": 1100,
         "wires": [
             [
                 "48d7f850de5a9432"
@@ -3249,7 +3261,7 @@
         "delayOnStart": false,
         "startDelayTime": "",
         "x": 890,
-        "y": 540,
+        "y": 1160,
         "wires": [
             [
                 "c38099268d595334"
@@ -3270,7 +3282,7 @@
         "finalize": "",
         "libs": [],
         "x": 1150,
-        "y": 440,
+        "y": 1060,
         "wires": [
             [
                 "725cf028b90a928f"
@@ -3290,7 +3302,7 @@
         "finalize": "",
         "libs": [],
         "x": 1150,
-        "y": 480,
+        "y": 1100,
         "wires": [
             [
                 "725cf028b90a928f"
@@ -3310,7 +3322,7 @@
         "finalize": "",
         "libs": [],
         "x": 1150,
-        "y": 520,
+        "y": 1140,
         "wires": [
             [
                 "725cf028b90a928f"
@@ -3322,7 +3334,7 @@
         "type": "debug",
         "z": "22276406018f011e",
         "name": "debug 6",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3330,7 +3342,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1360,
-        "y": 480,
+        "y": 1100,
         "wires": []
     },
     {
@@ -3346,7 +3358,7 @@
         "finalize": "",
         "libs": [],
         "x": 390,
-        "y": 620,
+        "y": 1240,
         "wires": [
             [
                 "faced13cc2d385fd"
@@ -3371,7 +3383,7 @@
         "repair": false,
         "outputs": 1,
         "x": 650,
-        "y": 620,
+        "y": 1240,
         "wires": [
             [
                 "3d628f17b42a42db"
@@ -3400,7 +3412,7 @@
         "delayOnStart": false,
         "startDelayTime": "",
         "x": 890,
-        "y": 620,
+        "y": 1240,
         "wires": [
             [
                 "fe88c00a8c089454"
@@ -3421,7 +3433,7 @@
         "finalize": "",
         "libs": [],
         "x": 1150,
-        "y": 620,
+        "y": 1240,
         "wires": [
             [
                 "2cbcf34d83c48dea"
@@ -3433,7 +3445,7 @@
         "type": "debug",
         "z": "22276406018f011e",
         "name": "debug 7",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3441,7 +3453,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1360,
-        "y": 620,
+        "y": 1240,
         "wires": []
     },
     {
@@ -3457,7 +3469,7 @@
         "finalize": "",
         "libs": [],
         "x": 370,
-        "y": 700,
+        "y": 1320,
         "wires": [
             [
                 "a54b3680a6203109"
@@ -3482,7 +3494,7 @@
         "repair": false,
         "outputs": 1,
         "x": 610,
-        "y": 700,
+        "y": 1320,
         "wires": [
             [
                 "bb6fbac51fce765a",
@@ -3512,7 +3524,7 @@
         "delayOnStart": false,
         "startDelayTime": "",
         "x": 880,
-        "y": 700,
+        "y": 1320,
         "wires": [
             [
                 "9d3e3da72d962033"
@@ -3533,7 +3545,7 @@
         "finalize": "",
         "libs": [],
         "x": 1180,
-        "y": 700,
+        "y": 1320,
         "wires": [
             [
                 "a1697f25a45e8759"
@@ -3545,7 +3557,7 @@
         "type": "debug",
         "z": "22276406018f011e",
         "name": "debug 8",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3553,7 +3565,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1400,
-        "y": 700,
+        "y": 1320,
         "wires": []
     },
     {
@@ -3578,7 +3590,7 @@
         "delayOnStart": false,
         "startDelayTime": "",
         "x": 880,
-        "y": 760,
+        "y": 1380,
         "wires": [
             [
                 "2e0690d4f4e3440b"
@@ -3599,7 +3611,7 @@
         "finalize": "",
         "libs": [],
         "x": 1180,
-        "y": 760,
+        "y": 1380,
         "wires": [
             [
                 "7aa6c1374775c630"
@@ -3611,7 +3623,7 @@
         "type": "debug",
         "z": "22276406018f011e",
         "name": "debug 9",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3619,7 +3631,843 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1400,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "21250f5164896984",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ PREMOJADO",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "39",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1040,
+        "y": 220,
+        "wires": [
+            [
+                "23ed9d5639bf76ab"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "23ed9d5639bf76ab",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PREMOJADO_",
+        "func": "global.set('PREMOJADO_', msg.payload[0]);\nmsg.payload = global.get('PREMOJADO_');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 220,
+        "wires": [
+            [
+                "702430d7b6f95f46"
+            ]
+        ]
+    },
+    {
+        "id": "702430d7b6f95f46",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 10",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2d18c40da1c5ff87",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ SPRAY",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "33",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1020,
+        "y": 280,
+        "wires": [
+            [
+                "dd1bde55e3401858"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "dd1bde55e3401858",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE SPRAY_",
+        "func": "global.set('SPRAY_', msg.payload[0]);\nmsg.payload = global.get('SPRAY_');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1230,
+        "y": 280,
+        "wires": [
+            [
+                "bd443a9c7aed4710"
+            ]
+        ]
+    },
+    {
+        "id": "bd443a9c7aed4710",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 11",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1420,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "76db15ee1c03069c",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ T_MEZCLADO_HUMEDO",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "32",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1080,
+        "y": 340,
+        "wires": [
+            [
+                "345cf27be7ea9f0a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "345cf27be7ea9f0a",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE SPRAY_",
+        "func": "global.set('SPRAY_', msg.payload[0]);\nmsg.payload = global.get('SPRAY_');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1350,
+        "y": 340,
+        "wires": [
+            [
+                "9c00685ccf2e9835"
+            ]
+        ]
+    },
+    {
+        "id": "9c00685ccf2e9835",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 12",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1540,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "fb5fbf845e49c90e",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ BARRIDO_BANDAS",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "24",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1060,
+        "y": 460,
+        "wires": [
+            [
+                "a61765dcb95f391f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d7a1202ab6cb1485",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ T_MEZCLADO_SECO",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "43",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1070,
+        "y": 520,
+        "wires": [
+            [
+                "4aa0b2be9237e4be"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "4aa0b2be9237e4be",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE T_MEZCLADO_SECO",
+        "func": "global.set('T_MEZCLADO_SECO', msg.payload[0]);\nmsg.payload = global.get('T_MEZCLADO_SECO');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 520,
+        "wires": [
+            [
+                "28285d9cee94a56b"
+            ]
+        ]
+    },
+    {
+        "id": "28285d9cee94a56b",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 14",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "c993683e6561bbe2",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ T_PRENDIDO",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "1",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1040,
+        "y": 640,
+        "wires": [
+            [
+                "5e3fc99da08d7771"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "5e3fc99da08d7771",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE T_PRENDIDO",
+        "func": "global.set('T_PRENDIDO', msg.payload[0]);\nmsg.payload = global.get('T_PRENDIDO');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 640,
+        "wires": [
+            [
+                "3878a86792af1d96"
+            ]
+        ]
+    },
+    {
+        "id": "3878a86792af1d96",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 15",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "2b76fbe4c48b2fa0",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ DOSIFICADOR_",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "42",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1050,
         "y": 760,
+        "wires": [
+            [
+                "ad0bea482d67331b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ad0bea482d67331b",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE DOSIFICADOR_",
+        "func": "global.set('DOSIFICADOR_', msg.payload[0]);\nmsg.payload = global.get('DOSIFICADOR_');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 760,
+        "wires": [
+            [
+                "41ede9c9d790eb22"
+            ]
+        ]
+    },
+    {
+        "id": "41ede9c9d790eb22",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 16",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1540,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "b59da9647974e393",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "d": true,
+        "name": "READ PULSOS_AGUA",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "42",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1050,
+        "y": 880,
+        "wires": [
+            [
+                "8b321084e9670da9"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8b321084e9670da9",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PULSOS_AGUA",
+        "func": "global.set('PULSOS_AGUA', msg.payload[0]);\nmsg.payload = global.get('PULSOS_AGUA');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 880,
+        "wires": [
+            [
+                "bcce7ca1cd844da2"
+            ]
+        ]
+    },
+    {
+        "id": "bcce7ca1cd844da2",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 17",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1540,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "3b10579a1dc72dc8",
+        "type": "inject",
+        "z": "22276406018f011e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 1, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+        "payloadType": "jsonata",
+        "x": 90,
+        "y": 180,
+        "wires": [
+            [
+                "f0ed58eda4d6f929",
+                "bdaa38e25ff547d7"
+            ]
+        ]
+    },
+    {
+        "id": "f0ed58eda4d6f929",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 18",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[65]",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e653e1f9e4baa961",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ T_APAGADO",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "2",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1040,
+        "y": 700,
+        "wires": [
+            [
+                "17f171f5b7e627e4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "17f171f5b7e627e4",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE T_APAGADO",
+        "func": "global.set('T_APAGADO', msg.payload[0]);\nmsg.payload = global.get('T_APAGADO');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 700,
+        "wires": [
+            [
+                "060d4da4ecd34cd8"
+            ]
+        ]
+    },
+    {
+        "id": "060d4da4ecd34cd8",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 19",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "5d6bc0aa3af46843",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ FRECUENCIA_",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "3",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1040,
+        "y": 820,
+        "wires": [
+            [
+                "57a9aa65eea2c0a6"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "57a9aa65eea2c0a6",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE DOSIFICADOR_",
+        "func": "global.set('DOSIFICADOR_', msg.payload[0]);\nmsg.payload = global.get('DOSIFICADOR_');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 820,
+        "wires": [
+            [
+                "5ed9e90c560cfb4d"
+            ]
+        ]
+    },
+    {
+        "id": "5ed9e90c560cfb4d",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 20",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1540,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "179b8c1dfd7df6a4",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ CICLO_CONTINUO",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "0",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1060,
+        "y": 400,
+        "wires": [
+            [
+                "629d4cddc2faa326"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "629d4cddc2faa326",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE SPRAY_",
+        "func": "global.set('SPRAY_', msg.payload[0]);\nmsg.payload = global.get('SPRAY_');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1350,
+        "y": 400,
+        "wires": [
+            [
+                "48773bf6b5081273"
+            ]
+        ]
+    },
+    {
+        "id": "48773bf6b5081273",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 21",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1540,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "951a86009b647d87",
+        "type": "modbus-getter",
+        "z": "22276406018f011e",
+        "name": "READ APERTURA_MIX",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "44",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1050,
+        "y": 580,
+        "wires": [
+            [
+                "e229cb429419b9d6"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e229cb429419b9d6",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE T_MEZCLADO_SECO",
+        "func": "global.set('T_MEZCLADO_SECO', msg.payload[0]);\nmsg.payload = global.get('T_MEZCLADO_SECO');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 580,
+        "wires": [
+            [
+                "f14c37cda264609c"
+            ]
+        ]
+    },
+    {
+        "id": "f14c37cda264609c",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 22",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "a61765dcb95f391f",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE BARRIDO_BANDAS",
+        "func": "global.set('BARRIDO_BANDAS', msg.payload[0]);\nmsg.payload = global.get('BARRIDO_BANDAS');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1390,
+        "y": 460,
+        "wires": [
+            [
+                "9cc027c3c86a6a4d"
+            ]
+        ]
+    },
+    {
+        "id": "9cc027c3c86a6a4d",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 13",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1620,
+        "y": 460,
         "wires": []
     }
 ]
