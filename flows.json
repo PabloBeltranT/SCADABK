@@ -16,6 +16,14 @@
         "env": []
     },
     {
+        "id": "7e9505c6d9af9c4c",
+        "type": "tab",
+        "label": "CONFIGURACION",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "7cb33314543eaf40",
         "type": "mongodb",
         "hostname": "localhost",
@@ -226,6 +234,48 @@
         "showErrors": false,
         "showWarnings": true,
         "showLogs": true
+    },
+    {
+        "id": "f13d1f30df8c1bbc",
+        "type": "ui_tab",
+        "name": "CONFIGURACION",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": true
+    },
+    {
+        "id": "f2f299339fa66504",
+        "type": "ui_group",
+        "name": "ENVIAR REPORTE A:",
+        "tab": "f13d1f30df8c1bbc",
+        "order": 3,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a4300fabda47cd77",
+        "type": "ui_group",
+        "name": "AGREGAR DESTINATARIO",
+        "tab": "f13d1f30df8c1bbc",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e11c04a8f07ad0ee",
+        "type": "ui_group",
+        "name": "ELIMINAR",
+        "tab": "f13d1f30df8c1bbc",
+        "order": 2,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "67e1536d3e6062f5",
@@ -2685,10 +2735,10 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "SAVE DATA",
-        "func": "msg.payload = {\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS T 1\" :        global.get('PULSOS_T_1'),\n    \"PULSOS T 2\" :        global.get('PULSOS_T_2'),\n    \"PULSOS T 3\" :        global.get('PULSOS_T_3'),\n    \"KG CEMENTO\" :        global.get('KG_CEMENTO'),\n    \"HUMEDAD SET\" :       global.get('HUMEDAD_SET'),\n    \"PREMOJADO\" :         global.get('PREMOJADO_'),\n    \"SPRAY\" :             global.get('SPRAY_'),\n    //\"T MEZCLADO HUMEDO\" : global.get('T_MEZCLADO_HUMEDO'),\n    \"CICLO CONT (S)\" :    global.get('CICLO_CONT_(S)'),\n    \"BARRIDO BANDAS\" :    global.get('BARRIDO_BANDAS'),\n    \"T MEZCLADO SECO\" :   global.get('T_MEZCLADO_SECO'),\n    \"APERTURA MIX\" :      global.get('APERTURA_MIX'),\n    \"T PRENDIDO\" :        global.get('T_PRENDIDO'),\n    \"T APAGADO\" :         global.get('T_APAGADO'),\n    \"DOSIFICADOR\" :       global.get('DOSIFICADOR_'),\n    \"PULSOS AGUA\" :       global.get('PULSOS_AGUA'),\n}\n//return msg.payload;\n\n\n{\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS MATERIAL 1\" : global.get(\"PULSOS_T_1\"),\n    \"PULSOS MATERIAL 2\" : global.get(\"PULSOS_T_2\"),\n    \"PULSOS MATERIAL 3\" : global.get(\"PULSOS_T_3\"),\n    \"\" : global.get(\"PULSOS_AGUA\"),\n    \"\" : global.get(\"KG_CEMENTO\"),\n    \"\" : global.get(\"HUMEDAD_SET\"),\n    \"\" : global.get(\"PREMOJADO_\",),\n    \"\" : global.get(\"SPRAY_\"),\n    \"\" : global.get(\"T_MEZCLADO_HUMED\"),\n    \"\" : global.get(\"CICLO_CONT_(S)\"),\n    \"\" : global.get(\"BARRIDO_BANDAS\"),\n    \"\" : global.get(\"T_MEZCLADO_SECO\"),\n    \"\" : global.get(\"APERTURA_MIX\"),\n    \"\" : global.get(\"T_PRENDIDO\"),\n    \"\" : global.get(\"T_APAGADO\"),\n    \"\" : global.get(\"DOSIFICADOR_\")\n}",
+        "func": "/*msg.payload = {\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS T 1\" :        global.get('PULSOS_T_1'),\n    \"PULSOS T 2\" :        global.get('PULSOS_T_2'),\n    \"PULSOS T 3\" :        global.get('PULSOS_T_3'),\n    \"KG CEMENTO\" :        global.get('KG_CEMENTO'),\n    \"HUMEDAD SET\" :       global.get('HUMEDAD_SET'),\n    \"PREMOJADO\" :         global.get('PREMOJADO_'),\n    \"SPRAY\" :             global.get('SPRAY_'),\n    //\"T MEZCLADO HUMEDO\" : global.get('T_MEZCLADO_HUMEDO'),\n    \"CICLO CONT (S)\" :    global.get('CICLO_CONT_(S)'),\n    \"BARRIDO BANDAS\" :    global.get('BARRIDO_BANDAS'),\n    \"T MEZCLADO SECO\" :   global.get('T_MEZCLADO_SECO'),\n    \"APERTURA MIX\" :      global.get('APERTURA_MIX'),\n    \"T PRENDIDO\" :        global.get('T_PRENDIDO'),\n    \"T APAGADO\" :         global.get('T_APAGADO'),\n    \"DOSIFICADOR\" :       global.get('DOSIFICADOR_'),\n    \"PULSOS AGUA\" :       global.get('PULSOS_AGUA'),\n}*/\n\n\n\nmsg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"PULSOS MATERIAL 1\": global.get(\"PULSOS_T_1\"),\n    \"PULSOS MATERIAL 2\": global.get(\"PULSOS_T_2\"),\n    \"PULSOS MATERIAL 3\": global.get(\"PULSOS_T_3\"),\n    \"LITROS AGUA\": global.get(\"PULSOS_AGUA\"),\n    \"KG CEMENTO\": global.get(\"KG_CEMENTO\"),\n    \"HUMEDAD SET\": global.get(\"HUMEDAD_SET\"),\n    \"PREMOJADO\": global.get(\"PREMOJADO_\",),\n    \"SPRAY\": global.get(\"SPRAY_\"),\n    \"T MEZCLADO HUMEDO\": global.get(\"T_MEZCLADO_HUMED\"),\n    \"CICLO CONTINUO (S)\": global.get(\"CICLO_CONT_(S)\"),\n    \"BARRIDO DE BANDAS\": global.get(\"BARRIDO_BANDAS\"),\n    \"T MEZCLADO SECO\": global.get(\"T_MEZCLADO_SECO\"),\n    \"APERTURA MIX\": global.get(\"APERTURA_MIX\"),\n    \"T PRENDIDO\": global.get(\"T_PRENDIDO\"),\n    \"T APAGADO\": global.get(\"T_APAGADO\"),\n    \"DOSIFICADOR\": global.get(\"DOSIFICADOR_\")\n}\n\nreturn msg.payload;\n\n\n\n\n",
         "outputs": 1,
         "timeout": 0,
-        "noerr": 18,
+        "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
@@ -2932,10 +2982,101 @@
         "z": "22276406018f011e",
         "group": "5d8f2ca7b07ffedc",
         "name": "",
-        "order": 2,
+        "order": 4,
         "width": "30",
         "height": "60",
-        "columns": [],
+        "columns": [
+            {
+                "field": "FECHA",
+                "title": "FECHA",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "HORA",
+                "title": "HORA",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "PULSOS MATERIAL 1",
+                "title": "PUL MAT 1",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "PULSOS MATERIAL 2",
+                "title": "PUL MAT 2",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "PULSOS MATERIAL 3",
+                "title": "PUL MAT 3",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "LITROS AGUA",
+                "title": "LITROS AGUA",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "KG CEMENTO",
+                "title": "KG CEMENTO",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "HUMEDAD SET",
+                "title": "HUMEDAD SET",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "DOSIFICADOR",
+                "title": "ADITIVO",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
         "outputs": 0,
         "cts": false,
         "x": 1010,
@@ -2948,7 +3089,7 @@
         "z": "22276406018f011e",
         "name": "",
         "group": "5d8f2ca7b07ffedc",
-        "order": 1,
+        "order": 3,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -4468,6 +4609,635 @@
         "statusType": "auto",
         "x": 1620,
         "y": 460,
+        "wires": []
+    },
+    {
+        "id": "5c3227f5cc16de95",
+        "type": "ui_button",
+        "z": "22276406018f011e",
+        "name": "",
+        "group": "5d8f2ca7b07ffedc",
+        "order": 2,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "label": "IR A CONFIGURACION",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#FF8000",
+        "className": "",
+        "icon": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 210,
+        "y": 1700,
+        "wires": [
+            [
+                "97028e58101f975a"
+            ]
+        ]
+    },
+    {
+        "id": "5737416815e60d26",
+        "type": "ui_text_input",
+        "z": "22276406018f011e",
+        "name": "",
+        "label": "PASSWORD",
+        "tooltip": "",
+        "group": "5d8f2ca7b07ffedc",
+        "order": 1,
+        "width": "25",
+        "height": "1",
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "payload",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 1390,
+        "y": 1760,
+        "wires": [
+            [
+                "beeb4c496941bef0"
+            ]
+        ]
+    },
+    {
+        "id": "070743fb753c651e",
+        "type": "ui_ui_control",
+        "z": "22276406018f011e",
+        "name": "",
+        "events": "all",
+        "x": 1340,
+        "y": 1700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48045f1b75b99a5c",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "IF PASSWORD IS TRUE",
+        "func": "//msg.payload = global.get(\"PASSWORD\");\n\nif (msg.payload[0].PASSWORD == global.get(\"PASSWORD\")){\n    msg.payload = true;\n    return msg;\n}else{\n    msg.payload = false;\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 1700,
+        "wires": [
+            [
+                "ba31dddfdf95d651",
+                "84a00dcfa39c65ee"
+            ]
+        ]
+    },
+    {
+        "id": "97028e58101f975a",
+        "type": "mongodb in",
+        "z": "22276406018f011e",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "CONFIG_PASS",
+        "operation": "find",
+        "x": 510,
+        "y": 1700,
+        "wires": [
+            [
+                "48045f1b75b99a5c"
+            ]
+        ]
+    },
+    {
+        "id": "84a00dcfa39c65ee",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "beeb4c496941bef0",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PASSWORD",
+        "func": "global.set(\"PASSWORD\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 1760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ba31dddfdf95d651",
+        "type": "switch",
+        "z": "22276406018f011e",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 990,
+        "y": 1700,
+        "wires": [
+            [
+                "29f7c7fd10fe8cf9"
+            ],
+            [
+                "c6510637648defbe"
+            ]
+        ]
+    },
+    {
+        "id": "c6510637648defbe",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "RESET PASS ENTRY",
+        "func": "msg.payload = \"\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 1760,
+        "wires": [
+            [
+                "5737416815e60d26"
+            ]
+        ]
+    },
+    {
+        "id": "29f7c7fd10fe8cf9",
+        "type": "change",
+        "z": "22276406018f011e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"tab\":\"CONFIGURACION\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1180,
+        "y": 1700,
+        "wires": [
+            [
+                "070743fb753c651e"
+            ]
+        ]
+    },
+    {
+        "id": "986f80d9aa77d08e",
+        "type": "comment",
+        "z": "22276406018f011e",
+        "name": "VALIDAR CONTRASENA PARA REDIRIGIR A CONFIGURACION",
+        "info": "",
+        "x": 340,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "d6a94ea8dd9308bd",
+        "type": "ui_text_input",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "a4300fabda47cd77",
+        "order": 1,
+        "width": "10",
+        "height": "1",
+        "passthru": false,
+        "mode": "email",
+        "delay": "0",
+        "topic": "payload",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "81bd267bdb6ac5f9",
+                "c3416702c5aef608",
+                "eab16e8490d78e0b"
+            ]
+        ]
+    },
+    {
+        "id": "c3416702c5aef608",
+        "type": "debug",
+        "z": "7e9505c6d9af9c4c",
+        "name": "debug 23",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "81bd267bdb6ac5f9",
+        "type": "change",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 160,
+        "y": 220,
+        "wires": [
+            [
+                "d6a94ea8dd9308bd"
+            ]
+        ]
+    },
+    {
+        "id": "e9c0492278a2975b",
+        "type": "mongodb out",
+        "z": "7e9505c6d9af9c4c",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "RECEIVERS",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 760,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "bc2d0f90f29fa7ac",
+        "type": "function",
+        "z": "7e9505c6d9af9c4c",
+        "name": "ALL COLLECTIONS",
+        "func": "msg.payload = {}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 240,
+        "wires": [
+            [
+                "7f7edee6c13d99de"
+            ]
+        ]
+    },
+    {
+        "id": "7f7edee6c13d99de",
+        "type": "mongodb in",
+        "z": "7e9505c6d9af9c4c",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "RECEIVERS",
+        "operation": "find",
+        "x": 1200,
+        "y": 240,
+        "wires": [
+            [
+                "50431308206f77c0"
+            ]
+        ]
+    },
+    {
+        "id": "8559e6dc5dc973e2",
+        "type": "ui_button",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "group": "e11c04a8f07ad0ee",
+        "order": 2,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "ACTUALIZAR",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#FF8000",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 680,
+        "y": 240,
+        "wires": [
+            [
+                "bc2d0f90f29fa7ac"
+            ]
+        ]
+    },
+    {
+        "id": "eab16e8490d78e0b",
+        "type": "function",
+        "z": "7e9505c6d9af9c4c",
+        "name": "function 5",
+        "func": "//msg.payload = {\"RECEIVER\":msg.payload}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "e9c0492278a2975b",
+                "7baf03be3ee25175"
+            ]
+        ]
+    },
+    {
+        "id": "50431308206f77c0",
+        "type": "function",
+        "z": "7e9505c6d9af9c4c",
+        "name": "SET DROPDOWN",
+        "func": "var correos = [];\n\nmsg.payload.forEach(function(pay) {\n    correos.push(pay.payload);\n});\n\nmsg.options = correos;\n//msg.payload = correos;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 360,
+        "wires": [
+            [
+                "fa2888859a3e912a",
+                "8bc3e66d5c41db5d"
+            ]
+        ]
+    },
+    {
+        "id": "fa2888859a3e912a",
+        "type": "ui_table",
+        "z": "7e9505c6d9af9c4c",
+        "group": "f2f299339fa66504",
+        "name": "ENVIAR REPORTE A:",
+        "order": 0,
+        "width": "10",
+        "height": "1",
+        "columns": [
+            {
+                "field": "payload",
+                "title": "DESTINATARIOS",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 1140,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "8bc3e66d5c41db5d",
+        "type": "ui_dropdown",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "e11c04a8f07ad0ee",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 1100,
+        "y": 360,
+        "wires": [
+            [
+                "c526e147e648beee"
+            ]
+        ]
+    },
+    {
+        "id": "7b5c5f0aad18838e",
+        "type": "ui_button",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "group": "e11c04a8f07ad0ee",
+        "order": 3,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "ELIMINAR",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "8e403e9c9472a5f5",
+                "7baf03be3ee25175"
+            ]
+        ]
+    },
+    {
+        "id": "302741e928a52040",
+        "type": "debug",
+        "z": "7e9505c6d9af9c4c",
+        "name": "debug 24",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1520,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "c526e147e648beee",
+        "type": "function",
+        "z": "7e9505c6d9af9c4c",
+        "name": "SET EMAIL TO DELETE",
+        "func": "global.set(\"EMAIL_TO_DELETE\",msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 360,
+        "wires": [
+            [
+                "302741e928a52040"
+            ]
+        ]
+    },
+    {
+        "id": "8e403e9c9472a5f5",
+        "type": "function",
+        "z": "7e9505c6d9af9c4c",
+        "name": "function 4",
+        "func": "msg.payload = {\"payload\":global.get(\"EMAIL_TO_DELETE\")}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 300,
+        "wires": [
+            [
+                "540b64b30cf9d72b",
+                "4c4182150891621c"
+            ]
+        ]
+    },
+    {
+        "id": "540b64b30cf9d72b",
+        "type": "debug",
+        "z": "7e9505c6d9af9c4c",
+        "name": "debug 25",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "4c4182150891621c",
+        "type": "mongodb out",
+        "z": "7e9505c6d9af9c4c",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "RECEIVERS",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 580,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7baf03be3ee25175",
+        "type": "delay",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 660,
+        "y": 200,
+        "wires": [
+            [
+                "bc2d0f90f29fa7ac"
+            ]
+        ]
+    },
+    {
+        "id": "90ec919c23145ebb",
+        "type": "comment",
+        "z": "7e9505c6d9af9c4c",
+        "name": "AGREGAR Y ELIMIAR DESTINATARIOS DE BASE DE DATOS",
+        "info": "",
+        "x": 310,
+        "y": 80,
         "wires": []
     }
 ]
