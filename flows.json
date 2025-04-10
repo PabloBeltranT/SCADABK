@@ -4106,7 +4106,7 @@
         "id": "72f037eae32114aa",
         "type": "modbus-getter",
         "z": "22276406018f011e",
-        "name": "MB GETTER [HR] 120-240",
+        "name": "MB GETTER [HR] 100-100",
         "showStatusActivities": false,
         "showErrors": false,
         "showWarnings": true,
@@ -4148,6 +4148,28 @@
         "x": 640,
         "y": 940,
         "wires": []
+    },
+    {
+        "id": "3046930e049ae03b",
+        "type": "csv",
+        "z": "22276406018f011e",
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1390,
+        "y": 1280,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "d6a94ea8dd9308bd",
