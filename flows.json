@@ -3014,7 +3014,7 @@
         "name": "",
         "order": 4,
         "width": "24",
-        "height": "1",
+        "height": "40",
         "columns": [
             {
                 "field": "",
@@ -4045,7 +4045,8 @@
                 "b6d7eb6b2a2263fc",
                 "48d7f850de5a9432",
                 "c38099268d595334",
-                "9d3e3da72d962033"
+                "9d3e3da72d962033",
+                "fe88c00a8c089454"
             ],
             []
         ]
@@ -4221,7 +4222,7 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "UPDATE KG_CEMENTO",
-        "func": "global.set('KG_CEMENTO', msg.payload[50]);\nmsg.payload = global.get('KG_CEMENTO');\nreturn msg;",
+        "func": "global.set('KG_CEMENTO', msg.payload[34]);\nmsg.payload = global.get('KG_CEMENTO');\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4912,6 +4913,35 @@
         "wires": [
             [
                 "36eb8e8b32367603"
+            ]
+        ]
+    },
+    {
+        "id": "b78f6e3f4dc131af",
+        "type": "inject",
+        "z": "2dc29aede84920ad",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 170,
+        "wires": [
+            [
+                "4cc1911c811f5d3c"
             ]
         ]
     }
