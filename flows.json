@@ -32,6 +32,22 @@
         "env": []
     },
     {
+        "id": "d9a6597e6bb6856f",
+        "type": "tab",
+        "label": "STYLES",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2dc29aede84920ad",
+        "type": "tab",
+        "label": "EMAIL",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "7cb33314543eaf40",
         "type": "mongodb",
         "hostname": "localhost",
@@ -176,9 +192,9 @@
         "tab": "83d4f76e7763510b",
         "order": 1,
         "disp": true,
-        "width": "30",
+        "width": "24",
         "collapse": false,
-        "className": ""
+        "className": "pad-box"
     },
     {
         "id": "80fbb335a0356fa2",
@@ -2763,7 +2779,7 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "SAVE DATA",
-        "func": "/*msg.payload = {\n    \"FECHA\" : msg.myymd,\n    \"HORA\" : msg.mytimes,\n    \"PULSOS T 1\" :        global.get('PULSOS_T_1'),\n    \"PULSOS T 2\" :        global.get('PULSOS_T_2'),\n    \"PULSOS T 3\" :        global.get('PULSOS_T_3'),\n    \"KG CEMENTO\" :        global.get('KG_CEMENTO'),\n    \"HUMEDAD SET\" :       global.get('HUMEDAD_SET'),\n    \"PREMOJADO\" :         global.get('PREMOJADO_'),\n    \"SPRAY\" :             global.get('SPRAY_'),\n    //\"T MEZCLADO HUMEDO\" : global.get('T_MEZCLADO_HUMEDO'),\n    \"CICLO CONT (S)\" :    global.get('CICLO_CONT_(S)'),\n    \"BARRIDO BANDAS\" :    global.get('BARRIDO_BANDAS'),\n    \"T MEZCLADO SECO\" :   global.get('T_MEZCLADO_SECO'),\n    \"APERTURA MIX\" :      global.get('APERTURA_MIX'),\n    \"T PRENDIDO\" :        global.get('T_PRENDIDO'),\n    \"T APAGADO\" :         global.get('T_APAGADO'),\n    \"DOSIFICADOR\" :       global.get('DOSIFICADOR_'),\n    \"PULSOS AGUA\" :       global.get('PULSOS_AGUA'),\n}*/\n\n\n\nmsg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"PULSOS MATERIAL 1\": global.get(\"PULSOS_T_1\"),\n    \"PULSOS MATERIAL 2\": global.get(\"PULSOS_T_2\"),\n    \"PULSOS MATERIAL 3\": global.get(\"PULSOS_T_3\"),\n    \"LITROS AGUA\": global.get(\"PULSOS_AGUA\"),\n    \"KG CEMENTO\": global.get(\"KG_CEMENTO\"),\n    \"HUMEDAD SET\": global.get(\"HUMEDAD_SET\"),\n    \"PREMOJADO\": global.get(\"PREMOJADO_\",),\n    \"SPRAY\": global.get(\"SPRAY_\"),\n    \"T MEZCLADO HUMEDO\": global.get(\"T_MEZCLADO_HUMEDO\"),\n    \"CICLO CONTINUO (S)\": global.get(\"CICLO_CONT_(S)\"),\n    \"BARRIDO DE BANDAS\": global.get(\"BARRIDO_BANDAS\"),\n    \"T MEZCLADO SECO\": global.get(\"T_MEZCLADO_SECO\"),\n    \"APERTURA MIX\": global.get(\"APERTURA_MIX\"),\n    \"T PRENDIDO\": global.get(\"T_PRENDIDO\"),\n    \"T APAGADO\": global.get(\"T_APAGADO\"),\n    \"DOSIFICADOR\": global.get(\"DOSIFICADOR_\"),\n    \"FRECUENCIA\": global.get(\"FRECUENCIA_\")\n}\n\nreturn msg.payload;\n\n\n\n\n",
+        "func": "msg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"PULSOS_MATERIAL_1\": global.get(\"PULSOS_T_1\"),\n    \"PULSOS_MATERIAL_2\": global.get(\"PULSOS_T_2\"),\n    \"PULSOS_MATERIAL_3\": global.get(\"PULSOS_T_3\"),\n    \"LITROS_AGUA\": global.get(\"PULSOS_AGUA\"),\n    \"KG_CEMENTO\": global.get(\"KG_CEMENTO\"),\n    \"HUMEDAD_SET\": global.get(\"HUMEDAD_SET\"),\n    \"PREMOJADO\": global.get(\"PREMOJADO_\",),\n    \"SPRAY\": global.get(\"SPRAY_\"),\n    \"T_MEZCLADO_HUMEDO\": global.get(\"T_MEZCLADO_HUMEDO\"),\n    \"CICLO_CONTINUO (S)\": global.get(\"CICLO_CONT_(S)\"),\n    \"BARRIDO_DE_BANDAS\": global.get(\"BARRIDO_BANDAS\"),\n    \"T_MEZCLADO_SECO\": global.get(\"T_MEZCLADO_SECO\"),\n    \"APERTURA_MIX\": global.get(\"APERTURA_MIX\"),\n    \"T_PRENDIDO\": global.get(\"T_PRENDIDO\"),\n    \"T_APAGADO\": global.get(\"T_APAGADO\"),\n    \"DOSIFICADOR\": global.get(\"DOSIFICADOR_\"),\n    \"FRECUENCIA\": global.get(\"FRECUENCIA_\")\n}\n\nreturn msg.payload;\n\n\n\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2808,7 +2824,8 @@
             [
                 "bdaa38e25ff547d7",
                 "af32942279f45516",
-                "72f037eae32114aa"
+                "72f037eae32114aa",
+                "04ac9645f6143db2"
             ],
             []
         ]
@@ -2888,7 +2905,7 @@
         "name": "READ DATA FROM MONGO DB",
         "info": "",
         "x": 230,
-        "y": 1140,
+        "y": 1070,
         "wires": []
     },
     {
@@ -2996,8 +3013,8 @@
         "group": "5d8f2ca7b07ffedc",
         "name": "",
         "order": 4,
-        "width": "30",
-        "height": "60",
+        "width": "24",
+        "height": "1",
         "columns": [
             {
                 "field": "",
@@ -3030,7 +3047,7 @@
                 }
             },
             {
-                "field": "PULSOS MATERIAL 1",
+                "field": "PULSOS_MATERIAL_1",
                 "title": "PUL MAT 1",
                 "width": "",
                 "align": "center",
@@ -3040,7 +3057,7 @@
                 }
             },
             {
-                "field": "PULSOS MATERIAL 2",
+                "field": "PULSOS_MATERIAL_2",
                 "title": "PUL MAT 2",
                 "width": "",
                 "align": "center",
@@ -3050,7 +3067,7 @@
                 }
             },
             {
-                "field": "PULSOS MATERIAL 3",
+                "field": "PULSOS_MATERIAL_3",
                 "title": "PUL MAT 3",
                 "width": "",
                 "align": "center",
@@ -3060,7 +3077,7 @@
                 }
             },
             {
-                "field": "LITROS AGUA",
+                "field": "LITROS_AGUA",
                 "title": "LITROS AGUA",
                 "width": "",
                 "align": "center",
@@ -3070,7 +3087,7 @@
                 }
             },
             {
-                "field": "KG CEMENTO",
+                "field": "KG_CEMENTO",
                 "title": "KG CEMENTO",
                 "width": "",
                 "align": "center",
@@ -3080,7 +3097,7 @@
                 }
             },
             {
-                "field": "HUMEDAD SET",
+                "field": "HUMEDAD_SET",
                 "title": "HUMEDAD SET",
                 "width": "",
                 "align": "center",
@@ -3113,8 +3130,8 @@
         "name": "",
         "group": "5d8f2ca7b07ffedc",
         "order": 3,
-        "width": 0,
-        "height": 0,
+        "width": "24",
+        "height": "1",
         "passthru": false,
         "label": "ACTUALIZAR",
         "tooltip": "",
@@ -3139,7 +3156,7 @@
         "type": "debug",
         "z": "22276406018f011e",
         "name": "debug 5",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3253,42 +3270,6 @@
         "wires": []
     },
     {
-        "id": "fe88c00a8c089454",
-        "type": "function",
-        "z": "22276406018f011e",
-        "name": "UPDATE KG_CEMENTO",
-        "func": "global.set('KG_CEMENTO', msg.payload[34]);\nmsg.payload = global.get('KG_CEMENTO');\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 650,
-        "y": 400,
-        "wires": [
-            [
-                "2cbcf34d83c48dea"
-            ]
-        ]
-    },
-    {
-        "id": "2cbcf34d83c48dea",
-        "type": "debug",
-        "z": "22276406018f011e",
-        "name": "debug 7",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 840,
-        "y": 400,
-        "wires": []
-    },
-    {
         "id": "9d3e3da72d962033",
         "type": "function",
         "z": "22276406018f011e",
@@ -3301,7 +3282,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 440,
+        "y": 400,
         "wires": [
             [
                 "a1697f25a45e8759"
@@ -3321,7 +3302,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 440,
+        "y": 400,
         "wires": []
     },
     {
@@ -3337,7 +3318,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 480,
+        "y": 440,
         "wires": [
             [
                 "702430d7b6f95f46"
@@ -3357,7 +3338,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 480,
+        "y": 440,
         "wires": []
     },
     {
@@ -3373,7 +3354,7 @@
         "finalize": "",
         "libs": [],
         "x": 630,
-        "y": 520,
+        "y": 480,
         "wires": [
             [
                 "bd443a9c7aed4710"
@@ -3393,7 +3374,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 800,
-        "y": 520,
+        "y": 480,
         "wires": []
     },
     {
@@ -3409,7 +3390,7 @@
         "finalize": "",
         "libs": [],
         "x": 690,
-        "y": 560,
+        "y": 520,
         "wires": [
             [
                 "9c00685ccf2e9835"
@@ -3429,7 +3410,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 920,
-        "y": 560,
+        "y": 520,
         "wires": []
     },
     {
@@ -3445,7 +3426,7 @@
         "finalize": "",
         "libs": [],
         "x": 670,
-        "y": 680,
+        "y": 640,
         "wires": [
             [
                 "28285d9cee94a56b"
@@ -3465,7 +3446,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 680,
+        "y": 640,
         "wires": []
     },
     {
@@ -3481,7 +3462,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 760,
+        "y": 720,
         "wires": [
             [
                 "3878a86792af1d96"
@@ -3501,7 +3482,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 760,
+        "y": 720,
         "wires": []
     },
     {
@@ -3517,7 +3498,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 840,
+        "y": 800,
         "wires": [
             [
                 "41ede9c9d790eb22"
@@ -3537,16 +3518,15 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 840,
+        "y": 800,
         "wires": []
     },
     {
         "id": "8b321084e9670da9",
         "type": "function",
         "z": "22276406018f011e",
-        "d": true,
         "name": "UPDATE PULSOS_AGUA",
-        "func": "global.set('PULSOS_AGUA', msg.payload[0]);\nmsg.payload = global.get('PULSOS_AGUA');\nreturn msg;",
+        "func": "global.set('PULSOS_AGUA', msg.payload[80]);\nmsg.payload = global.get('PULSOS_AGUA');\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3554,7 +3534,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 360,
+        "y": 880,
         "wires": [
             [
                 "bcce7ca1cd844da2"
@@ -3574,7 +3554,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 360,
+        "y": 880,
         "wires": []
     },
     {
@@ -3599,7 +3579,8 @@
         "wires": [
             [
                 "f0ed58eda4d6f929",
-                "bdaa38e25ff547d7"
+                "bdaa38e25ff547d7",
+                "04ac9645f6143db2"
             ]
         ]
     },
@@ -3633,7 +3614,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 800,
+        "y": 760,
         "wires": [
             [
                 "060d4da4ecd34cd8"
@@ -3653,7 +3634,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 800,
+        "y": 760,
         "wires": []
     },
     {
@@ -3669,7 +3650,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 880,
+        "y": 840,
         "wires": [
             [
                 "5ed9e90c560cfb4d"
@@ -3689,7 +3670,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 880,
+        "y": 840,
         "wires": []
     },
     {
@@ -3705,7 +3686,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 600,
+        "y": 560,
         "wires": [
             [
                 "48773bf6b5081273"
@@ -3725,7 +3706,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 600,
+        "y": 560,
         "wires": []
     },
     {
@@ -3741,7 +3722,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 720,
+        "y": 680,
         "wires": [
             [
                 "f14c37cda264609c"
@@ -3761,7 +3742,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 720,
+        "y": 680,
         "wires": []
     },
     {
@@ -3777,7 +3758,7 @@
         "finalize": "",
         "libs": [],
         "x": 670,
-        "y": 640,
+        "y": 600,
         "wires": [
             [
                 "9cc027c3c86a6a4d"
@@ -3797,7 +3778,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 640,
+        "y": 600,
         "wires": []
     },
     {
@@ -3807,7 +3788,7 @@
         "name": "",
         "group": "5d8f2ca7b07ffedc",
         "order": 2,
-        "width": "5",
+        "width": "4",
         "height": "1",
         "passthru": false,
         "label": "IR A CONFIGURACION",
@@ -3824,7 +3805,8 @@
         "y": 1380,
         "wires": [
             [
-                "97028e58101f975a"
+                "97028e58101f975a",
+                "47f06bb8a4578dae"
             ]
         ]
     },
@@ -3837,7 +3819,7 @@
         "tooltip": "",
         "group": "5d8f2ca7b07ffedc",
         "order": 1,
-        "width": "25",
+        "width": "20",
         "height": "1",
         "passthru": true,
         "mode": "number",
@@ -3846,7 +3828,7 @@
         "sendOnBlur": false,
         "className": "",
         "topicType": "msg",
-        "x": 1390,
+        "x": 1430,
         "y": 1440,
         "wires": [
             [
@@ -3860,7 +3842,7 @@
         "z": "22276406018f011e",
         "name": "",
         "events": "all",
-        "x": 1340,
+        "x": 1380,
         "y": 1380,
         "wires": [
             []
@@ -4060,11 +4042,9 @@
                 "17f171f5b7e627e4",
                 "ad0bea482d67331b",
                 "57a9aa65eea2c0a6",
-                "8b321084e9670da9",
                 "b6d7eb6b2a2263fc",
                 "48d7f850de5a9432",
                 "c38099268d595334",
-                "fe88c00a8c089454",
                 "9d3e3da72d962033"
             ],
             []
@@ -4123,53 +4103,154 @@
         "keepMsgProperties": false,
         "delayOnStart": false,
         "startDelayTime": "",
-        "x": 380,
-        "y": 940,
+        "x": 360,
+        "y": 880,
         "wires": [
             [
-                "28c66eaf43bd0e6c"
+                "8b321084e9670da9"
             ],
             []
         ]
     },
     {
-        "id": "28c66eaf43bd0e6c",
+        "id": "04ac9645f6143db2",
+        "type": "delay",
+        "z": "22276406018f011e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 160,
+        "y": 1110,
+        "wires": [
+            [
+                "d935bd825029b445"
+            ]
+        ]
+    },
+    {
+        "id": "d935bd825029b445",
+        "type": "change",
+        "z": "22276406018f011e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 1110,
+        "wires": [
+            [
+                "f74cb41079d34a5a"
+            ]
+        ]
+    },
+    {
+        "id": "b2333b7d94f60a53",
+        "type": "change",
+        "z": "22276406018f011e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1200,
+        "y": 1480,
+        "wires": [
+            [
+                "5737416815e60d26"
+            ]
+        ]
+    },
+    {
+        "id": "47f06bb8a4578dae",
+        "type": "delay",
+        "z": "22276406018f011e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1000,
+        "y": 1480,
+        "wires": [
+            [
+                "b2333b7d94f60a53"
+            ]
+        ]
+    },
+    {
+        "id": "fe88c00a8c089454",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE KG_CEMENTO",
+        "func": "global.set('KG_CEMENTO', msg.payload[80]);\nmsg.payload = global.get('KG_CEMENTO');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 360,
+        "wires": [
+            [
+                "2cbcf34d83c48dea"
+            ]
+        ]
+    },
+    {
+        "id": "2cbcf34d83c48dea",
         "type": "debug",
         "z": "22276406018f011e",
-        "name": "debug 9",
-        "active": true,
+        "name": "debug 7",
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload[30]",
-        "targetType": "msg",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 640,
-        "y": 940,
+        "x": 840,
+        "y": 360,
         "wires": []
-    },
-    {
-        "id": "3046930e049ae03b",
-        "type": "csv",
-        "z": "22276406018f011e",
-        "name": "",
-        "spec": "rfc",
-        "sep": ",",
-        "hdrin": "",
-        "hdrout": "none",
-        "multi": "one",
-        "ret": "\\r\\n",
-        "temp": "",
-        "skip": "0",
-        "strings": true,
-        "include_empty_strings": "",
-        "include_null_values": "",
-        "x": 1390,
-        "y": 1280,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "d6a94ea8dd9308bd",
@@ -4638,6 +4719,199 @@
         "wires": [
             [
                 "ec3796c5fdc77f8f"
+            ]
+        ]
+    },
+    {
+        "id": "08067a7f9c1fd6a9",
+        "type": "ui_template",
+        "z": "d9a6597e6bb6856f",
+        "group": "",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "\n<style>\n    .pad-box{\n        padding: 3px;\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 310,
+        "y": 210,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d39196e5ddc44663",
+        "type": "e-mail",
+        "z": "2dc29aede84920ad",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "pablobeltran219@gmail.com",
+        "dname": "mhv",
+        "x": 1020,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "5dc2611a4b4887cb",
+        "type": "function",
+        "z": "2dc29aede84920ad",
+        "name": "FORMAT TEMPLATE",
+        "func": "var row_list = ``;\n\nmsg.payload.forEach(function(record) {\n  var row_template = `\n    <tr>\n      <td>${record.FECHA}</td>\n      <td>${record.HORA}</td>\n      <td>${record.PULSOS_MATERIAL_1}</td>\n      <td>${record.PULSOS_MATERIAL_2}</td>\n      <td>${record.PULSOS_MATERIAL_3}</td>\n      <td>${record.LITROS_AGUA}</td>\n      <td>${record.KG_CEMENTO}</td>\n      <td>${record.HUMEDAD_SET}</td>\n      <td>${record.ADITIVO}</td>\n    </tr>\n    `\n    row_list = row_list + row_template;\n});\n\n\n\nvar template = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Tabla de Empresa</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      margin: 40px;\n      background-color: #f9f9f9;\n      color: #333;\n    }\n\n    .header {\n      background-color: black;\n      color: white;\n      padding: 20px;\n      border-radius: 10px;\n      margin-bottom: 30px;\n    }\n\n    .header h1 {\n      margin: 0 0 10px;\n    }\n\n    .header p {\n      margin: 5px 0;\n    }\n\n    table {\n      width: 100%;\n      border-collapse: collapse;\n      background-color: white;\n      border-radius: 10px;\n      overflow: hidden;\n      box-shadow: 0 0 10px rgba(0,0,0,0.1);\n    }\n\n    th, td {\n      border: 1px solid #ddd;\n      padding: 12px;\n      text-align: center;\n    }\n\n    th {\n      background-color: #535353;\n      color: white;\n    }\n\n    tr:nth-child(even) {\n      background-color: #f2f2f2;\n    }\n\n    tr:hover {\n      background-color: #e0f0ff;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"header\">\n    <h1>SCADA BLOKERA KALEB</h1>\n    <p>REPORTE DIARIO EMITIDO AUTOMATICAMENTE</p>\n  </div>\n\n  <table>\n    <thead>\n      <tr>\n        <th>FECHA</th>\n        <th>HORA</th>\n        <th>PUL MAT 1</th>\n        <th>PUL MAT 2</th>\n        <th>PUL MAT 3</th>\n        <th>L AGUA</th>\n        <th>KG CEMENTO</th>\n        <th>HUMEDAD SET</th>\n        <th>ADITIVO</th>\n      </tr>\n    </thead>\n    <tbody>\n      ${row_list}\n    </tbody>\n  </table>\n\n</body>\n</html>`\n\nmsg.payload = template;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 80,
+        "wires": [
+            [
+                "3d54bc361e61dfdc",
+                "d39196e5ddc44663"
+            ]
+        ]
+    },
+    {
+        "id": "3d54bc361e61dfdc",
+        "type": "debug",
+        "z": "2dc29aede84920ad",
+        "name": "debug 30",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 130,
+        "wires": []
+    },
+    {
+        "id": "7737aa1455ff5beb",
+        "type": "inject",
+        "z": "2dc29aede84920ad",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "480",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 80,
+        "y": 80,
+        "wires": [
+            [
+                "4cc1911c811f5d3c"
+            ]
+        ]
+    },
+    {
+        "id": "3c297036e202d039",
+        "type": "debug",
+        "z": "2dc29aede84920ad",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f82b67c4d4b30e8e",
+        "type": "mongodb in",
+        "z": "2dc29aede84920ad",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "BATCH",
+        "operation": "find",
+        "x": 590,
+        "y": 80,
+        "wires": [
+            [
+                "3c297036e202d039",
+                "5dc2611a4b4887cb"
+            ]
+        ]
+    },
+    {
+        "id": "36eb8e8b32367603",
+        "type": "function",
+        "z": "2dc29aede84920ad",
+        "name": "QUERY",
+        "func": "msg.payload = {\"FECHA\":msg.myymd}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "f82b67c4d4b30e8e"
+            ]
+        ]
+    },
+    {
+        "id": "4cc1911c811f5d3c",
+        "type": "simpletime",
+        "z": "2dc29aede84920ad",
+        "name": "",
+        "mydate": false,
+        "myymd": true,
+        "myyear": false,
+        "mymonth": false,
+        "mymonthn": false,
+        "mymonthf": false,
+        "mydom": false,
+        "mydoy": false,
+        "myday": false,
+        "mydayf": false,
+        "myhourpm": false,
+        "myhour": false,
+        "mytime": false,
+        "mytimes": true,
+        "myminute": false,
+        "myminutes": false,
+        "mysecond": false,
+        "mymillis": false,
+        "myepoch": false,
+        "myrawdate": false,
+        "mypm": false,
+        "x": 220,
+        "y": 80,
+        "wires": [
+            [
+                "36eb8e8b32367603"
             ]
         ]
     }
