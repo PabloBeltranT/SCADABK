@@ -4221,7 +4221,7 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "UPDATE KG_CEMENTO",
-        "func": "global.set('KG_CEMENTO', msg.payload[80]);\nmsg.payload = global.get('KG_CEMENTO');\nreturn msg;",
+        "func": "global.set('KG_CEMENTO', msg.payload[50]);\nmsg.payload = global.get('KG_CEMENTO');\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
