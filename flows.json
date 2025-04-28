@@ -277,7 +277,7 @@
         "disp": true,
         "width": "10",
         "collapse": false,
-        "className": ""
+        "className": "pad-box"
     },
     {
         "id": "a4300fabda47cd77",
@@ -288,7 +288,7 @@
         "disp": true,
         "width": "10",
         "collapse": false,
-        "className": ""
+        "className": "pad-box"
     },
     {
         "id": "e11c04a8f07ad0ee",
@@ -299,7 +299,7 @@
         "disp": true,
         "width": "10",
         "collapse": false,
-        "className": ""
+        "className": "pad-box"
     },
     {
         "id": "cff76322bdf31492",
@@ -320,6 +320,36 @@
         "width": 6,
         "collapse": false,
         "className": ""
+    },
+    {
+        "id": "19a2f659c166163f",
+        "type": "ui_group",
+        "name": "OFFSET",
+        "tab": "f13d1f30df8c1bbc",
+        "order": 4,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": "pad-box"
+    },
+    {
+        "id": "2936b813.6cde68",
+        "type": "ui_tab",
+        "name": "Scheduler Demo",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "bfe48a3e.1b0f4",
+        "type": "ui_group",
+        "name": "Scheduler",
+        "tab": "2936b813.6cde68",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
     },
     {
         "id": "67e1536d3e6062f5",
@@ -2711,7 +2741,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n// VARIABLE PARA CONTROLAR LATCH DE BATIDA LISTA\nglobal.set('estado_anterior',false);\nglobal.set('estado_mezcla','');\n\n// VARIABLES GLOBALES\nglobal.set(\"PULSOS_T_1\", \"\");\nglobal.set(\"PULSOS_T_2\", \"\");\nglobal.set(\"PULSOS_T_3\", \"\");\nglobal.set(\"PULSOS_AGUA\", \"\");\nglobal.set(\"KG_CEMENTO\", \"\");\nglobal.set(\"HUMEDAD_SET\", \"\");\nglobal.set(\"PREMOJADO_\", \"\");\nglobal.set(\"SPRAY_\", \"\");\nglobal.set(\"T_MEZCLADO_HUMEDO\", \"\");\nglobal.set(\"CICLO_CONT_(S)\", \"\");\nglobal.set(\"BARRIDO_BANDAS\", \"\");\nglobal.set(\"T_MEZCLADO_SECO\", \"\");\nglobal.set(\"APERTURA_MIX\", \"\");\nglobal.set(\"T_PRENDIDO\", \"\");\nglobal.set(\"T_APAGADO\", \"\");\nglobal.set(\"DOSIFICADOR_\", \"\");\nglobal.set(\"FRECUENCIA_\", \"\");",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n// VARIABLE PARA CONTROLAR LATCH DE BATIDA LISTA\nglobal.set('estado_anterior',false);\nglobal.set('estado_mezcla','');\n\n// VARIABLES GLOBALES\nglobal.set(\"PULSOS_T_1\", \"\");\nglobal.set(\"PULSOS_T_2\", \"\");\nglobal.set(\"PULSOS_T_3\", \"\");\nglobal.set(\"PULSOS_AGUA\", \"\");\nglobal.set(\"KG_CEMENTO\", \"\");\nglobal.set(\"HUMEDAD_SET\", \"\");\nglobal.set(\"PREMOJADO_\", \"\");\nglobal.set(\"SPRAY_\", \"\");\nglobal.set(\"T_MEZCLADO_HUMEDO\", \"\");\nglobal.set(\"CICLO_CONT_(S)\", \"\");\nglobal.set(\"BARRIDO_BANDAS\", \"\");\nglobal.set(\"T_MEZCLADO_SECO\", \"\");\nglobal.set(\"APERTURA_MIX\", \"\");\nglobal.set(\"T_PRENDIDO\", \"\");\nglobal.set(\"T_APAGADO\", \"\");\nglobal.set(\"DOSIFICADOR_\", \"\");\nglobal.set(\"FRECUENCIA_\", \"\");\n\n",
         "finalize": "",
         "libs": [],
         "x": 360,
@@ -2779,7 +2809,7 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "SAVE DATA",
-        "func": "msg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"PULSOS_MATERIAL_1\": global.get(\"PULSOS_T_1\"),\n    \"PULSOS_MATERIAL_2\": global.get(\"PULSOS_T_2\"),\n    \"PULSOS_MATERIAL_3\": global.get(\"PULSOS_T_3\"),\n    \"LITROS_AGUA\": global.get(\"PULSOS_AGUA\"),\n    \"KG_CEMENTO\": global.get(\"KG_CEMENTO\"),\n    \"HUMEDAD_SET\": global.get(\"HUMEDAD_SET\"),\n    \"PREMOJADO\": global.get(\"PREMOJADO_\",),\n    \"SPRAY\": global.get(\"SPRAY_\"),\n    \"T_MEZCLADO_HUMEDO\": global.get(\"T_MEZCLADO_HUMEDO\"),\n    \"CICLO_CONTINUO (S)\": global.get(\"CICLO_CONT_(S)\"),\n    \"BARRIDO_DE_BANDAS\": global.get(\"BARRIDO_BANDAS\"),\n    \"T_MEZCLADO_SECO\": global.get(\"T_MEZCLADO_SECO\"),\n    \"APERTURA_MIX\": global.get(\"APERTURA_MIX\"),\n    \"T_PRENDIDO\": global.get(\"T_PRENDIDO\"),\n    \"T_APAGADO\": global.get(\"T_APAGADO\"),\n    \"DOSIFICADOR\": global.get(\"DOSIFICADOR_\"),\n    \"FRECUENCIA\": global.get(\"FRECUENCIA_\")\n}\n\nreturn msg.payload;\n\n\n\n\n",
+        "func": "msg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"PULSOS_MATERIAL_1\": global.get(\"PULSOS_T_1\"),\n    \"PULSOS_MATERIAL_2\": global.get(\"PULSOS_T_2\"),\n    \"PULSOS_MATERIAL_3\": global.get(\"PULSOS_T_3\"),\n    \"LITROS_AGUA\": global.get(\"PULSOS_AGUA\"),\n    \"KG_CEMENTO\": global.get(\"KG_CEMENTO\"),\n    \"HUMEDAD_SET\": global.get(\"HUMEDAD_SET\"),\n    \"PREMOJADO\": global.get(\"PREMOJADO_\",),\n    \"SPRAY\": global.get(\"SPRAY_\"),\n    \"T_MEZCLADO_HUMEDO\": global.get(\"T_MEZCLADO_HUMEDO\"),\n    \"CICLO_CONTINUO (S)\": global.get(\"CICLO_CONT_(S)\"),\n    \"BARRIDO_DE_BANDAS\": global.get(\"BARRIDO_BANDAS\"),\n    \"T_MEZCLADO_SECO\": global.get(\"T_MEZCLADO_SECO\"),\n    \"APERTURA_MIX\": global.get(\"APERTURA_MIX\"),\n    \"T_PRENDIDO\": global.get(\"T_PRENDIDO\"),\n    \"T_APAGADO\": global.get(\"T_APAGADO\"),\n    \"DOSIFICADOR\": global.get(\"DOSIFICADOR_\"),\n    \"FRECUENCIA\": global.get(\"FRECUENCIA_\"),\n    \"OFFSET_MATERIAL_1\": global.get(\"OFFSET_MATERIAL_1\"),\n    \"OFFSET_MATERIAL_2\": global.get(\"OFFSET_MATERIAL_2\"),\n    \"OFFSET_MATERIAL_3\": global.get(\"OFFSET_MATERIAL_3\"),\n    \"OFFSET_CEMENTO\": global.get(\"OFFSET_KG_CEMENTO\")\n}\n\nreturn msg.payload;\n\n\n\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3057,6 +3087,16 @@
                 }
             },
             {
+                "field": "OFFSET_MATERIAL_1",
+                "title": "OS MAT 1",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
                 "field": "PULSOS_MATERIAL_2",
                 "title": "PUL MAT 2",
                 "width": "",
@@ -3067,8 +3107,28 @@
                 }
             },
             {
+                "field": "OFFSET_MATERIAL_2",
+                "title": "OS MAT 2",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
                 "field": "PULSOS_MATERIAL_3",
                 "title": "PUL MAT 3",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "OFFSET_MATERIAL_3",
+                "title": "OS MAT 3",
                 "width": "",
                 "align": "center",
                 "formatter": "plaintext",
@@ -3089,6 +3149,16 @@
             {
                 "field": "KG_CEMENTO",
                 "title": "KG CEMENTO",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "OFFSET_CEMENTO",
+                "title": "OS CEMENTO",
                 "width": "",
                 "align": "center",
                 "formatter": "plaintext",
@@ -4452,7 +4522,7 @@
         "z": "7e9505c6d9af9c4c",
         "group": "f2f299339fa66504",
         "name": "ENVIAR REPORTE A:",
-        "order": 0,
+        "order": 8,
         "width": "10",
         "height": "1",
         "columns": [
@@ -4659,6 +4729,157 @@
         "wires": []
     },
     {
+        "id": "2a21c0184b0809b4",
+        "type": "comment",
+        "z": "7e9505c6d9af9c4c",
+        "name": "OFFSET",
+        "info": "",
+        "x": 140,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "8aca5b09a512fa19",
+        "type": "ui_text_input",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "label": "MATERIAL 1",
+        "tooltip": "PULSOS",
+        "group": "19a2f659c166163f",
+        "order": 1,
+        "width": "5",
+        "height": "1",
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "MATERIAL_1",
+        "sendOnBlur": true,
+        "className": "view",
+        "topicType": "str",
+        "x": 150,
+        "y": 600,
+        "wires": [
+            [
+                "6b3ab23e563a67d7"
+            ]
+        ]
+    },
+    {
+        "id": "aad03e7247b63736",
+        "type": "ui_text_input",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "label": "MATERIAL 2",
+        "tooltip": "PULSOS",
+        "group": "19a2f659c166163f",
+        "order": 3,
+        "width": "5",
+        "height": "1",
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "MATERIAL_2",
+        "sendOnBlur": true,
+        "className": "view",
+        "topicType": "str",
+        "x": 150,
+        "y": 640,
+        "wires": [
+            [
+                "6b3ab23e563a67d7"
+            ]
+        ]
+    },
+    {
+        "id": "6e512a7939e5daee",
+        "type": "ui_text_input",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "label": "MATERIAL 3",
+        "tooltip": "PULSOS",
+        "group": "19a2f659c166163f",
+        "order": 5,
+        "width": "5",
+        "height": "1",
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "MATERIAL_3",
+        "sendOnBlur": true,
+        "className": "view",
+        "topicType": "str",
+        "x": 150,
+        "y": 680,
+        "wires": [
+            [
+                "6b3ab23e563a67d7"
+            ]
+        ]
+    },
+    {
+        "id": "ee9eeb60f219d585",
+        "type": "ui_text_input",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "label": "KG CEMENTO",
+        "tooltip": "KG",
+        "group": "19a2f659c166163f",
+        "order": 4,
+        "width": "5",
+        "height": "1",
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "KG_CEMENTO",
+        "sendOnBlur": true,
+        "className": "view",
+        "topicType": "str",
+        "x": 160,
+        "y": 720,
+        "wires": [
+            [
+                "6b3ab23e563a67d7"
+            ]
+        ]
+    },
+    {
+        "id": "6b3ab23e563a67d7",
+        "type": "function",
+        "z": "7e9505c6d9af9c4c",
+        "name": "function 2",
+        "func": "\nif (msg.topic == \"MATERIAL_1\"){\n    global.set(\"OFFSET_MATERIAL_1\", msg.payload);\n    msg.payload = global.get(\"OFFSET_MATERIAL_1\")\n}\n\nif (msg.topic == \"MATERIAL_2\") {\n    global.set(\"OFFSET_MATERIAL_2\", msg.payload);\n}\n\nif (msg.topic == \"MATERIAL_3\") {\n    global.set(\"OFFSET_MATERIAL_3\", msg.payload);\n}\n\nif (msg.topic == \"AGUA\") {\n    global.set(\"OFFSET_L_AGUA\", msg.payload);\n}\n\nif (msg.topic == \"KG_CEMENTO\") {\n    global.set(\"OFFSET_KG_CEMENTO\", msg.payload);\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n\nglobal.set(\"OFFSET_MATERIAL_1\",0);\nglobal.set(\"OFFSET_MATERIAL_2\", 0);\nglobal.set(\"OFFSET_MATERIAL_3\", 0);\nglobal.set(\"OFFSET_KG_CEMENTO\", 0);",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 670,
+        "wires": [
+            [
+                "5b31546ac978a555"
+            ]
+        ]
+    },
+    {
+        "id": "5b31546ac978a555",
+        "type": "debug",
+        "z": "7e9505c6d9af9c4c",
+        "name": "debug 29",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 670,
+        "wires": []
+    },
+    {
         "id": "ec3796c5fdc77f8f",
         "type": "function",
         "z": "2d0421ce0fccf441",
@@ -4732,7 +4953,7 @@
         "order": 0,
         "width": 0,
         "height": 0,
-        "format": "\n<style>\n    .pad-box{\n        padding: 3px;\n    }\n</style>",
+        "format": "\n<style>\n    .pad-box{\n        padding: 5px;\n    }\n    .boton-test{\n        background-color: green !important;\n    }\n    .boton-test:hover{\n        background-color: red !important;\n    }\n</style>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -4755,10 +4976,10 @@
         "token": "oauth2Response.access_token",
         "secure": true,
         "tls": true,
-        "name": "pablobeltran219@gmail.com",
+        "name": "",
         "dname": "mhv",
-        "x": 1020,
-        "y": 80,
+        "x": 1360,
+        "y": 230,
         "wires": []
     },
     {
@@ -4766,84 +4987,20 @@
         "type": "function",
         "z": "2dc29aede84920ad",
         "name": "FORMAT TEMPLATE",
-        "func": "var row_list = ``;\n\nmsg.payload.forEach(function(record) {\n  var row_template = `\n    <tr>\n      <td>${record.FECHA}</td>\n      <td>${record.HORA}</td>\n      <td>${record.PULSOS_MATERIAL_1}</td>\n      <td>${record.PULSOS_MATERIAL_2}</td>\n      <td>${record.PULSOS_MATERIAL_3}</td>\n      <td>${record.LITROS_AGUA}</td>\n      <td>${record.KG_CEMENTO}</td>\n      <td>${record.HUMEDAD_SET}</td>\n      <td>${record.ADITIVO}</td>\n    </tr>\n    `\n    row_list = row_list + row_template;\n});\n\n\n\nvar template = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Tabla de Empresa</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      margin: 40px;\n      background-color: #f9f9f9;\n      color: #333;\n    }\n\n    .header {\n      background-color: black;\n      color: white;\n      padding: 20px;\n      border-radius: 10px;\n      margin-bottom: 30px;\n    }\n\n    .header h1 {\n      margin: 0 0 10px;\n    }\n\n    .header p {\n      margin: 5px 0;\n    }\n\n    table {\n      width: 100%;\n      border-collapse: collapse;\n      background-color: white;\n      border-radius: 10px;\n      overflow: hidden;\n      box-shadow: 0 0 10px rgba(0,0,0,0.1);\n    }\n\n    th, td {\n      border: 1px solid #ddd;\n      padding: 12px;\n      text-align: center;\n    }\n\n    th {\n      background-color: #535353;\n      color: white;\n    }\n\n    tr:nth-child(even) {\n      background-color: #f2f2f2;\n    }\n\n    tr:hover {\n      background-color: #e0f0ff;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"header\">\n    <h1>PRODUCCION BLOKERA KALEB</h1>\n    <p>REPORTE DIARIO EMITIDO AUTOMATICAMENTE</p>\n  </div>\n\n  <table>\n    <thead>\n      <tr>\n        <th>FECHA</th>\n        <th>HORA</th>\n        <th>PUL MAT 1</th>\n        <th>PUL MAT 2</th>\n        <th>PUL MAT 3</th>\n        <th>L AGUA</th>\n        <th>KG CEMENTO</th>\n        <th>HUMEDAD SET</th>\n        <th>ADITIVO</th>\n      </tr>\n    </thead>\n    <tbody>\n      ${row_list}\n    </tbody>\n  </table>\n\n</body>\n</html>`\n\nmsg.topic = \"PRODUCCION BLOQUERA KALEB\";\nmsg.payload = template;\n\nreturn msg;",
+        "func": "var row_list = ``;\n\n\nvar datos_encabezado = {\n  \"cantidad_de_registros\": msg.payload.length,\n  \"total_pulsos_material_1\": 0,\n  \"total_pulsos_material_2\": 0,\n  \"total_pulsos_material_3\": 0, \n  \"l_agua\": 0,\n  \"kg_cemento\": 0,\n  \"os_material_1\": 0,\n  \"os_material_2\": 0,\n  \"os_material_3\": 0,\n  \"os_kg_cemento\": 0,\n}\n\n\nmsg.payload.forEach(function(record) {\n  var row_template = `\n    <tr>\n      <td>${record.FECHA}</td>\n      <td>${record.HORA}</td>\n      <td>${record.PULSOS_MATERIAL_1}</td>\n      <td>${record.OFFSET_MATERIAL_1}</td>\n      <td>${record.PULSOS_MATERIAL_2}</td>\n      <td>${record.OFFSET_MATERIAL_2}</td>\n      <td>${record.PULSOS_MATERIAL_3}</td>\n      <td>${record.OFFSET_MATERIAL_3}</td>\n      <td>${record.LITROS_AGUA}</td>\n      <td>${record.KG_CEMENTO}</td>\n      <td>${record.OFFSET_CEMENTO}</td>\n      <td>${record.HUMEDAD_SET}</td>\n      <td>${record.DOSIFICADOR}</td>\n    </tr>\n    `\n  row_list = row_list + row_template;\n\n  datos_encabezado.total_pulsos_material_1 = datos_encabezado.total_pulsos_material_1 + record.PULSOS_MATERIAL_1;\n  datos_encabezado.os_material_1 = datos_encabezado.os_material_1 + record.OFFSET_MATERIAL_1;\n  \n  datos_encabezado.total_pulsos_material_2 = datos_encabezado.total_pulsos_material_2 + record.PULSOS_MATERIAL_2;\n  datos_encabezado.os_material_2 = datos_encabezado.os_material_2 + record.OFFSET_MATERIAL_2;\n  \n  datos_encabezado.total_pulsos_material_3 = datos_encabezado.total_pulsos_material_3 + record.PULSOS_MATERIAL_3;\n  datos_encabezado.os_material_3 = datos_encabezado.os_material_3 + record.OFFSET_MATERIAL_3;\n  \n  datos_encabezado.l_agua = datos_encabezado.l_agua + record.LITROS_AGUA;\n  \n  datos_encabezado.kg_cemento = datos_encabezado.kg_cemento + record.KG_CEMENTO;\n  datos_encabezado.os_kg_cemento = datos_encabezado.os_kg_cemento + record.OFFSET_CEMENTO;\n\n});\n\n\n\nvar template = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Tabla de Empresa</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      margin: 40px;\n      background-color: #f9f9f9;\n      color: #333;\n    }\n\n    .header {\n      background-color: #303030;\n      color: white;\n      padding: 20px;\n      border-radius: 10px;\n      margin-bottom: 30px;\n    }\n\n    .header h1 {\n      margin: 0 0 10px;\n      color: yellow;\n    }\n\n    .header p {\n      margin: 5px 0;\n    }\n\n    table {\n      width: 100%;\n      border-collapse: collapse;\n      background-color: white;\n      border-radius: 10px;\n      overflow: hidden;\n      box-shadow: 0 0 10px rgba(0,0,0,0.1);\n    }\n\n    th, td {\n      border: 1px solid #ddd;\n      padding: 12px;\n      text-align: center;\n    }\n\n    th {\n      background-color: #535353;\n      color: white;\n    }\n\n    tr:nth-child(even) {\n      background-color: #f2f2f2;\n    }\n\n    tr:hover {\n      background-color: #e0f0ff;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"header\">\n    <h1>PRODUCCION BLOQUERA KALEB</h1>\n    <p>REPORTE DIARIO EMITIDO AUTOMATICAMENTE</p>\n    <p>BATIDAS: ${datos_encabezado.cantidad_de_registros}</p>\n    <p>TOTAL DE PULSOS EN MATERIAL 1: ${datos_encabezado.total_pulsos_material_1} + OFFSET: ${datos_encabezado.os_material_1} = ${parseInt(datos_encabezado.total_pulsos_material_1) + parseInt(datos_encabezado.os_material_1)}</p> \n    <p>TOTAL DE PULSOS EN MATERIAL 2: ${datos_encabezado.total_pulsos_material_2} + OFFSET: ${datos_encabezado.os_material_2} = ${parseInt(datos_encabezado.total_pulsos_material_2) + parseInt(datos_encabezado.os_material_2)}</p>\n    <p>TOTAL DE PULSOS EN MATERIAL 3: ${datos_encabezado.total_pulsos_material_3} + OFFSET: ${datos_encabezado.os_material_3} = ${parseInt(datos_encabezado.total_pulsos_material_3) + parseInt(datos_encabezado.os_material_3)}</p>\n    <p>LITROS DE AGUA EN TOTAL: ${datos_encabezado.l_agua}</p>\n    <P>KG TOTAL DE CEMENTO: ${datos_encabezado.kg_cemento} + OFFSET: ${datos_encabezado.os_kg_cemento} = ${parseInt(datos_encabezado.kg_cemento) + parseInt(datos_encabezado.os_kg_cemento)}</P>\n  </div>\n\n  <table>\n    <thead>\n      <tr>\n        <th>FECHA</th>\n        <th>HORA</th>\n        <th>PUL MAT 1</th>\n        <th>OS MAT 1</th>\n        <th>PUL MAT 2</th>\n        <th>OS MAT 2</th>\n        <th>PUL MAT 3</th>\n        <th>OS MAT 3</th>\n        <th>L AGUA</th>\n        <th>KG CEMENTO</th>\n        <th>OS KG CEMENTO</th>\n        <th>HUMEDAD SET</th>\n        <th>ADITIVO</th>\n      </tr>\n    </thead>\n    <tbody>\n      ${row_list}\n    </tbody>\n  </table>\n\n</body>\n</html>`\n\nmsg.topic = \"PRODUCCION BLOQUERA KALEB\";\nmsg.payload = template;\nmsg.datos = datos_encabezado;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 850,
-        "y": 80,
-        "wires": [
-            [
-                "3d54bc361e61dfdc",
-                "d39196e5ddc44663"
-            ]
-        ]
-    },
-    {
-        "id": "3d54bc361e61dfdc",
-        "type": "debug",
-        "z": "2dc29aede84920ad",
-        "name": "debug 30",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1030,
+        "x": 1140,
         "y": 130,
-        "wires": []
-    },
-    {
-        "id": "7737aa1455ff5beb",
-        "type": "inject",
-        "z": "2dc29aede84920ad",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "480",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 80,
-        "y": 80,
         "wires": [
             [
-                "4cc1911c811f5d3c"
+                "534e24e26e1eb82f"
             ]
         ]
-    },
-    {
-        "id": "3c297036e202d039",
-        "type": "debug",
-        "z": "2dc29aede84920ad",
-        "name": "debug 9",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 810,
-        "y": 120,
-        "wires": []
     },
     {
         "id": "f82b67c4d4b30e8e",
@@ -4853,11 +5010,10 @@
         "name": "",
         "collection": "BATCH",
         "operation": "find",
-        "x": 590,
-        "y": 80,
+        "x": 880,
+        "y": 130,
         "wires": [
             [
-                "3c297036e202d039",
                 "5dc2611a4b4887cb"
             ]
         ]
@@ -4874,8 +5030,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
-        "y": 80,
+        "x": 650,
+        "y": 130,
         "wires": [
             [
                 "f82b67c4d4b30e8e"
@@ -4908,8 +5064,8 @@
         "myepoch": false,
         "myrawdate": false,
         "mypm": false,
-        "x": 220,
-        "y": 80,
+        "x": 500,
+        "y": 130,
         "wires": [
             [
                 "36eb8e8b32367603"
@@ -4917,7 +5073,109 @@
         ]
     },
     {
-        "id": "b78f6e3f4dc131af",
+        "id": "1664e52aedf648f0",
+        "type": "mongodb in",
+        "z": "2dc29aede84920ad",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "RECEIVERS",
+        "operation": "find",
+        "x": 950,
+        "y": 230,
+        "wires": [
+            [
+                "4a5491f7b0d7dd1c"
+            ]
+        ]
+    },
+    {
+        "id": "534e24e26e1eb82f",
+        "type": "function",
+        "z": "2dc29aede84920ad",
+        "name": "ALL DOCUMENTS",
+        "func": " msg.pay = msg.payload; \n\nmsg.payload = {}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 230,
+        "wires": [
+            [
+                "1664e52aedf648f0"
+            ]
+        ]
+    },
+    {
+        "id": "ad013a15e261b0e3",
+        "type": "debug",
+        "z": "2dc29aede84920ad",
+        "name": "debug 31",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1370,
+        "y": 270,
+        "wires": []
+    },
+    {
+        "id": "4a5491f7b0d7dd1c",
+        "type": "function",
+        "z": "2dc29aede84920ad",
+        "name": "FORMAT CC",
+        "func": "\n\nvar receivers_array = [];\n\nmsg.payload.forEach(function(document) {\n    receivers_array.push(document.payload);\n});\n\n\nmsg.cc = receivers_array.join(\",\");\n\n// msg.cc = \"mantenimientobloquerakaleb@gmail.com, pablobeltran219@gmail.com, beltranpablobeltran@outlook.com\"\n\nmsg.payload = msg.pay;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 230,
+        "wires": [
+            [
+                "ad013a15e261b0e3",
+                "d39196e5ddc44663"
+            ]
+        ]
+    },
+    {
+        "id": "19908b98446643d4",
+        "type": "ui_button",
+        "z": "2dc29aede84920ad",
+        "name": "",
+        "group": "f2f299339fa66504",
+        "order": 7,
+        "width": "10",
+        "height": "1",
+        "passthru": false,
+        "label": "TEST",
+        "tooltip": "",
+        "color": "WHITE",
+        "bgcolor": "green",
+        "className": "boton-test",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 360,
+        "y": 170,
+        "wires": [
+            [
+                "4cc1911c811f5d3c"
+            ]
+        ]
+    },
+    {
+        "id": "1893c9b5cd32e828",
         "type": "inject",
         "z": "2dc29aede84920ad",
         "name": "",
@@ -4937,12 +5195,57 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 120,
-        "y": 170,
+        "x": 350,
+        "y": 210,
         "wires": [
             [
-                "4cc1911c811f5d3c"
+                "19908b98446643d4"
             ]
         ]
+    },
+    {
+        "id": "95a2b45facc63d14",
+        "type": "inject",
+        "z": "2dc29aede84920ad",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "27 02 * * *",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 70,
+        "wires": [
+            [
+                "f7db4da33f3c9ba5"
+            ]
+        ]
+    },
+    {
+        "id": "f7db4da33f3c9ba5",
+        "type": "debug",
+        "z": "2dc29aede84920ad",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 70,
+        "wires": []
     }
 ]
