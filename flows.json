@@ -4470,7 +4470,8 @@
         "y": 240,
         "wires": [
             [
-                "bc2d0f90f29fa7ac"
+                "bc2d0f90f29fa7ac",
+                "f8afdd6f5922bac6"
             ]
         ]
     },
@@ -4734,8 +4735,8 @@
         "z": "7e9505c6d9af9c4c",
         "name": "OFFSET",
         "info": "",
-        "x": 140,
-        "y": 540,
+        "x": 760,
+        "y": 660,
         "wires": []
     },
     {
@@ -4756,11 +4757,11 @@
         "sendOnBlur": true,
         "className": "view",
         "topicType": "str",
-        "x": 150,
-        "y": 600,
+        "x": 770,
+        "y": 720,
         "wires": [
             [
-                "6b3ab23e563a67d7"
+                "d29f8d6b80932a3f"
             ]
         ]
     },
@@ -4782,11 +4783,11 @@
         "sendOnBlur": true,
         "className": "view",
         "topicType": "str",
-        "x": 150,
-        "y": 640,
+        "x": 770,
+        "y": 800,
         "wires": [
             [
-                "6b3ab23e563a67d7"
+                "d29f8d6b80932a3f"
             ]
         ]
     },
@@ -4808,11 +4809,11 @@
         "sendOnBlur": true,
         "className": "view",
         "topicType": "str",
-        "x": 150,
-        "y": 680,
+        "x": 770,
+        "y": 880,
         "wires": [
             [
-                "6b3ab23e563a67d7"
+                "d29f8d6b80932a3f"
             ]
         ]
     },
@@ -4834,11 +4835,11 @@
         "sendOnBlur": true,
         "className": "view",
         "topicType": "str",
-        "x": 160,
-        "y": 720,
+        "x": 780,
+        "y": 960,
         "wires": [
             [
-                "6b3ab23e563a67d7"
+                "d29f8d6b80932a3f"
             ]
         ]
     },
@@ -4847,18 +4848,19 @@
         "type": "function",
         "z": "7e9505c6d9af9c4c",
         "name": "function 2",
-        "func": "\nif (msg.topic == \"MATERIAL_1\"){\n    global.set(\"OFFSET_MATERIAL_1\", msg.payload);\n    msg.payload = global.get(\"OFFSET_MATERIAL_1\")\n}\n\nif (msg.topic == \"MATERIAL_2\") {\n    global.set(\"OFFSET_MATERIAL_2\", msg.payload);\n}\n\nif (msg.topic == \"MATERIAL_3\") {\n    global.set(\"OFFSET_MATERIAL_3\", msg.payload);\n}\n\nif (msg.topic == \"AGUA\") {\n    global.set(\"OFFSET_L_AGUA\", msg.payload);\n}\n\nif (msg.topic == \"KG_CEMENTO\") {\n    global.set(\"OFFSET_KG_CEMENTO\", msg.payload);\n}\n\nreturn msg;\n",
+        "func": "\nif (msg.topic == \"MATERIAL_1\"){\n    global.set(\"OFFSET_MATERIAL_1\", msg.payload);\n    msg.payload = global.get(\"OFFSET_MATERIAL_1\")\n}\n\nif (msg.topic == \"MATERIAL_2\") {\n    global.set(\"OFFSET_MATERIAL_2\", msg.payload);\n}\n\nif (msg.topic == \"MATERIAL_3\") {\n    global.set(\"OFFSET_MATERIAL_3\", msg.payload);\n}\n\nif (msg.topic == \"AGUA\") {\n    global.set(\"OFFSET_L_AGUA\", msg.payload);\n}\n\nif (msg.topic == \"KG_CEMENTO\") {\n    global.set(\"OFFSET_KG_CEMENTO\", msg.payload);\n}\n\nmsg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"OFFSET_MATERIAL_1\" : global.get(\"OFFSET_MATERIAL_1\"),\n    \"OFFSET_MATERIAL_2\" : global.get(\"OFFSET_MATERIAL_2\"),\n    \"OFFSET_MATERIAL_3\" : global.get(\"OFFSET_MATERIAL_3\"),\n    \"OFFSET_KG_CEMENTO\" : global.get(\"OFFSET_KG_CEMENTO\"),\n}\n\nreturn msg.payload;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n\nglobal.set(\"OFFSET_MATERIAL_1\",0);\nglobal.set(\"OFFSET_MATERIAL_2\", 0);\nglobal.set(\"OFFSET_MATERIAL_3\", 0);\nglobal.set(\"OFFSET_KG_CEMENTO\", 0);",
         "finalize": "",
         "libs": [],
-        "x": 400,
-        "y": 670,
+        "x": 1140,
+        "y": 720,
         "wires": [
             [
-                "5b31546ac978a555"
+                "5b31546ac978a555",
+                "53385581f7b62615"
             ]
         ]
     },
@@ -4875,9 +4877,489 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 580,
-        "y": 670,
+        "x": 1300,
+        "y": 780,
         "wires": []
+    },
+    {
+        "id": "53385581f7b62615",
+        "type": "mongodb out",
+        "z": "7e9505c6d9af9c4c",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "OFFSETS",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 1390,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "39eddf5167286faa",
+        "type": "mongodb in",
+        "z": "7e9505c6d9af9c4c",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "OFFSETS",
+        "operation": "find",
+        "x": 390,
+        "y": 440,
+        "wires": [
+            [
+                "3a5f69685346c1f5"
+            ]
+        ]
+    },
+    {
+        "id": "3a5f69685346c1f5",
+        "type": "debug",
+        "z": "7e9505c6d9af9c4c",
+        "name": "debug 30",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f8afdd6f5922bac6",
+        "type": "change",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "39eddf5167286faa"
+            ]
+        ]
+    },
+    {
+        "id": "4881518492f73913",
+        "type": "inject",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 95,
+        "y": 720,
+        "wires": [
+            [
+                "e543f86edcf38c0b"
+            ]
+        ],
+        "icon": "node-red/serial.svg",
+        "l": false
+    },
+    {
+        "id": "907430c8dc510817",
+        "type": "mongodb in",
+        "z": "7e9505c6d9af9c4c",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "OFFSETS",
+        "operation": "find",
+        "x": 330,
+        "y": 720,
+        "wires": [
+            [
+                "bfaf766976ea5a97",
+                "61457eb3836101a8",
+                "254d4393dc219631",
+                "2cd2ecb4767746c6",
+                "2fac518ae3729bba"
+            ]
+        ]
+    },
+    {
+        "id": "bfaf766976ea5a97",
+        "type": "debug",
+        "z": "7e9505c6d9af9c4c",
+        "name": "debug 32",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "d29f8d6b80932a3f",
+        "type": "simpletime",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "mydate": true,
+        "myymd": true,
+        "myyear": false,
+        "mymonth": true,
+        "mymonthn": false,
+        "mymonthf": false,
+        "mydom": false,
+        "mydoy": false,
+        "myday": false,
+        "mydayf": false,
+        "myhourpm": false,
+        "myhour": false,
+        "mytime": false,
+        "mytimes": true,
+        "myminute": false,
+        "myminutes": false,
+        "mysecond": false,
+        "mymillis": false,
+        "myepoch": false,
+        "myrawdate": true,
+        "mypm": true,
+        "x": 990,
+        "y": 720,
+        "wires": [
+            [
+                "6b3ab23e563a67d7"
+            ]
+        ]
+    },
+    {
+        "id": "61457eb3836101a8",
+        "type": "rbe",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload.OFFSET_MATERIAL_1",
+        "topi": "topic",
+        "x": 615,
+        "y": 720,
+        "wires": [
+            [
+                "8aca5b09a512fa19"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "254d4393dc219631",
+        "type": "rbe",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload.OFFSET_MATERIAL_2",
+        "topi": "topic",
+        "x": 615,
+        "y": 800,
+        "wires": [
+            [
+                "aad03e7247b63736"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "2cd2ecb4767746c6",
+        "type": "rbe",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload.OFFSET_MATERIAL_3",
+        "topi": "topic",
+        "x": 615,
+        "y": 880,
+        "wires": [
+            [
+                "6e512a7939e5daee"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "2fac518ae3729bba",
+        "type": "rbe",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload.OFFSET_KG_CEMENTO",
+        "topi": "topic",
+        "x": 615,
+        "y": 960,
+        "wires": [
+            [
+                "ee9eeb60f219d585"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "6fa939c3c0166f87",
+        "type": "debug",
+        "z": "7e9505c6d9af9c4c",
+        "name": "debug 33",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 260,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "e543f86edcf38c0b",
+        "type": "function",
+        "z": "7e9505c6d9af9c4c",
+        "name": "function 6",
+        "func": "msg.payload = {};\nmsg.sort = {\"_id\":-1};\nmsg.limit = 1;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 145,
+        "y": 720,
+        "wires": [
+            [
+                "907430c8dc510817",
+                "6fa939c3c0166f87"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "b67300d4f3a2f435",
+        "type": "inject",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 95,
+        "y": 820,
+        "wires": [
+            [
+                "f35c2df77ee70587"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "b83b4981fc504a46",
+        "type": "mongodb in",
+        "z": "7e9505c6d9af9c4c",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "OFFSETS",
+        "operation": "find",
+        "x": 330,
+        "y": 820,
+        "wires": [
+            [
+                "9da4cde697e607bf",
+                "8cf0088090e5ed20",
+                "a888e2d4c2131e70",
+                "baf5a33f02adb7f6"
+            ]
+        ]
+    },
+    {
+        "id": "f35c2df77ee70587",
+        "type": "function",
+        "z": "7e9505c6d9af9c4c",
+        "name": "function 7",
+        "func": "msg.payload = {};\nmsg.sort = {\"_id\":-1};\nmsg.limit = 1;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 145,
+        "y": 820,
+        "wires": [
+            [
+                "b83b4981fc504a46"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "9da4cde697e607bf",
+        "type": "change",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.OFFSET_MATERIAL_1",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 615,
+        "y": 760,
+        "wires": [
+            [
+                "8aca5b09a512fa19"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "8cf0088090e5ed20",
+        "type": "change",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.OFFSET_MATERIAL_2",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 615,
+        "y": 840,
+        "wires": [
+            [
+                "aad03e7247b63736"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "a888e2d4c2131e70",
+        "type": "change",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.OFFSET_MATERIAL_3",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 615,
+        "y": 920,
+        "wires": [
+            [
+                "6e512a7939e5daee"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "baf5a33f02adb7f6",
+        "type": "change",
+        "z": "7e9505c6d9af9c4c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.OFFSET_KG_CEMENTO",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 615,
+        "y": 1000,
+        "wires": [
+            [
+                "ee9eeb60f219d585"
+            ]
+        ],
+        "l": false
     },
     {
         "id": "ec3796c5fdc77f8f",
