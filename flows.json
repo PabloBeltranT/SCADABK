@@ -383,7 +383,7 @@
         "tab": "ea14cfdebfa5eef2",
         "order": 1,
         "disp": false,
-        "width": "7",
+        "width": "6",
         "collapse": false,
         "className": ""
     },
@@ -2773,7 +2773,7 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "LISTA RISING EDGE ",
-        "func": "\n\nif (msg.payload[65] == true && global.get('estado_anterior') == false && global.get(\"registr_batida_plc\") == true){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA_LISTA');\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n    \n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload[65] == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload[65] == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload[65] == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\n\n//msg.payload = msg.payload[0];\nreturn msg;",
+        "func": "\n\nif (msg.payload[65] == true && global.get('estado_anterior') == false && global.get(\"registr_batida_plc\") == true){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA_LISTA');\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n    \n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('estado_mezcla');\n};\n\n\n/*\nif (global.get(\"registr_batida_plc\") == true && global.get(\"CONTINUO\") ==  false && global.get(\"ABRIR_MIXER\") == true){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA_LISTA');\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n    \n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('estado_mezcla');\n};\n*/\n\n\n\nif (msg.payload[65] == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload[65] == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload[65] == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\n\n//msg.payload = msg.payload[0];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2845,7 +2845,7 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "SAVE DATA",
-        "func": "msg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"PULSOS_MATERIAL_1\": global.get(\"PULSOS_T_1\"),\n    \"PULSOS_MATERIAL_2\": global.get(\"PULSOS_T_2\"),\n    \"PULSOS_MATERIAL_3\": global.get(\"PULSOS_T_3\"),\n    \"LITROS_AGUA\": global.get(\"PULSOS_AGUA\"),\n    \"KG_CEMENTO\": global.get(\"KG_CEMENTO\"),\n    \"HUMEDAD_SET\": global.get(\"HUMEDAD_SET\"),\n    \"PREMOJADO\": global.get(\"PREMOJADO_\",),\n    \"SPRAY\": global.get(\"SPRAY_\"),\n    \"T_MEZCLADO_HUMEDO\": global.get(\"T_MEZCLADO_HUMEDO\"),\n    \"CICLO_CONTINUO (S)\": global.get(\"CICLO_CONT_(S)\"),\n    \"BARRIDO_DE_BANDAS\": global.get(\"BARRIDO_BANDAS\"),\n    \"T_MEZCLADO_SECO\": global.get(\"T_MEZCLADO_SECO\"),\n    \"APERTURA_MIX\": global.get(\"APERTURA_MIX\"),\n    \"T_PRENDIDO\": global.get(\"T_PRENDIDO\"),\n    \"T_APAGADO\": global.get(\"T_APAGADO\"),\n    \"DOSIFICADOR\": global.get(\"DOSIFICADOR_\"),\n    \"FRECUENCIA\": global.get(\"FRECUENCIA_\"),\n    \"OFFSET_MATERIAL_1\": global.get(\"OFFSET_MATERIAL_1\"),\n    \"OFFSET_MATERIAL_2\": global.get(\"OFFSET_MATERIAL_2\"),\n    \"OFFSET_MATERIAL_3\": global.get(\"OFFSET_MATERIAL_3\"),\n    \"OFFSET_CEMENTO\": global.get(\"OFFSET_KG_CEMENTO\")\n}\n\nreturn msg.payload;\n\n\n\n\n",
+        "func": "msg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"PULSOS_MATERIAL_1\": global.get(\"PULSOS_T_1\"),\n    \"PULSOS_MATERIAL_2\": global.get(\"PULSOS_T_2\"),\n    \"PULSOS_MATERIAL_3\": global.get(\"PULSOS_T_3\"),\n    \"LITROS_AGUA\": global.get(\"PULSOS_AGUA\"),\n    \"KG_CEMENTO\": global.get(\"KG_CEMENTO\"),\n    \"HUMEDAD_SET\": global.get(\"HUMEDAD_SET\"),\n    \"PREMOJADO\": global.get(\"PREMOJADO_\",),\n    \"SPRAY\": global.get(\"SPRAY_\"),\n    \"T_MEZCLADO_HUMEDO\": global.get(\"T_MEZCLADO_HUMEDO\"),\n    \"CICLO_CONTINUO (S)\": global.get(\"CICLO_CONT_(S)\"),\n    \"BARRIDO_DE_BANDAS\": global.get(\"BARRIDO_BANDAS\"),\n    \"T_MEZCLADO_SECO\": global.get(\"T_MEZCLADO_SECO\"),\n    \"APERTURA_MIX\": global.get(\"APERTURA_MIX\"),\n    \"T_PRENDIDO\": global.get(\"T_PRENDIDO\"),\n    \"T_APAGADO\": global.get(\"T_APAGADO\"),\n    \"DOSIFICADOR\": global.get(\"DOSIFICADOR_\"),\n    \"FRECUENCIA\": global.get(\"FRECUENCIA_\"),\n    \"OFFSET_MATERIAL_1\": global.get(\"OFFSET_MATERIAL_1\"),\n    \"OFFSET_MATERIAL_2\": global.get(\"OFFSET_MATERIAL_2\"),\n    \"OFFSET_MATERIAL_3\": global.get(\"OFFSET_MATERIAL_3\"),\n    \"OFFSET_CEMENTO\": global.get(\"OFFSET_KG_CEMENTO\"),\n    \"SETPOINT_LITROS_AGUA\": global.get(\"setpoint_litros_agua\")\n}\n\nreturn msg.payload;\n\n\n\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2890,8 +2890,8 @@
             [
                 "af32942279f45516",
                 "72f037eae32114aa",
-                "04ac9645f6143db2",
-                "bdaa38e25ff547d7"
+                "bdaa38e25ff547d7",
+                "04ac9645f6143db2"
             ],
             []
         ]
@@ -3640,7 +3640,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "bcce7ca1cd844da2"
@@ -3660,7 +3660,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 880,
+        "y": 920,
         "wires": []
     },
     {
@@ -3680,8 +3680,8 @@
         "topic": "",
         "payload": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 1, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
         "payloadType": "jsonata",
-        "x": 90,
-        "y": 180,
+        "x": 110,
+        "y": 420,
         "wires": [
             [
                 "f0ed58eda4d6f929",
@@ -3702,8 +3702,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 340,
-        "y": 180,
+        "x": 360,
+        "y": 420,
         "wires": []
     },
     {
@@ -4043,7 +4043,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 990,
+        "x": 1010,
         "y": 1380,
         "wires": [
             [
@@ -4093,7 +4093,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1180,
+        "x": 1200,
         "y": 1380,
         "wires": [
             [
@@ -4151,7 +4151,8 @@
                 "48d7f850de5a9432",
                 "c38099268d595334",
                 "9d3e3da72d962033",
-                "fe88c00a8c089454"
+                "fe88c00a8c089454",
+                "6fac08951d1c6762"
             ],
             []
         ]
@@ -4210,11 +4211,12 @@
         "delayOnStart": false,
         "startDelayTime": "",
         "x": 320,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "8b321084e9670da9",
-                "56fca90ecebfd515"
+                "56fca90ecebfd515",
+                "0461d6ba1ba5066d"
             ],
             []
         ]
@@ -4435,7 +4437,7 @@
         "type": "debug",
         "z": "22276406018f011e",
         "name": "debug 34",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -4444,7 +4446,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 580,
-        "y": 960,
+        "y": 1000,
         "wires": []
     },
     {
@@ -4460,12 +4462,177 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 960,
+        "y": 1000,
         "wires": [
             [
                 "9f8b6d04ebf30cc5"
             ]
         ]
+    },
+    {
+        "id": "0461d6ba1ba5066d",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE CONTINUO",
+        "func": "global.set('CONTINUO', msg.payload[28]);\nmsg.payload = global.get('CONTINUO');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 960,
+        "wires": [
+            [
+                "36d2d12862cc2868"
+            ]
+        ]
+    },
+    {
+        "id": "36d2d12862cc2868",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 41",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "6fac08951d1c6762",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE ABRIR MIXER",
+        "func": "global.set('ABRIR_MIXER', msg.payload[87]);\nmsg.payload = global.get('ABRIR_MIXER');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 880,
+        "wires": [
+            [
+                "4940d0304e86b0e6"
+            ]
+        ]
+    },
+    {
+        "id": "4940d0304e86b0e6",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 42",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "cec0e8fdd90f519e",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "BATIDA MANUAL",
+        "func": "if (global.get(\"registr_batida_plc\") == true && global.get(\"CONTINUO\") ==  false && global.get(\"ABRIR_MIXER\") == true){\n    msg.payload = true;\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "db8b643b0f80a977"
+            ]
+        ]
+    },
+    {
+        "id": "3e99e0a72d189596",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "function 15",
+        "func": "if (msg.payload == true){\n    msg.payload = true;\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 345,
+        "y": 180,
+        "wires": [
+            [
+                "bdaa38e25ff547d7"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "db8b643b0f80a977",
+        "type": "rbe",
+        "z": "22276406018f011e",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 295,
+        "y": 180,
+        "wires": [
+            [
+                "3e99e0a72d189596"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "e46f36ed90236bd8",
+        "type": "inject",
+        "z": "22276406018f011e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 45,
+        "y": 180,
+        "wires": [
+            [
+                "cec0e8fdd90f519e"
+            ]
+        ],
+        "icon": "node-red/serial.svg",
+        "l": false
     },
     {
         "id": "d6a94ea8dd9308bd",
@@ -5883,7 +6050,7 @@
         "z": "2e6d05ea4d93a944",
         "name": "",
         "group": "bafe8d350de57074",
-        "order": 0,
+        "order": 1,
         "width": "6",
         "height": "6",
         "gtype": "gage",
@@ -5930,7 +6097,8 @@
         "y": 80,
         "wires": [
             [
-                "32e077fef9c0b8f1"
+                "32e077fef9c0b8f1",
+                "a59da6fdbff896cd"
             ]
         ]
     },
@@ -5950,9 +6118,399 @@
         "y": 80,
         "wires": [
             [
-                "6b299854f6f4eab4"
+                "6b299854f6f4eab4",
+                "5a862669c7f9b718",
+                "49cd186782c2e7e1"
             ]
         ]
+    },
+    {
+        "id": "5a862669c7f9b718",
+        "type": "debug",
+        "z": "2e6d05ea4d93a944",
+        "name": "debug 35",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "49cd186782c2e7e1",
+        "type": "function",
+        "z": "2e6d05ea4d93a944",
+        "name": "DESBORDE DE AGUA",
+        "func": "if (msg.payload >= global.get(\"setpoint_litros_agua\") && global.get(\"mezcla_lista\") == false ){\n    msg.topic = \"MHUMEDAD OK\";\n    msg.payload = true;\n    return msg;\n};\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [
+                "5182824548083d45",
+                "580dc80dbacdc29c"
+            ]
+        ]
+    },
+    {
+        "id": "6fdc7c2c5288bfa7",
+        "type": "function",
+        "z": "2e6d05ea4d93a944",
+        "name": "function 11",
+        "func": "global.set(\"setpoint_litros_agua\", msg.payload);\nmsg.payload = global.get(\"setpoint_litros_agua\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "c93f5a94d9da9dd4"
+            ]
+        ]
+    },
+    {
+        "id": "c93f5a94d9da9dd4",
+        "type": "debug",
+        "z": "2e6d05ea4d93a944",
+        "name": "debug 36",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b1ab9d3d22f36259",
+        "type": "ui_text_input",
+        "z": "2e6d05ea4d93a944",
+        "d": true,
+        "name": "",
+        "label": "SETPOINT",
+        "tooltip": "",
+        "group": "bafe8d350de57074",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": "0",
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [
+                "6fdc7c2c5288bfa7"
+            ]
+        ]
+    },
+    {
+        "id": "5182824548083d45",
+        "type": "debug",
+        "z": "2e6d05ea4d93a944",
+        "name": "debug 37",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "09a3cda0a2d0fa6b",
+        "type": "modbus-write",
+        "z": "2e6d05ea4d93a944",
+        "d": true,
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "84",
+        "quantity": "1",
+        "server": "79820e68718191b3",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 780,
+        "y": 240,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "deab24786e37bc3a",
+        "type": "modbus-read",
+        "z": "2e6d05ea4d93a944",
+        "name": "",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "84",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 450,
+        "y": 380,
+        "wires": [
+            [
+                "5a509f02c86a1b33"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "5a509f02c86a1b33",
+        "type": "debug",
+        "z": "2e6d05ea4d93a944",
+        "name": "debug 38",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload[0]",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a59da6fdbff896cd",
+        "type": "function",
+        "z": "2e6d05ea4d93a944",
+        "name": "function 12",
+        "func": "msg.value = global.get(\"setpoint_litros_agua\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "9b0fc86197b799c1"
+            ]
+        ]
+    },
+    {
+        "id": "9b0fc86197b799c1",
+        "type": "ui_text",
+        "z": "2e6d05ea4d93a944",
+        "group": "bafe8d350de57074",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "SETPOINT ACTUAL: ",
+        "format": "{{msg.value}}",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 660,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "580dc80dbacdc29c",
+        "type": "rbe",
+        "z": "2e6d05ea4d93a944",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 575,
+        "y": 240,
+        "wires": [
+            [
+                "09a3cda0a2d0fa6b"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "4e7a513cfae34e39",
+        "type": "inject",
+        "z": "2e6d05ea4d93a944",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 450,
+        "y": 240,
+        "wires": [
+            [
+                "a0c25c2880aca060"
+            ]
+        ]
+    },
+    {
+        "id": "fa733a91f1d981ca",
+        "type": "debug",
+        "z": "2e6d05ea4d93a944",
+        "name": "debug 39",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a4f72680b5866393",
+        "type": "modbus-read",
+        "z": "2e6d05ea4d93a944",
+        "name": "MEZCLA LISTA",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "65",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 460,
+        "y": 500,
+        "wires": [
+            [
+                "34f8d08779fd9fb1"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "34f8d08779fd9fb1",
+        "type": "function",
+        "z": "2e6d05ea4d93a944",
+        "name": "function 13",
+        "func": "global.set(\"mezcla_lista\", msg.payload[0]);\nmsg.payload = global.get(\"mezcla_lista\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 500,
+        "wires": [
+            [
+                "d3e8fa47311bf661"
+            ]
+        ]
+    },
+    {
+        "id": "d3e8fa47311bf661",
+        "type": "debug",
+        "z": "2e6d05ea4d93a944",
+        "name": "debug 40",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "a0c25c2880aca060",
+        "type": "function",
+        "z": "2e6d05ea4d93a944",
+        "name": "function 14",
+        "func": "if (msg.payload == true){\n    msg.payload = true;\n    return msg;\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 625,
+        "y": 240,
+        "wires": [
+            [
+                "09a3cda0a2d0fa6b",
+                "fa733a91f1d981ca"
+            ]
+        ],
+        "l": false
     },
     {
         "id": "499c3f7871f94163",
