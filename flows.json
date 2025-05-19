@@ -56,12 +56,73 @@
         "env": []
     },
     {
-        "id": "a7e2d5dfaa5bd8fd",
+        "id": "4d346416301ae751",
+        "type": "tab",
+        "label": "DEBUG DATOS",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e1f5f23a63b2aa15",
         "type": "tab",
         "label": "API",
         "disabled": false,
         "info": "",
         "env": []
+    },
+    {
+        "id": "e1bc9dc3d74a721d",
+        "type": "tab",
+        "label": "DATOS",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b70b8d636718a17e",
+        "type": "group",
+        "z": "2e6d05ea4d93a944",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "6b299854f6f4eab4",
+            "b7619f452a165a33",
+            "32e077fef9c0b8f1",
+            "5a862669c7f9b718",
+            "49cd186782c2e7e1",
+            "6fdc7c2c5288bfa7",
+            "c93f5a94d9da9dd4",
+            "b1ab9d3d22f36259",
+            "5182824548083d45",
+            "09a3cda0a2d0fa6b",
+            "deab24786e37bc3a",
+            "5a509f02c86a1b33",
+            "a59da6fdbff896cd",
+            "9b0fc86197b799c1",
+            "580dc80dbacdc29c",
+            "fa733a91f1d981ca",
+            "a4f72680b5866393",
+            "34f8d08779fd9fb1",
+            "d3e8fa47311bf661",
+            "a0c25c2880aca060",
+            "bd527a9d4d9e1c0b",
+            "c2f0ae078944b256",
+            "80e7e789fe67e7e1",
+            "91348905c4b5efd8",
+            "c96f2b295bcfadf3"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 1412,
+        "h": 462
     },
     {
         "id": "7cb33314543eaf40",
@@ -154,7 +215,7 @@
             }
         },
         "site": {
-            "name": "BLOCKES KALEB DASHBOARD",
+            "name": "BLOQUES KALEB DASHBOARD",
             "hideToolbar": "false",
             "allowSwipe": "false",
             "lockMenu": "true",
@@ -384,6 +445,37 @@
         "order": 1,
         "disp": false,
         "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d0e920f3d65ab20b",
+        "type": "ui_group",
+        "name": "CUARTO DE CONTROL",
+        "tab": "ea14cfdebfa5eef2",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "056a4826f5669029",
+        "type": "ui_tab",
+        "name": "REGISTROS",
+        "icon": "dashboard",
+        "order": 7,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "58df4d1dea36f283",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "056a4826f5669029",
+        "order": 1,
+        "disp": false,
+        "width": "24",
         "collapse": false,
         "className": ""
     },
@@ -2773,7 +2865,7 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "LISTA RISING EDGE ",
-        "func": "\n\nif (msg.payload[65] == true && global.get('estado_anterior') == false && global.get(\"registr_batida_plc\") == true){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA_LISTA');\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n    \n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('estado_mezcla');\n};\n\n\n/*\nif (global.get(\"registr_batida_plc\") == true && global.get(\"CONTINUO\") ==  false && global.get(\"ABRIR_MIXER\") == true){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA_LISTA');\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n    \n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('estado_mezcla');\n};\n*/\n\n\n\nif (msg.payload[65] == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload[65] == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload[65] == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\n\n//msg.payload = msg.payload[0];\nreturn msg;",
+        "func": "\n\nif (msg.payload[65] == true && global.get('estado_anterior') == false && global.get(\"registr_batida_plc\") == true){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA_LISTA');\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n    \n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('estado_mezcla');\n\n    //\n    flow.set(\"MODO\", \"AUT\");\n    return msg;\n};\n\n\n/*\nif (global.get(\"registr_batida_plc\") == true && global.get(\"CONTINUO\") ==  false && global.get(\"ABRIR_MIXER\") == true){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA_LISTA');\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n    \n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('estado_mezcla');\n};\n*/\n\n\n\nif (msg.payload[65] == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload[65] == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload[65] == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\n\n//msg.payload = msg.payload[0];\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2845,7 +2937,7 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "SAVE DATA",
-        "func": "msg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"PULSOS_MATERIAL_1\": global.get(\"PULSOS_T_1\"),\n    \"PULSOS_MATERIAL_2\": global.get(\"PULSOS_T_2\"),\n    \"PULSOS_MATERIAL_3\": global.get(\"PULSOS_T_3\"),\n    \"LITROS_AGUA\": global.get(\"PULSOS_AGUA\"),\n    \"KG_CEMENTO\": global.get(\"KG_CEMENTO\"),\n    \"HUMEDAD_SET\": global.get(\"HUMEDAD_SET\"),\n    \"PREMOJADO\": global.get(\"PREMOJADO_\",),\n    \"SPRAY\": global.get(\"SPRAY_\"),\n    \"T_MEZCLADO_HUMEDO\": global.get(\"T_MEZCLADO_HUMEDO\"),\n    \"CICLO_CONTINUO (S)\": global.get(\"CICLO_CONT_(S)\"),\n    \"BARRIDO_DE_BANDAS\": global.get(\"BARRIDO_BANDAS\"),\n    \"T_MEZCLADO_SECO\": global.get(\"T_MEZCLADO_SECO\"),\n    \"APERTURA_MIX\": global.get(\"APERTURA_MIX\"),\n    \"T_PRENDIDO\": global.get(\"T_PRENDIDO\"),\n    \"T_APAGADO\": global.get(\"T_APAGADO\"),\n    \"DOSIFICADOR\": global.get(\"DOSIFICADOR_\"),\n    \"FRECUENCIA\": global.get(\"FRECUENCIA_\"),\n    \"OFFSET_MATERIAL_1\": global.get(\"OFFSET_MATERIAL_1\"),\n    \"OFFSET_MATERIAL_2\": global.get(\"OFFSET_MATERIAL_2\"),\n    \"OFFSET_MATERIAL_3\": global.get(\"OFFSET_MATERIAL_3\"),\n    \"OFFSET_CEMENTO\": global.get(\"OFFSET_KG_CEMENTO\"),\n    \"SETPOINT_LITROS_AGUA\": global.get(\"setpoint_litros_agua\")\n}\n\nreturn msg.payload;\n\n\n\n\n",
+        "func": "msg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"PULSOS_MATERIAL_1\": global.get(\"PULSOS_T_1\"),\n    \"PULSOS_MATERIAL_2\": global.get(\"PULSOS_T_2\"),\n    \"PULSOS_MATERIAL_3\": global.get(\"PULSOS_T_3\"),\n\n    \"PULSOS_REALES_MATERIAL_1\": global.get(\"MATERIAL_ACTUAL_1\"),\n    \"PULSOS_REALES_MATERIAL_2\": global.get(\"MATERIAL_ACTUAL_2\"),\n    \"PULSOS_REALES_MATERIAL_3\": global.get(\"MATERIAL_ACTUAL_3\"),\n    \"LITROS_AGUA\": global.get(\"PULSOS_AGUA\"),\n    \"CEMENTO_REAL\": parseInt(global.get(\"CEMENTO_ACTUAL\")/10), \n    \"KG_CEMENTO\": global.get(\"KG_CEMENTO\"),\n    \"HUMEDAD_SET\": parseInt(global.get(\"HUMEDAD_SET\")/10),\n    \"PREMOJADO\": global.get(\"PREMOJADO_\",),\n    \"SPRAY\": global.get(\"SPRAY_\"),\n    \"T_MEZCLADO_HUMEDO\": global.get(\"T_MEZCLADO_HUMEDO\"),\n    \"CICLO_CONTINUO (S)\": global.get(\"CICLO_CONT_(S)\"),\n    \"BARRIDO_DE_BANDAS\": global.get(\"BARRIDO_BANDAS\"),\n    \"T_MEZCLADO_SECO\": global.get(\"T_MEZCLADO_SECO\"),\n    \"APERTURA_MIX\": global.get(\"APERTURA_MIX\"),\n    \"T_PRENDIDO\": global.get(\"T_PRENDIDO\"),\n    \"T_APAGADO\": global.get(\"T_APAGADO\"),\n    \"DOSIFICADOR\": global.get(\"DOSIFICADOR_\"),\n    \"FRECUENCIA\": global.get(\"FRECUENCIA_\"),\n    \"OFFSET_MATERIAL_1\": global.get(\"OFFSET_MATERIAL_1\"),\n    \"OFFSET_MATERIAL_2\": global.get(\"OFFSET_MATERIAL_2\"),\n    \"OFFSET_MATERIAL_3\": global.get(\"OFFSET_MATERIAL_3\"),\n    \"OFFSET_CEMENTO\": global.get(\"OFFSET_KG_CEMENTO\"),\n    \"SETPOINT_LITROS_AGUA\": global.get(\"setpoint_litros_agua\"),\n    \"MODO\": flow.get(\"MODO\")\n}\n\n\nglobal.set(\"MATERIAL_ACTUAL_1\",0);\nglobal.set(\"MATERIAL_ACTUAL_2\",0);\nglobal.set(\"MATERIAL_ACTUAL_3\",0);\nglobal.set(\"CEMENTO_ACTUAL\",0);\nglobal.set(\"registr_batida_plc\", false);\n\nreturn msg.payload;\n\n\n\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2891,7 +2983,8 @@
                 "af32942279f45516",
                 "72f037eae32114aa",
                 "bdaa38e25ff547d7",
-                "04ac9645f6143db2"
+                "04ac9645f6143db2",
+                "f19b969ee604d58e"
             ],
             []
         ]
@@ -2909,8 +3002,8 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 600,
-        "y": 140,
+        "x": 820,
+        "y": 180,
         "wires": []
     },
     {
@@ -2918,7 +3011,7 @@
         "type": "debug",
         "z": "22276406018f011e",
         "name": "debug 3",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -2971,7 +3064,7 @@
         "name": "READ DATA FROM MONGO DB",
         "info": "",
         "x": 230,
-        "y": 1070,
+        "y": 1200,
         "wires": []
     },
     {
@@ -2993,7 +3086,7 @@
         "collection": "BATCH",
         "operation": "find",
         "x": 780,
-        "y": 1200,
+        "y": 1280,
         "wires": [
             [
                 "eaa7a3414ba00ca0",
@@ -3014,7 +3107,7 @@
         "finalize": "",
         "libs": [],
         "x": 540,
-        "y": 1200,
+        "y": 1280,
         "wires": [
             [
                 "d94ff4b89a042eba"
@@ -3048,7 +3141,7 @@
         "myrawdate": false,
         "mypm": false,
         "x": 370,
-        "y": 1200,
+        "y": 1280,
         "wires": [
             [
                 "cf7e02f56396c447"
@@ -3069,7 +3162,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1100,
-        "y": 1260,
+        "y": 1340,
         "wires": []
     },
     {
@@ -3123,8 +3216,8 @@
                 }
             },
             {
-                "field": "OFFSET_MATERIAL_1",
-                "title": "OS MAT 1",
+                "field": "PULSOS_REALES_MATERIAL_1",
+                "title": "REAL MAT 1",
                 "width": "",
                 "align": "center",
                 "formatter": "plaintext",
@@ -3143,8 +3236,8 @@
                 }
             },
             {
-                "field": "OFFSET_MATERIAL_2",
-                "title": "OS MAT 2",
+                "field": "PULSOS_REALES_MATERIAL_2",
+                "title": "REAL MAT 2",
                 "width": "",
                 "align": "center",
                 "formatter": "plaintext",
@@ -3163,18 +3256,8 @@
                 }
             },
             {
-                "field": "OFFSET_MATERIAL_3",
-                "title": "OS MAT 3",
-                "width": "",
-                "align": "center",
-                "formatter": "plaintext",
-                "formatterParams": {
-                    "target": "_blank"
-                }
-            },
-            {
-                "field": "LITROS_AGUA",
-                "title": "LITROS AGUA",
+                "field": "PULSOS_REALES_MATERIAL_3",
+                "title": "REAL MAT 3",
                 "width": "",
                 "align": "center",
                 "formatter": "plaintext",
@@ -3193,8 +3276,8 @@
                 }
             },
             {
-                "field": "OFFSET_CEMENTO",
-                "title": "OS CEMENTO",
+                "field": "CEMENTO_REAL",
+                "title": "REAL CEMENTO",
                 "width": "",
                 "align": "center",
                 "formatter": "plaintext",
@@ -3213,9 +3296,29 @@
                 }
             },
             {
+                "field": "LITROS_AGUA",
+                "title": "LITROS AGUA",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
                 "field": "DOSIFICADOR",
                 "title": "ADITIVO",
                 "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "MODO",
+                "title": "MODO",
+                "width": "4%",
                 "align": "center",
                 "formatter": "plaintext",
                 "formatterParams": {
@@ -3226,7 +3329,7 @@
         "outputs": 0,
         "cts": false,
         "x": 1010,
-        "y": 1200,
+        "y": 1280,
         "wires": []
     },
     {
@@ -3250,7 +3353,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 180,
-        "y": 1200,
+        "y": 1280,
         "wires": [
             [
                 "f74cb41079d34a5a"
@@ -3312,7 +3415,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 240,
+        "y": 320,
         "wires": [
             [
                 "725cf028b90a928f"
@@ -3332,7 +3435,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 280,
+        "y": 360,
         "wires": [
             [
                 "bc63d4bfd1102904"
@@ -3352,7 +3455,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "8f4afda01541ed95"
@@ -3372,7 +3475,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 240,
+        "y": 320,
         "wires": []
     },
     {
@@ -3388,7 +3491,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 400,
+        "y": 480,
         "wires": [
             [
                 "a1697f25a45e8759"
@@ -3408,7 +3511,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 400,
+        "y": 480,
         "wires": []
     },
     {
@@ -3424,7 +3527,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 440,
+        "y": 520,
         "wires": [
             [
                 "702430d7b6f95f46"
@@ -3444,7 +3547,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 440,
+        "y": 520,
         "wires": []
     },
     {
@@ -3460,7 +3563,7 @@
         "finalize": "",
         "libs": [],
         "x": 630,
-        "y": 480,
+        "y": 560,
         "wires": [
             [
                 "bd443a9c7aed4710"
@@ -3480,7 +3583,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 800,
-        "y": 480,
+        "y": 560,
         "wires": []
     },
     {
@@ -3496,7 +3599,7 @@
         "finalize": "",
         "libs": [],
         "x": 690,
-        "y": 520,
+        "y": 600,
         "wires": [
             [
                 "9c00685ccf2e9835"
@@ -3516,7 +3619,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 920,
-        "y": 520,
+        "y": 600,
         "wires": []
     },
     {
@@ -3532,7 +3635,7 @@
         "finalize": "",
         "libs": [],
         "x": 670,
-        "y": 640,
+        "y": 720,
         "wires": [
             [
                 "28285d9cee94a56b"
@@ -3552,7 +3655,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 640,
+        "y": 720,
         "wires": []
     },
     {
@@ -3568,7 +3671,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 720,
+        "y": 800,
         "wires": [
             [
                 "3878a86792af1d96"
@@ -3588,7 +3691,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 720,
+        "y": 800,
         "wires": []
     },
     {
@@ -3604,7 +3707,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 800,
+        "y": 880,
         "wires": [
             [
                 "41ede9c9d790eb22"
@@ -3624,7 +3727,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 800,
+        "y": 880,
         "wires": []
     },
     {
@@ -3640,7 +3743,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "bcce7ca1cd844da2"
@@ -3660,7 +3763,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 920,
+        "y": 1000,
         "wires": []
     },
     {
@@ -3680,8 +3783,8 @@
         "topic": "",
         "payload": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 1, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\t0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
         "payloadType": "jsonata",
-        "x": 110,
-        "y": 420,
+        "x": 170,
+        "y": 1160,
         "wires": [
             [
                 "f0ed58eda4d6f929",
@@ -3703,7 +3806,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 360,
-        "y": 420,
+        "y": 1160,
         "wires": []
     },
     {
@@ -3719,7 +3822,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 760,
+        "y": 840,
         "wires": [
             [
                 "060d4da4ecd34cd8"
@@ -3739,7 +3842,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 760,
+        "y": 840,
         "wires": []
     },
     {
@@ -3755,7 +3858,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 840,
+        "y": 920,
         "wires": [
             [
                 "5ed9e90c560cfb4d"
@@ -3775,7 +3878,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 840,
+        "y": 920,
         "wires": []
     },
     {
@@ -3791,7 +3894,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 560,
+        "y": 640,
         "wires": [
             [
                 "48773bf6b5081273"
@@ -3811,7 +3914,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 560,
+        "y": 640,
         "wires": []
     },
     {
@@ -3827,7 +3930,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 680,
+        "y": 760,
         "wires": [
             [
                 "f14c37cda264609c"
@@ -3847,7 +3950,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 860,
-        "y": 680,
+        "y": 760,
         "wires": []
     },
     {
@@ -3863,7 +3966,7 @@
         "finalize": "",
         "libs": [],
         "x": 670,
-        "y": 600,
+        "y": 680,
         "wires": [
             [
                 "9cc027c3c86a6a4d"
@@ -3883,7 +3986,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 600,
+        "y": 680,
         "wires": []
     },
     {
@@ -4133,7 +4236,7 @@
         "delayOnStart": false,
         "startDelayTime": "",
         "x": 370,
-        "y": 240,
+        "y": 320,
         "wires": [
             [
                 "23ed9d5639bf76ab",
@@ -4152,7 +4255,7 @@
                 "c38099268d595334",
                 "9d3e3da72d962033",
                 "fe88c00a8c089454",
-                "6fac08951d1c6762"
+                "9bffc0be840aa9e3"
             ],
             []
         ]
@@ -4170,7 +4273,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 280,
+        "y": 360,
         "wires": []
     },
     {
@@ -4186,7 +4289,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 320,
+        "y": 400,
         "wires": []
     },
     {
@@ -4211,12 +4314,13 @@
         "delayOnStart": false,
         "startDelayTime": "",
         "x": 320,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "8b321084e9670da9",
-                "56fca90ecebfd515",
-                "0461d6ba1ba5066d"
+                "b0074785a069a24b",
+                "57d293d11f071e96",
+                "837b0469608164cd"
             ],
             []
         ]
@@ -4239,7 +4343,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 160,
-        "y": 1110,
+        "y": 1240,
         "wires": [
             [
                 "d935bd825029b445"
@@ -4266,7 +4370,7 @@
         "to": "",
         "reg": false,
         "x": 350,
-        "y": 1110,
+        "y": 1240,
         "wires": [
             [
                 "f74cb41079d34a5a"
@@ -4338,7 +4442,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 360,
+        "y": 440,
         "wires": [
             [
                 "2cbcf34d83c48dea"
@@ -4358,35 +4462,14 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 360,
+        "y": 440,
         "wires": []
-    },
-    {
-        "id": "d079a83cddd8f868",
-        "type": "function",
-        "z": "22276406018f011e",
-        "d": true,
-        "name": "LISTA RISING EDGE ",
-        "func": "\n\nif (msg.payload[0] == true && global.get('estado_anterior') == false && global.get(\"\") == true){\n    // SE DETECTO FLANCO ASCENDENTE (HACER REGISTRO DE BATCH)\n    global.set('estado_mezcla','MEZCLA_LISTA');\n\n    // MANDAR VARIABLE A TRUE PARA HACER CAMBIO DE ESTADO Y DIFERENCIAR FLANCO\n    global.set('estado_anterior', true);\n    \n    // RETORNAR ESTADO DE MEZCLA\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload[0] == true && global.get('estado_anterior') == true) {\n    // ESTADO DE MEZCLA SIGUE LISTA (INDICAR EN DASH)\n    global.set('estado_mezcla', 'ESPERANDO RESET DE CICLO');\n    msg.payload = global.get('estado_mezcla');\n};\n\nif (msg.payload[0] == false && global.get('estado_anterior') == false) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'PREPARANDO MEZCLA');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\nif (msg.payload[0] == false && global.get('estado_anterior') == true) {\n    // SE DETECTO FLANCO DESCENDENTE (HACER RESET DE SER NECESARIO)\n    global.set('estado_mezcla', 'CICLO REINICIADO');\n    msg.payload = global.get('estado_mezcla');\n\n    // MANDAR VARIABLE A FALSE PARA REINICIAR CICLO Y DETECTAR FLANCO ASCENDENTE POSTERIORMENTE\n    global.set('estado_anterior', false);\n}\n\n\n\n//msg.payload = msg.payload[0];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n// VARIABLE PARA CONTROLAR LATCH DE BATIDA LISTA\nglobal.set('estado_anterior',false);\nglobal.set('estado_mezcla','');\n\n// VARIABLES GLOBALES\nglobal.set(\"PULSOS_T_1\", 0);\nglobal.set(\"PULSOS_T_2\", 0);\nglobal.set(\"PULSOS_T_3\", 0);\nglobal.set(\"PULSOS_AGUA\", 0);\nglobal.set(\"KG_CEMENTO\", 0);\nglobal.set(\"HUMEDAD_SET\", 0);\nglobal.set(\"PREMOJADO_\", 0);\nglobal.set(\"SPRAY_\", 0);\nglobal.set(\"T_MEZCLADO_HUMEDO\", 0);\nglobal.set(\"CICLO_CONT_(S)\", 0);\nglobal.set(\"BARRIDO_BANDAS\", 0);\nglobal.set(\"T_MEZCLADO_SECO\", 0);\nglobal.set(\"APERTURA_MIX\", 0);\nglobal.set(\"T_PRENDIDO\", 0);\nglobal.set(\"T_APAGADO\", 0);\nglobal.set(\"DOSIFICADOR_\", 0);\nglobal.set(\"FRECUENCIA_\", 0);\n\n",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 140,
-        "wires": [
-            [
-                "ca1a43564b71cdc6"
-            ]
-        ]
     },
     {
         "id": "a2a3054f39c8893b",
         "type": "modbus-read",
         "z": "22276406018f011e",
-        "name": "READ MIX READY",
+        "name": "REGISTRO HECHO READY",
         "topic": "",
         "showStatusActivities": false,
         "logIOActivities": false,
@@ -4405,11 +4488,12 @@
         "ioFile": "",
         "useIOForPayload": false,
         "emptyMsgOnFail": false,
-        "x": 130,
-        "y": 340,
+        "x": 1160,
+        "y": 300,
         "wires": [
             [
-                "aaba97440b9560a8"
+                "aaba97440b9560a8",
+                "80205bce3304bf31"
             ],
             []
         ]
@@ -4418,55 +4502,19 @@
         "id": "aaba97440b9560a8",
         "type": "function",
         "z": "22276406018f011e",
-        "name": "function 8",
-        "func": "global.set(\"registr_batida_plc\", msg.payload[0]);\nreturn msg;",
+        "d": true,
+        "name": "UPDATE REGISTRO REALIZADO",
+        "func": "global.set(\"registr_batida_plc\", msg.payload[0]);\nmsg.payload = global.get(\"registr_batida_plc\");\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
-        "y": 340,
+        "x": 1500,
+        "y": 440,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "9f8b6d04ebf30cc5",
-        "type": "debug",
-        "z": "22276406018f011e",
-        "name": "debug 34",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 580,
-        "y": 1000,
-        "wires": []
-    },
-    {
-        "id": "56fca90ecebfd515",
-        "type": "function",
-        "z": "22276406018f011e",
-        "name": "function 9",
-        "func": "msg.payload = {\n    \"material actual 1: \":msg.payload[31],\n    \"material actual 2: \":msg.payload[45],\n    \"material actual 3: \":msg.payload[58]\n    };\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 400,
-        "y": 1000,
-        "wires": [
-            [
-                "9f8b6d04ebf30cc5"
-            ]
         ]
     },
     {
@@ -4474,15 +4522,15 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "UPDATE CONTINUO",
-        "func": "global.set('CONTINUO', msg.payload[28]);\nmsg.payload = global.get('CONTINUO');\nreturn msg;",
+        "func": "global.set('INICIO_AUTOMATICO', msg.payload[0]);\nmsg.payload = global.get('INICIO_AUTOMATICO');\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 640,
-        "y": 960,
+        "x": 1460,
+        "y": 240,
         "wires": [
             [
                 "36d2d12862cc2868"
@@ -4501,44 +4549,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 960,
-        "wires": []
-    },
-    {
-        "id": "6fac08951d1c6762",
-        "type": "function",
-        "z": "22276406018f011e",
-        "name": "UPDATE ABRIR MIXER",
-        "func": "global.set('ABRIR_MIXER', msg.payload[87]);\nmsg.payload = global.get('ABRIR_MIXER');\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 650,
-        "y": 880,
-        "wires": [
-            [
-                "4940d0304e86b0e6"
-            ]
-        ]
-    },
-    {
-        "id": "4940d0304e86b0e6",
-        "type": "debug",
-        "z": "22276406018f011e",
-        "name": "debug 42",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 840,
-        "y": 880,
+        "x": 1640,
+        "y": 240,
         "wires": []
     },
     {
@@ -4546,15 +4558,15 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "BATIDA MANUAL",
-        "func": "if (global.get(\"registr_batida_plc\") == true && global.get(\"CONTINUO\") ==  false && global.get(\"ABRIR_MIXER\") == true){\n    msg.payload = true;\n};\nreturn msg;",
+        "func": "if (global.get(\"registr_batida_plc\") == true && global.get(\"INICIO_AUTOMATICO\") ==  false && global.get(\"ABRIR_MIXER\") == true){\n    msg.payload = true;\n    flow.set(\"MODO\", \"MAN\");\n}else{\n    msg.payload = false;\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 170,
-        "y": 180,
+        "x": 410,
+        "y": 160,
         "wires": [
             [
                 "db8b643b0f80a977"
@@ -4566,18 +4578,19 @@
         "type": "function",
         "z": "22276406018f011e",
         "name": "function 15",
-        "func": "if (msg.payload == true){\n    msg.payload = true;\n    return msg;\n}\n",
+        "func": "if (msg.payload == true){\n    msg.payload = 'MEZCLA_LISTA';\n    flow.set(\"registro_manual\", \"se hizo registro\");\n    return msg;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"registro_manual\");",
         "finalize": "",
         "libs": [],
-        "x": 345,
-        "y": 180,
+        "x": 585,
+        "y": 160,
         "wires": [
             [
-                "bdaa38e25ff547d7"
+                "6db820cee9a2c72b",
+                "ca1a43564b71cdc6"
             ]
         ],
         "l": false
@@ -4594,8 +4607,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 295,
-        "y": 180,
+        "x": 535,
+        "y": 160,
         "wires": [
             [
                 "3e99e0a72d189596"
@@ -4625,7 +4638,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 45,
-        "y": 180,
+        "y": 160,
         "wires": [
             [
                 "cec0e8fdd90f519e"
@@ -4633,6 +4646,516 @@
         ],
         "icon": "node-red/serial.svg",
         "l": false
+    },
+    {
+        "id": "894642d219f62366",
+        "type": "modbus-read",
+        "z": "22276406018f011e",
+        "name": "INICIO AUTOMATICO READ",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "52",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 1160,
+        "y": 240,
+        "wires": [
+            [
+                "0461d6ba1ba5066d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8cfbb9e37d2f428a",
+        "type": "modbus-read",
+        "z": "22276406018f011e",
+        "name": "ABRIR MIXER READ",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "135",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 1140,
+        "y": 360,
+        "wires": [
+            [
+                "6fac08951d1c6762"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3c5a8af9c46c855f",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 44",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1660,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6fac08951d1c6762",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE ABRIR MIXER",
+        "func": "global.set('ABRIR_MIXER', msg.payload[0]);\nmsg.payload = global.get('ABRIR_MIXER');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1470,
+        "y": 320,
+        "wires": [
+            [
+                "3c5a8af9c46c855f"
+            ]
+        ]
+    },
+    {
+        "id": "b0074785a069a24b",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PULSOS_MATERIAL_1",
+        "func": "\n/*\nSE SE REALIZO REGISTRO EN PLC Y SE DETECTO FLANCO ASCENDENTE DE MATERIAL 1,\n ACTUALIZA EL MATERIAL 1 ACTUAL Y SETEA LA VARIABLE PARA DAR FUNCION A FLANCO.\n*/\n\nif (global.get(\"registr_batida_plc\") == true && flow.get(\"rising_edege_material_1\") != true){\n\n    global.set('MATERIAL_ACTUAL_1', msg.payload[31]);\n    msg.payload = global.get('MATERIAL_ACTUAL_1');\n\n    flow.set(\"rising_edege_material_1\", true)\n    return msg;\n};\n\n\n/* \nSI SE REINICIO CICLO RESETEA VARIABLE DE FLANCO ASCENDENTE PARA DETECTAR CANBIO CUANDO PLC HAGA UN REGISTRO.\n*/\nif (global.get(\"registr_batida_plc\") == false && flow.get(\"rising_edege_material_1\") == true){\n    flow.set(\"rising_edege_material_1\", false);\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"rising_edege_material_1\"); ",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 1040,
+        "wires": [
+            [
+                "69ae1418fecc2526"
+            ]
+        ]
+    },
+    {
+        "id": "69ae1418fecc2526",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 45",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "57d293d11f071e96",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PULSOS_MATERIAL_2",
+        "func": "/*\nSE SE REALIZO REGISTRO EN PLC Y SE DETECTO FLANCO ASCENDENTE DE MATERIAL 1,\n ACTUALIZA EL MATERIAL 1 ACTUAL Y SETEA LA VARIABLE PARA DAR FUNCION A FLANCO.\n*/\n\nif (global.get(\"registr_batida_plc\") == true && flow.get(\"rising_edege_material_2\") != true) {\n\n    global.set('MATERIAL_ACTUAL_2', msg.payload[45]);\n    msg.payload = global.get('MATERIAL_ACTUAL_2');\n\n    flow.set(\"rising_edege_material_2\", true)\n    return msg;\n};\n\n\n/* \nSI SE REINICIO CICLO RESETEA VARIABLE DE FLANCO ASCENDENTE PARA DETECTAR CANBIO CUANDO PLC HAGA UN REGISTRO.\n*/\nif (global.get(\"registr_batida_plc\") == false && flow.get(\"rising_edege_material_2\") == true) {\n    flow.set(\"rising_edege_material_2\", false);\n}\n\n\n\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"rising_edege_material_2\"); ",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 1080,
+        "wires": [
+            [
+                "28344d08736e06b1"
+            ]
+        ]
+    },
+    {
+        "id": "28344d08736e06b1",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 34",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "837b0469608164cd",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE PULSOS_MATERIAL_3",
+        "func": "/*\nSE SE REALIZO REGISTRO EN PLC Y SE DETECTO FLANCO ASCENDENTE DE MATERIAL 1,\n ACTUALIZA EL MATERIAL 1 ACTUAL Y SETEA LA VARIABLE PARA DAR FUNCION A FLANCO.\n*/\n\nif (global.get(\"registr_batida_plc\") == true && flow.get(\"rising_edege_material_3\") != true && global.get('OPEN_CEMENTO') == true) {\n\n    global.set('MATERIAL_ACTUAL_3', msg.payload[58]);\n    msg.payload = global.get('MATERIAL_ACTUAL_3');\n\n    flow.set(\"rising_edege_material_3\", true)\n    return msg;\n};\n\n\n/* \nSI SE REINICIO CICLO RESETEA VARIABLE DE FLANCO ASCENDENTE PARA DETECTAR CANBIO CUANDO PLC HAGA UN REGISTRO.\n*/\nif (global.get(\"registr_batida_plc\") == false && flow.get(\"rising_edege_material_3\") == true) {\n    flow.set(\"rising_edege_material_3\", false);\n}\n\n\n\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"rising_edege_material_3\"); ",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 1120,
+        "wires": [
+            [
+                "5a30d9027efe30a4"
+            ]
+        ]
+    },
+    {
+        "id": "5a30d9027efe30a4",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 46",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "9bffc0be840aa9e3",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE KG_CEMENTO",
+        "func": "if (global.get(\"KG_OK\") == true && global.get(\"registr_batida_plc\") == true &&  flow.get(\"rising_edge_cemento\") != true){\n    global.set('CEMENTO_ACTUAL', msg.payload[31]);\n    msg.payload = global.get('CEMENTO_ACTUAL');\n    flow.set(\"rising_edge_cemento\", true);\n    return msg;\n};\n\nif (global.get(\"registr_batida_plc\") == false && flow.get(\"rising_edge_cemento\") == true) {\n    flow.set(\"rising_edge_cemento\", false);\n}\n\n\n\n//global.get(\"OPEN_CEMENTO\") == false &&",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"rising_edge_cemento\");",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 960,
+        "wires": [
+            [
+                "18eb1651525d31d0"
+            ]
+        ]
+    },
+    {
+        "id": "18eb1651525d31d0",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 47",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "254ed719fca1f666",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE KG OK CEMENTO",
+        "func": "global.set('KG_OK', msg.payload[0]);\nmsg.payload = global.get('KG_OK');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1480,
+        "y": 360,
+        "wires": [
+            [
+                "7f1fa450f11bbc33"
+            ]
+        ]
+    },
+    {
+        "id": "7f1fa450f11bbc33",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 42",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1680,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a48ff218b86ddb1a",
+        "type": "modbus-read",
+        "z": "22276406018f011e",
+        "name": "KG_OK READ",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "152",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 1120,
+        "y": 420,
+        "wires": [
+            [
+                "254ed719fca1f666"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b38df19524efde08",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE OPEN CEMENTO",
+        "func": "global.set('OPEN_CEMENTO', msg.payload[0]);\nmsg.payload = global.get('OPEN_CEMENTO');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1480,
+        "y": 400,
+        "wires": [
+            [
+                "e59d8ac36089cf4b"
+            ]
+        ]
+    },
+    {
+        "id": "e59d8ac36089cf4b",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 48",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1680,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "c337f0cb936e09a2",
+        "type": "modbus-read",
+        "z": "22276406018f011e",
+        "name": "OPEN CEMENTO READ",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "153",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "79820e68718191b3",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 1150,
+        "y": 480,
+        "wires": [
+            [
+                "b38df19524efde08"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6db820cee9a2c72b",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 49",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "f19b969ee604d58e",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "UPDATE MEZCLA_LISTA",
+        "func": "global.set(\"MEZCLA_LISTA_PLC\", msg.payload[65]);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set(\"MEZCLA_LISTA_PLC\");",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 280,
+        "wires": [
+            [
+                "aebc610f9dd9b9df"
+            ]
+        ]
+    },
+    {
+        "id": "aebc610f9dd9b9df",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 52",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "80205bce3304bf31",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "function 17",
+        "func": "msg.payload = msg.payload[0];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1375,
+        "y": 280,
+        "wires": [
+            [
+                "48971960aa76a00e"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "48971960aa76a00e",
+        "type": "rbe",
+        "z": "22276406018f011e",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1425,
+        "y": 280,
+        "wires": [
+            [
+                "01559eb45533d961"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "01559eb45533d961",
+        "type": "function",
+        "z": "22276406018f011e",
+        "name": "function 18",
+        "func": "if (msg.payload ==  true){\n    flow.set(\"UNO_MAS\",\"flanco ascendente\");\n    global.set(\"registr_batida_plc\", msg.payload);\n    msg.payload = [flow.get(\"UNO_MAS\"), global.get(\"registr_batida_plc\")];\n    return msg;\n}\nif (msg.payload == false){\n    flow.set(\"UNO_MAS\",\"flanco descendente\");\n    //global.set(\"registr_batida_plc\", msg.payload);\n    msg.payload = [flow.get(\"UNO_MAS\"), global.get(\"registr_batida_plc\")];\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1530,
+        "y": 280,
+        "wires": [
+            [
+                "c210418671906d30"
+            ]
+        ]
+    },
+    {
+        "id": "c210418671906d30",
+        "type": "debug",
+        "z": "22276406018f011e",
+        "name": "debug 54",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1680,
+        "y": 280,
+        "wires": []
     },
     {
         "id": "d6a94ea8dd9308bd",
@@ -5780,7 +6303,7 @@
         "type": "function",
         "z": "2dc29aede84920ad",
         "name": "FORMAT TEMPLATE",
-        "func": "var row_list = ``;\nmsg.query = msg.payload;\n\nvar datos_encabezado = {\n  \"cantidad_de_registros\": msg.payload.length,\n  \"total_pulsos_material_1\": 0,\n  \"total_pulsos_material_2\": 0,\n  \"total_pulsos_material_3\": 0, \n  \"l_agua\": 0,\n  \"kg_cemento\": 0,\n  \"os_material_1\": 0,\n  \"os_material_2\": 0,\n  \"os_material_3\": 0,\n  \"os_kg_cemento\": 0,\n}\n\n\nmsg.payload.forEach(function(record) {\n  var row_template = `\n    <tr>\n      <td>${record.FECHA}</td>\n      <td>${record.HORA}</td>\n      <td>${record.PULSOS_MATERIAL_1}</td>\n      <td>${record.OFFSET_MATERIAL_1}</td>\n      <td>${record.PULSOS_MATERIAL_2}</td>\n      <td>${record.OFFSET_MATERIAL_2}</td>\n      <td>${record.PULSOS_MATERIAL_3}</td>\n      <td>${record.OFFSET_MATERIAL_3}</td>\n      <td>${record.LITROS_AGUA}</td>\n      <td>${record.KG_CEMENTO}</td>\n      <td>${record.OFFSET_CEMENTO}</td>\n      <td>${record.HUMEDAD_SET}</td>\n      <td>${record.DOSIFICADOR}</td>\n    </tr>\n    `\n  row_list = row_list + row_template;\n\n  datos_encabezado.total_pulsos_material_1 = datos_encabezado.total_pulsos_material_1 + record.PULSOS_MATERIAL_1;\n  datos_encabezado.os_material_1 = datos_encabezado.os_material_1 + record.OFFSET_MATERIAL_1;\n  \n  datos_encabezado.total_pulsos_material_2 = datos_encabezado.total_pulsos_material_2 + record.PULSOS_MATERIAL_2;\n  datos_encabezado.os_material_2 = datos_encabezado.os_material_2 + record.OFFSET_MATERIAL_2;\n  \n  datos_encabezado.total_pulsos_material_3 = datos_encabezado.total_pulsos_material_3 + record.PULSOS_MATERIAL_3;\n  datos_encabezado.os_material_3 = datos_encabezado.os_material_3 + record.OFFSET_MATERIAL_3;\n  \n  datos_encabezado.l_agua = datos_encabezado.l_agua + record.LITROS_AGUA;\n  \n  datos_encabezado.kg_cemento = datos_encabezado.kg_cemento + record.KG_CEMENTO;\n  datos_encabezado.os_kg_cemento = datos_encabezado.os_kg_cemento + record.OFFSET_CEMENTO;\n\n});\n\n\n\nvar template = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Tabla de Empresa</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      margin: 40px;\n      background-color: #f9f9f9;\n      color: #333;\n    }\n\n    .header {\n      background-color: #303030;\n      color: white;\n      padding: 20px;\n      border-radius: 10px;\n      margin-bottom: 30px;\n    }\n\n    .header h1 {\n      margin: 0 0 10px;\n      color: yellow;\n    }\n\n    .header p {\n      margin: 5px 0;\n    }\n\n    table {\n      width: 100%;\n      border-collapse: collapse;\n      background-color: white;\n      border-radius: 10px;\n      overflow: hidden;\n      box-shadow: 0 0 10px rgba(0,0,0,0.1);\n    }\n\n    th, td {\n      border: 1px solid #ddd;\n      padding: 12px;\n      text-align: center;\n    }\n\n    th {\n      background-color: #535353;\n      color: white;\n    }\n\n    tr:nth-child(even) {\n      background-color: #f2f2f2;\n    }\n\n    tr:hover {\n      background-color: #e0f0ff;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"header\">\n    <h1>PRODUCCION BLOQUERA KALEB</h1>\n    <p>REPORTE DIARIO EMITIDO AUTOMATICAMENTE</p>\n    <p>BATIDAS: ${datos_encabezado.cantidad_de_registros}</p>\n    <p>TOTAL DE PULSOS EN MATERIAL 1: ${datos_encabezado.total_pulsos_material_1} + OFFSET: ${datos_encabezado.os_material_1} = ${parseInt(datos_encabezado.total_pulsos_material_1) + parseInt(datos_encabezado.os_material_1)}</p> \n    <p>TOTAL DE PULSOS EN MATERIAL 2: ${datos_encabezado.total_pulsos_material_2} + OFFSET: ${datos_encabezado.os_material_2} = ${parseInt(datos_encabezado.total_pulsos_material_2) + parseInt(datos_encabezado.os_material_2)}</p>\n    <p>TOTAL DE PULSOS EN MATERIAL 3: ${datos_encabezado.total_pulsos_material_3} + OFFSET: ${datos_encabezado.os_material_3} = ${parseInt(datos_encabezado.total_pulsos_material_3) + parseInt(datos_encabezado.os_material_3)}</p>\n    <p>LITROS DE AGUA EN TOTAL: ${datos_encabezado.l_agua}</p>\n    <P>KG TOTAL DE CEMENTO: ${datos_encabezado.kg_cemento} + OFFSET: ${datos_encabezado.os_kg_cemento} = ${parseInt(datos_encabezado.kg_cemento) + parseInt(datos_encabezado.os_kg_cemento)}</P>\n  </div>\n\n  <table>\n    <thead>\n      <tr>\n        <th>FECHA</th>\n        <th>HORA</th>\n        <th>PUL MAT 1</th>\n        <th>OS MAT 1</th>\n        <th>PUL MAT 2</th>\n        <th>OS MAT 2</th>\n        <th>PUL MAT 3</th>\n        <th>OS MAT 3</th>\n        <th>L AGUA</th>\n        <th>KG CEMENTO</th>\n        <th>OS KG CEMENTO</th>\n        <th>HUMEDAD SET</th>\n        <th>ADITIVO</th>\n      </tr>\n    </thead>\n    <tbody>\n      ${row_list}\n    </tbody>\n  </table>\n\n</body>\n</html>`\n\nmsg.topic = \"PRODUCCION BLOQUERA KALEB\";\nmsg.payload = template;\nmsg.datos = datos_encabezado;\n\nreturn msg;",
+        "func": "var row_list = ``;\nmsg.query = msg.payload;\n\nvar datos_encabezado = {\n  \"cantidad_de_registros\": msg.payload.length,\n  \"total_pulsos_material_1\": 0,\n  \"total_pulsos_material_2\": 0,\n  \"total_pulsos_material_3\": 0, \n  \"l_agua\": 0,\n  \"kg_cemento\": 0,\n  \"real_material_1\": 0,\n  \"real_material_2\": 0,\n  \"real_material_3\": 0,\n  \"real_kg_cemento\": 0,\n}\n\n\nmsg.payload.forEach(function(record) {\n  var row_template = `\n    <tr>\n      <td>${record.FECHA}</td>\n      <td>${record.HORA}</td>\n      <td>${record.PULSOS_MATERIAL_1}</td>\n      <td>${record.PULSOS_REALES_MATERIAL_1}</td>\n      <td>${record.PULSOS_MATERIAL_2}</td>\n      <td>${record.PULSOS_REALES_MATERIAL_2}</td>\n      <td>${record.PULSOS_MATERIAL_3}</td>\n      <td>${record.PULSOS_REALES_MATERIAL_3}</td>\n      <td>${record.KG_CEMENTO}</td>\n      <td>${record.CEMENTO_REAL}</td>\n      <td>${record.HUMEDAD_SET}</td>\n      <td>${record.LITROS_AGUA}</td>\n      <td>${record.DOSIFICADOR}</td>\n      <td>${record.MODO}</td>\n    </tr>\n    `\n  row_list = row_list + row_template;\n\n  datos_encabezado.total_pulsos_material_1 = datos_encabezado.total_pulsos_material_1 + record.PULSOS_MATERIAL_1;\n  datos_encabezado.real_material_1 = datos_encabezado.real_material_1 + record.PULSOS_REALES_MATERIAL_1;\n  \n  datos_encabezado.total_pulsos_material_2 = datos_encabezado.total_pulsos_material_2 + record.PULSOS_MATERIAL_2;\n  datos_encabezado.real_material_2 = datos_encabezado.real_material_2 + record.PULSOS_REALES_MATERIAL_2;\n  \n  datos_encabezado.total_pulsos_material_3 = datos_encabezado.total_pulsos_material_3 + record.PULSOS_MATERIAL_3;\n  datos_encabezado.real_material_3 = datos_encabezado.real_material_3 + record.PULSOS_REALES_MATERIAL_3;\n  \n  datos_encabezado.l_agua = datos_encabezado.l_agua + record.LITROS_AGUA;\n  \n  datos_encabezado.kg_cemento = datos_encabezado.kg_cemento + record.KG_CEMENTO;\n  datos_encabezado.real_kg_cemento = datos_encabezado.real_kg_cemento + record.CEMENTO_REAL;\n\n});\n\n\n\nvar template = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Tabla de Empresa</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      margin: 40px;\n      background-color: #f9f9f9;\n      color: #333;\n    }\n\n    .header {\n      background-color: #303030;\n      color: white;\n      padding: 20px;\n      border-radius: 10px;\n      margin-bottom: 30px;\n    }\n\n    .header h1 {\n      margin: 0 0 10px;\n      color: yellow;\n    }\n\n    .header p {\n      margin: 5px 0;\n    }\n\n    table {\n      width: 100%;\n      border-collapse: collapse;\n      background-color: white;\n      border-radius: 10px;\n      overflow: hidden;\n      box-shadow: 0 0 10px rgba(0,0,0,0.1);\n    }\n\n    th, td {\n      border: 1px solid #ddd;\n      padding: 12px;\n      text-align: center;\n    }\n\n    th {\n      background-color: #535353;\n      color: white;\n    }\n\n    tr:nth-child(even) {\n      background-color: #f2f2f2;\n    }\n\n    tr:hover {\n      background-color: #e0f0ff;\n    }\n\n    span {\n      color: yellow;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"header\">\n    <h1>PRODUCCION BLOQUERA KALEB</h1>\n    <p>REPORTE DIARIO EMITIDO AUTOMATICAMENTE</p>\n    <p>BATIDAS: <span>${datos_encabezado.cantidad_de_registros}</span></p>\n    <p>TOTAL DE PULSOS EN MATERIAL 1: <span>${datos_encabezado.total_pulsos_material_1}</span> MENOS REAL: <span>${datos_encabezado.real_material_1}</span> DIFERENCIA: <span>${parseInt(datos_encabezado.real_material_1) - parseInt(datos_encabezado.total_pulsos_material_1)}</span></p> \n    <p>TOTAL DE PULSOS EN MATERIAL 2: <span>${datos_encabezado.total_pulsos_material_2}</span> MENOS REAL: <span>${datos_encabezado.real_material_2}</span> DIFERENCIA: <span>${parseInt(datos_encabezado.real_material_2) - parseInt(datos_encabezado.total_pulsos_material_2)}</span></p>\n    <p>TOTAL DE PULSOS EN MATERIAL 3: <span>${datos_encabezado.total_pulsos_material_3}</span> MENOS REAL: <span>${datos_encabezado.real_material_3}</span> DIFERENCIA: <span>${parseInt(datos_encabezado.real_material_3) - parseInt(datos_encabezado.total_pulsos_material_3)}</span></p>\n    <p>LITROS DE AGUA EN TOTAL: <span>${datos_encabezado.l_agua}</span></p>\n    <P>KG TOTAL DE CEMENTO: <span>${datos_encabezado.kg_cemento}</span> MENOS REAL: <span>${datos_encabezado.real_kg_cemento}</span> DIFERENCIA: <span>${parseInt(datos_encabezado.real_kg_cemento) - parseInt(datos_encabezado.kg_cemento)}</span></P>\n  </div>\n\n  <table>\n    <thead>\n      <tr>\n        <th>FECHA</th>\n        <th>HORA</th>\n        <th>SET MAT 1</th>\n        <th>REAL MAT 1</th>\n        <th>SET MAT 2</th>\n        <th>REAL MAT 2</th>\n        <th>SET MAT 3</th>\n        <th>REAL MAT 3</th>\n        <th>SET KG CEMENTO</th>\n        <th>REAL KG CEMENTO</th>\n        <th>HUMEDAD SET</th>\n        <th>L AGUA REAL</th>\n        <th>ADITIVO</th>\n        <th>MODO</th>\n      </tr>\n    </thead>\n    <tbody>\n      ${row_list}\n    </tbody>\n  </table>\n\n</body>\n</html>`\n\nmsg.topic = \"PRODUCCION BLOQUERA KALEB\";\nmsg.payload = template;\nmsg.datos = datos_encabezado;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5907,7 +6430,7 @@
         "type": "debug",
         "z": "2dc29aede84920ad",
         "name": "debug 31",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -5983,18 +6506,17 @@
             }
         ],
         "repeat": "",
-        "crontab": "00 10 * * *",
+        "crontab": "00 19 * * 1,2,3,4,5,6",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1050,
-        "y": 320,
+        "x": 330,
+        "y": 460,
         "wires": [
             [
-                "4cc1911c811f5d3c",
-                "ad013a15e261b0e3"
+                "4cc1911c811f5d3c"
             ]
         ]
     },
@@ -6048,12 +6570,13 @@
         "id": "6b299854f6f4eab4",
         "type": "ui_gauge",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "",
         "group": "bafe8d350de57074",
         "order": 1,
         "width": "6",
         "height": "6",
-        "gtype": "gage",
+        "gtype": "donut",
         "title": "LITROS DE AGUA",
         "label": "LITROS",
         "format": "{{value}}",
@@ -6068,14 +6591,15 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 630,
-        "y": 80,
+        "x": 670,
+        "y": 100,
         "wires": []
     },
     {
         "id": "b7619f452a165a33",
         "type": "inject",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "1 seg",
         "props": [
             {
@@ -6093,8 +6617,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
-        "y": 80,
+        "x": 140,
+        "y": 100,
         "wires": [
             [
                 "32e077fef9c0b8f1",
@@ -6106,6 +6630,7 @@
         "id": "32e077fef9c0b8f1",
         "type": "function",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "UPDATE PULSOS_AGUA",
         "func": "msg.payload = global.get('PULSOS_AGUA');\nreturn msg;",
         "outputs": 1,
@@ -6114,8 +6639,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
-        "y": 80,
+        "x": 440,
+        "y": 100,
         "wires": [
             [
                 "6b299854f6f4eab4",
@@ -6128,6 +6653,7 @@
         "id": "5a862669c7f9b718",
         "type": "debug",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "debug 35",
         "active": false,
         "tosidebar": true,
@@ -6136,24 +6662,25 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 600,
-        "y": 120,
+        "x": 640,
+        "y": 140,
         "wires": []
     },
     {
         "id": "49cd186782c2e7e1",
         "type": "function",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "DESBORDE DE AGUA",
-        "func": "if (msg.payload >= global.get(\"setpoint_litros_agua\") && global.get(\"mezcla_lista\") == false ){\n    msg.topic = \"MHUMEDAD OK\";\n    msg.payload = true;\n    return msg;\n};\n",
+        "func": "if (msg.payload >= global.get(\"setpoint_litros_agua\") && global.get(\"mezcla_lista\") == false && global.get(\"habilitar_proteccion\") == true){\n    msg.payload = true;\n    return msg;\n}else{\n    msg.payload = false;\n    return msg;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 650,
-        "y": 160,
+        "x": 690,
+        "y": 180,
         "wires": [
             [
                 "5182824548083d45",
@@ -6165,6 +6692,7 @@
         "id": "6fdc7c2c5288bfa7",
         "type": "function",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "function 11",
         "func": "global.set(\"setpoint_litros_agua\", msg.payload);\nmsg.payload = global.get(\"setpoint_litros_agua\");\nreturn msg;",
         "outputs": 1,
@@ -6173,8 +6701,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
-        "y": 320,
+        "x": 590,
+        "y": 240,
         "wires": [
             [
                 "c93f5a94d9da9dd4"
@@ -6185,6 +6713,7 @@
         "id": "c93f5a94d9da9dd4",
         "type": "debug",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "debug 36",
         "active": false,
         "tosidebar": true,
@@ -6193,22 +6722,22 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 760,
-        "y": 320,
+        "x": 740,
+        "y": 240,
         "wires": []
     },
     {
         "id": "b1ab9d3d22f36259",
         "type": "ui_text_input",
         "z": "2e6d05ea4d93a944",
-        "d": true,
+        "g": "b70b8d636718a17e",
         "name": "",
         "label": "SETPOINT",
         "tooltip": "",
         "group": "bafe8d350de57074",
         "order": 2,
-        "width": 0,
-        "height": 0,
+        "width": "3",
+        "height": "1",
         "passthru": true,
         "mode": "number",
         "delay": "0",
@@ -6216,8 +6745,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 450,
-        "y": 320,
+        "x": 430,
+        "y": 240,
         "wires": [
             [
                 "6fdc7c2c5288bfa7"
@@ -6228,6 +6757,7 @@
         "id": "5182824548083d45",
         "type": "debug",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "debug 37",
         "active": false,
         "tosidebar": true,
@@ -6237,8 +6767,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 160,
+        "x": 900,
+        "y": 180,
         "wires": []
     },
     {
@@ -6246,6 +6776,7 @@
         "type": "modbus-write",
         "z": "2e6d05ea4d93a944",
         "d": true,
+        "g": "b70b8d636718a17e",
         "name": "",
         "showStatusActivities": false,
         "showErrors": false,
@@ -6259,8 +6790,8 @@
         "keepMsgProperties": false,
         "delayOnStart": false,
         "startDelayTime": "",
-        "x": 780,
-        "y": 240,
+        "x": 1040,
+        "y": 280,
         "wires": [
             [],
             []
@@ -6270,7 +6801,8 @@
         "id": "deab24786e37bc3a",
         "type": "modbus-read",
         "z": "2e6d05ea4d93a944",
-        "name": "",
+        "g": "b70b8d636718a17e",
+        "name": "HUMEDAD LISTA READ",
         "topic": "",
         "showStatusActivities": false,
         "logIOActivities": false,
@@ -6289,8 +6821,8 @@
         "ioFile": "",
         "useIOForPayload": false,
         "emptyMsgOnFail": false,
-        "x": 450,
-        "y": 380,
+        "x": 470,
+        "y": 300,
         "wires": [
             [
                 "5a509f02c86a1b33"
@@ -6302,6 +6834,7 @@
         "id": "5a509f02c86a1b33",
         "type": "debug",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "debug 38",
         "active": false,
         "tosidebar": true,
@@ -6311,14 +6844,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 620,
-        "y": 380,
+        "x": 660,
+        "y": 300,
         "wires": []
     },
     {
         "id": "a59da6fdbff896cd",
         "type": "function",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "function 12",
         "func": "msg.value = global.get(\"setpoint_litros_agua\");\nreturn msg;",
         "outputs": 1,
@@ -6327,8 +6861,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
-        "y": 440,
+        "x": 430,
+        "y": 360,
         "wires": [
             [
                 "9b0fc86197b799c1"
@@ -6339,8 +6873,9 @@
         "id": "9b0fc86197b799c1",
         "type": "ui_text",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "group": "bafe8d350de57074",
-        "order": 2,
+        "order": 4,
         "width": 0,
         "height": 0,
         "name": "",
@@ -6352,14 +6887,15 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 660,
-        "y": 440,
+        "x": 640,
+        "y": 360,
         "wires": []
     },
     {
         "id": "580dc80dbacdc29c",
         "type": "rbe",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "",
         "func": "rbei",
         "gap": "",
@@ -6368,65 +6904,38 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 575,
-        "y": 240,
-        "wires": [
-            [
-                "09a3cda0a2d0fa6b"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "4e7a513cfae34e39",
-        "type": "inject",
-        "z": "2e6d05ea4d93a944",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "false",
-        "payloadType": "bool",
-        "x": 450,
+        "x": 855,
         "y": 240,
         "wires": [
             [
                 "a0c25c2880aca060"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "fa733a91f1d981ca",
         "type": "debug",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "debug 39",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 760,
-        "y": 280,
+        "x": 1010,
+        "y": 240,
         "wires": []
     },
     {
         "id": "a4f72680b5866393",
         "type": "modbus-read",
         "z": "2e6d05ea4d93a944",
-        "name": "MEZCLA LISTA",
+        "g": "b70b8d636718a17e",
+        "name": "MEZCLA LISTA READ",
         "topic": "",
         "showStatusActivities": false,
         "logIOActivities": false,
@@ -6446,7 +6955,7 @@
         "useIOForPayload": false,
         "emptyMsgOnFail": false,
         "x": 460,
-        "y": 500,
+        "y": 440,
         "wires": [
             [
                 "34f8d08779fd9fb1"
@@ -6458,6 +6967,7 @@
         "id": "34f8d08779fd9fb1",
         "type": "function",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "function 13",
         "func": "global.set(\"mezcla_lista\", msg.payload[0]);\nmsg.payload = global.get(\"mezcla_lista\");\nreturn msg;",
         "outputs": 1,
@@ -6467,7 +6977,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 500,
+        "y": 440,
         "wires": [
             [
                 "d3e8fa47311bf661"
@@ -6478,6 +6988,7 @@
         "id": "d3e8fa47311bf661",
         "type": "debug",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "debug 40",
         "active": false,
         "tosidebar": true,
@@ -6486,14 +6997,15 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 500,
+        "x": 800,
+        "y": 440,
         "wires": []
     },
     {
         "id": "a0c25c2880aca060",
         "type": "function",
         "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
         "name": "function 14",
         "func": "if (msg.payload == true){\n    msg.payload = true;\n    return msg;\n};",
         "outputs": 1,
@@ -6502,28 +7014,935 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 625,
+        "x": 905,
         "y": 240,
         "wires": [
             [
-                "09a3cda0a2d0fa6b",
-                "fa733a91f1d981ca"
+                "fa733a91f1d981ca",
+                "09a3cda0a2d0fa6b"
             ]
         ],
         "l": false
     },
     {
-        "id": "499c3f7871f94163",
-        "type": "http in",
-        "z": "a7e2d5dfaa5bd8fd",
-        "name": "",
-        "url": "",
-        "method": "get",
-        "upload": false,
-        "x": 290,
-        "y": 200,
+        "id": "91348905c4b5efd8",
+        "type": "function",
+        "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
+        "name": "function 10",
+        "func": "global.set(\"habilitar_proteccion\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1350,
+        "y": 100,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "bd527a9d4d9e1c0b",
+        "type": "inject",
+        "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1000",
+        "payloadType": "num",
+        "x": 230,
+        "y": 400,
+        "wires": [
+            [
+                "9b0fc86197b799c1"
+            ]
+        ]
+    },
+    {
+        "id": "c2f0ae078944b256",
+        "type": "ui_switch",
+        "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
+        "name": "PROTECCION LIBROS DE AGUA",
+        "label": "HABILITAR",
+        "tooltip": "",
+        "group": "bafe8d350de57074",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1120,
+        "y": 100,
+        "wires": [
+            [
+                "91348905c4b5efd8"
+            ]
+        ]
+    },
+    {
+        "id": "80e7e789fe67e7e1",
+        "type": "inject",
+        "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 910,
+        "y": 100,
+        "wires": [
+            [
+                "c2f0ae078944b256"
+            ]
+        ]
+    },
+    {
+        "id": "c96f2b295bcfadf3",
+        "type": "comment",
+        "z": "2e6d05ea4d93a944",
+        "g": "b70b8d636718a17e",
+        "name": "LITROS DE AGUA",
+        "info": "",
+        "x": 150,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "b65ed65347cea18a",
+        "type": "ui_gauge",
+        "z": "2e6d05ea4d93a944",
+        "name": "",
+        "group": "d0e920f3d65ab20b",
+        "order": 0,
+        "width": "3",
+        "height": "3",
+        "gtype": "donut",
+        "title": "TEMPERATURA",
+        "label": "C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#f0ea2d",
+            "#d91212",
+            "#000000"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 710,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "40466d19e913f6f0",
+        "type": "ui_gauge",
+        "z": "2e6d05ea4d93a944",
+        "name": "",
+        "group": "d0e920f3d65ab20b",
+        "order": 1,
+        "width": "3",
+        "height": "3",
+        "gtype": "donut",
+        "title": "HUMEDAD",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#f5f6f9",
+            "#5c65e6",
+            "#0011ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "levelchart",
+        "x": 690,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "165b22f745bfd5f6",
+        "type": "inject",
+        "z": "2e6d05ea4d93a944",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 600,
+        "wires": [
+            [
+                "cdaa145d7ce80dc7",
+                "758534fcc4a5a23e"
+            ]
+        ]
+    },
+    {
+        "id": "cdaa145d7ce80dc7",
+        "type": "function",
+        "z": "2e6d05ea4d93a944",
+        "name": "UPDATE TEMPERATURA",
+        "func": "msg.payload = global.get(\"temperatura\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 600,
+        "wires": [
+            [
+                "b65ed65347cea18a"
+            ]
+        ]
+    },
+    {
+        "id": "758534fcc4a5a23e",
+        "type": "function",
+        "z": "2e6d05ea4d93a944",
+        "name": "UPDATE humedad",
+        "func": "msg.payload = global.get(\"humedad\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 640,
+        "wires": [
+            [
+                "40466d19e913f6f0"
+            ]
+        ]
+    },
+    {
+        "id": "06a2c9196760b474",
+        "type": "simpletime",
+        "z": "4d346416301ae751",
+        "name": "",
+        "mydate": true,
+        "myymd": true,
+        "myyear": false,
+        "mymonth": true,
+        "mymonthn": false,
+        "mymonthf": false,
+        "mydom": false,
+        "mydoy": false,
+        "myday": false,
+        "mydayf": false,
+        "myhourpm": false,
+        "myhour": false,
+        "mytime": false,
+        "mytimes": true,
+        "myminute": false,
+        "myminutes": false,
+        "mysecond": false,
+        "mymillis": false,
+        "myepoch": false,
+        "myrawdate": true,
+        "mypm": true,
+        "x": 570,
+        "y": 120,
+        "wires": [
+            [
+                "2a8eb7a8548a2078"
+            ]
+        ]
+    },
+    {
+        "id": "7d16ca7a2c8c27c1",
+        "type": "mongodb out",
+        "z": "4d346416301ae751",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "BATIDAS_PLC",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 1000,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "102f662c579fd3d9",
+        "type": "function",
+        "z": "4d346416301ae751",
+        "name": "GLOBAL MEZCLA_LISTA",
+        "func": "msg.payload = global.get(\"MEZCLA_LISTA_PLC\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 120,
+        "wires": [
+            [
+                "e7446d0aa49c1f81"
+            ]
+        ]
+    },
+    {
+        "id": "e7446d0aa49c1f81",
+        "type": "rbe",
+        "z": "4d346416301ae751",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 415,
+        "y": 120,
+        "wires": [
+            [
+                "12c1aa78c4ba82b3"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "12c1aa78c4ba82b3",
+        "type": "function",
+        "z": "4d346416301ae751",
+        "name": "function 9",
+        "func": "if(msg.payload == true){\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 465,
+        "y": 120,
+        "wires": [
+            [
+                "06a2c9196760b474"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "0838e4d12ee50207",
+        "type": "mongodb out",
+        "z": "4d346416301ae751",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "MEZCLA_LISTA_PLC",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 1030,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "2a8eb7a8548a2078",
+        "type": "function",
+        "z": "4d346416301ae751",
+        "name": "SAVE DATA",
+        "func": "msg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"EVENTO: \": \"BATIDA LISTA EN PLC.\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 120,
+        "wires": [
+            [
+                "d4dc5622ab0b660c",
+                "7d16ca7a2c8c27c1"
+            ]
+        ]
+    },
+    {
+        "id": "f5d9f9a7f736676e",
+        "type": "inject",
+        "z": "4d346416301ae751",
+        "name": "1 seg",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 120,
+        "wires": [
+            [
+                "102f662c579fd3d9",
+                "d1ecf0aca0a65043"
+            ]
+        ],
+        "icon": "node-red/serial.svg"
+    },
+    {
+        "id": "d4dc5622ab0b660c",
+        "type": "debug",
+        "z": "4d346416301ae751",
+        "name": "debug 50",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8c09aa3d0ea292ce",
+        "type": "debug",
+        "z": "4d346416301ae751",
+        "name": "debug 51",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "acef78156aa4fd9f",
+        "type": "simpletime",
+        "z": "4d346416301ae751",
+        "name": "",
+        "mydate": true,
+        "myymd": true,
+        "myyear": false,
+        "mymonth": true,
+        "mymonthn": false,
+        "mymonthf": false,
+        "mydom": false,
+        "mydoy": false,
+        "myday": false,
+        "mydayf": false,
+        "myhourpm": false,
+        "myhour": false,
+        "mytime": false,
+        "mytimes": true,
+        "myminute": false,
+        "myminutes": false,
+        "mysecond": false,
+        "mymillis": false,
+        "myepoch": false,
+        "myrawdate": true,
+        "mypm": true,
+        "x": 570,
+        "y": 260,
+        "wires": [
+            [
+                "40f6dcce9139f9b9"
+            ]
+        ]
+    },
+    {
+        "id": "d1ecf0aca0a65043",
+        "type": "function",
+        "z": "4d346416301ae751",
+        "name": "GLOBAL UNO_MAS",
+        "func": "msg.payload = global.get(\"registr_batida_plc\");\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 260,
+        "wires": [
+            [
+                "26a9c61156741497"
+            ]
+        ]
+    },
+    {
+        "id": "26a9c61156741497",
+        "type": "rbe",
+        "z": "4d346416301ae751",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 415,
+        "y": 260,
+        "wires": [
+            [
+                "4d4191b0f97d98ca"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "4d4191b0f97d98ca",
+        "type": "function",
+        "z": "4d346416301ae751",
+        "name": "function 8",
+        "func": "if(msg.payload == true){\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 465,
+        "y": 260,
+        "wires": [
+            [
+                "acef78156aa4fd9f"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "40f6dcce9139f9b9",
+        "type": "function",
+        "z": "4d346416301ae751",
+        "name": "SAVE DATA",
+        "func": "msg.payload = {\n    \"FECHA\": msg.myymd,\n    \"HORA\": msg.mytimes,\n    \"EVENTO: \": \"REGISTRO DE BATIDA REALIZADO EN PLC.\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 260,
+        "wires": [
+            [
+                "8c09aa3d0ea292ce",
+                "0838e4d12ee50207"
+            ]
+        ]
+    },
+    {
+        "id": "8fc60271534819bb",
+        "type": "http in",
+        "z": "e1f5f23a63b2aa15",
+        "name": "",
+        "url": "/api",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 280,
+        "y": 280,
+        "wires": [
+            [
+                "8dc5d38f43f2ddac",
+                "8b7e69e95690511a"
+            ]
+        ]
+    },
+    {
+        "id": "8dc5d38f43f2ddac",
+        "type": "debug",
+        "z": "e1f5f23a63b2aa15",
+        "name": "debug 53",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f0c6d6f847401784",
+        "type": "http response",
+        "z": "e1f5f23a63b2aa15",
+        "name": "",
+        "statusCode": "201",
+        "headers": {},
+        "x": 760,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "8b7e69e95690511a",
+        "type": "function",
+        "z": "e1f5f23a63b2aa15",
+        "name": "function 16",
+        "func": "if(msg.payload.DATA == \"ERROR_MEDICION\"){\n    msg.payload = {\"DATA\":false};\n};\nglobal.set(\"temperatura\", msg.payload.temperature);\nglobal.set(\"humedad\", msg.payload.humidity);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 280,
+        "wires": [
+            [
+                "f0c6d6f847401784"
+            ]
+        ]
+    },
+    {
+        "id": "2d6bb578b1582d3a",
+        "type": "ui_table",
+        "z": "e1bc9dc3d74a721d",
+        "group": "58df4d1dea36f283",
+        "name": "",
+        "order": 4,
+        "width": "24",
+        "height": "40",
+        "columns": [
+            {
+                "field": "",
+                "title": "",
+                "width": "3%",
+                "align": "center",
+                "formatter": "rownum",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "FECHA",
+                "title": "FECHA",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "HORA",
+                "title": "HORA",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "PULSOS_MATERIAL_1",
+                "title": "PUL MAT 1",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "PULSOS_REALES_MATERIAL_1",
+                "title": "REAL MAT 1",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "PULSOS_MATERIAL_2",
+                "title": "PUL MAT 2",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "PULSOS_REALES_MATERIAL_2",
+                "title": "REAL MAT 2",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "PULSOS_MATERIAL_3",
+                "title": "PUL MAT 3",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "PULSOS_REALES_MATERIAL_3",
+                "title": "REAL MAT 3",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "KG_CEMENTO",
+                "title": "KG CEMENTO",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "CEMENTO_REAL",
+                "title": "REAL CEMENTO",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "HUMEDAD_SET",
+                "title": "HUMEDAD SET",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "LITROS_AGUA",
+                "title": "LITROS AGUA",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "DOSIFICADOR",
+                "title": "ADITIVO",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "MODO",
+                "title": "MODO",
+                "width": "4%",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 710,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d8fcbe8ede6b39c6",
+        "type": "mongodb in",
+        "z": "e1bc9dc3d74a721d",
+        "mongodb": "7cb33314543eaf40",
+        "name": "",
+        "collection": "BATCH",
+        "operation": "find",
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "2d6bb578b1582d3a",
+                "829dec2d9a8e1aab"
+            ]
+        ]
+    },
+    {
+        "id": "abd834e6d5cdbf1d",
+        "type": "ui_date_picker",
+        "z": "e1bc9dc3d74a721d",
+        "name": "",
+        "label": "FECHA",
+        "group": "58df4d1dea36f283",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "23e45468c438ee6e",
+                "89fc7bd9d8a1beaf"
+            ]
+        ]
+    },
+    {
+        "id": "7cc364e66d45b1b1",
+        "type": "debug",
+        "z": "e1bc9dc3d74a721d",
+        "name": "debug 55",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "23e45468c438ee6e",
+        "type": "function",
+        "z": "e1bc9dc3d74a721d",
+        "name": "function 20",
+        "func": "let date = new Date(msg.payload);\nlet fecha = date.toLocaleDateString('en-CA', { timeZone: 'America/Hermosillo' });\nmsg.payload = {\"FECHA\":fecha};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "7cc364e66d45b1b1",
+                "d8fcbe8ede6b39c6"
+            ]
+        ]
+    },
+    {
+        "id": "829dec2d9a8e1aab",
+        "type": "debug",
+        "z": "e1bc9dc3d74a721d",
+        "name": "debug 56",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "89fc7bd9d8a1beaf",
+        "type": "debug",
+        "z": "e1bc9dc3d74a721d",
+        "name": "debug 57",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 260,
+        "y": 200,
+        "wires": []
     }
 ]
